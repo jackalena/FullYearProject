@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:questions="clr-namespace:FullYearProject.Models.Questions">
+
+    <SolidColorBrush x:Key="WindowDefaultBackground" Color="#126" />
+
+    <questions:QuestionResultTopicCollection x:Key="SampleQuestionResults">
+        <questions:QuestionResultTopic Topic="Topic 1">
+            <questions:QuestionResult Question="Question 1">
+                <questions:QuestionResult.Answers>
+                    <questions:AnswerOptionCollection>
+                        <questions:AnswerOption Answer="Option 1" IsCorrect="True"
+                                            IsSelected="True" />
+                        <questions:AnswerOption Answer="Option 2" IsCorrect="False"
+                                            IsSelected="False" />
+                        <questions:AnswerOption Answer="Option 3" IsCorrect="False"
+                                            IsSelected="False" />
+                        <questions:AnswerOption Answer="Option 4" IsCorrect="False"
+                                            IsSelected="False" />
+                    </questions:AnswerOptionCollection>
+                </questions:QuestionResult.Answers>
+            </questions:QuestionResult>
+            <questions:QuestionResult Question="Question 2">
+                <questions:QuestionResult.Answers>
+                    <questions:AnswerOptionCollection>
+                        <questions:AnswerOption
+                            Answer="Option 1 with much a much longer text answer that covers multiple lines."
+                            IsCorrect="False" IsSelected="True" />
+                        <questions:AnswerOption Answer="Option 2" IsCorrect="True"
+                                            IsSelected="False" />
+                        <questions:AnswerOption Answer="Option 3" IsCorrect="False"
+                                            IsSelected="False" />
+                        <questions:AnswerOption Answer="Option 4"
+                                            IsCorrect="False" IsSelected="False" />
+                    </questions:AnswerOptionCollection>
+                </questions:QuestionResult.Answers>
+            </questions:QuestionResult>
+            <questions:QuestionResult Question="Question 3">
+                <questions:QuestionResult.Answers>
+                    <questions:AnswerOptionCollection>
+                        <questions:AnswerOption Answer="False" IsCorrect="False" IsSelected="False" />
+                        <questions:AnswerOption Answer="True" IsCorrect="True" IsSelected="True" />
+                    </questions:AnswerOptionCollection>
+                </questions:QuestionResult.Answers>
+            </questions:QuestionResult>
+            <questions:QuestionResult Question="Question 4">
+                <questions:QuestionResult.Answers>
+                    <questions:AnswerOptionCollection>
+                        <questions:AnswerOption Answer="False" IsCorrect="False" IsSelected="True" />
+                        <questions:AnswerOption Answer="True" IsCorrect="True" IsSelected="False" />
+                    </questions:AnswerOptionCollection>
+                </questions:QuestionResult.Answers>
+            </questions:QuestionResult>
+        </questions:QuestionResultTopic>
+        <questions:QuestionResultTopic Topic="Topic 2">
+            <questions:QuestionResult Question="Question 5" />
+            <questions:QuestionResult Question="Question 6" />
+            <questions:QuestionResult Question="Question 7" />
+            <questions:QuestionResult Question="Question 8" />
+        </questions:QuestionResultTopic>
+        <questions:QuestionResultTopic Topic="Topic 3">
+            <questions:QuestionResult Question="Question 9" />
+            <questions:QuestionResult Question="Question 10" />
+            <questions:QuestionResult Question="Question 11" />
+            <questions:QuestionResult Question="Question 12" />
+        </questions:QuestionResultTopic>
+    </questions:QuestionResultTopicCollection>
+
+</ResourceDictionary>

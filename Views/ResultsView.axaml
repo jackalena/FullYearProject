@@ -1,0 +1,63 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:FullYearProject.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FullYearProject.Views.ResultsView">
+
+    <UserControl.Styles>
+        <StyleInclude Source="Styles.axaml" />
+    </UserControl.Styles>
+
+    <DockPanel>
+        <views:HeaderView DockPanel.Dock="Top" />
+
+        <Grid Margin="20" RowSpacing="10" ColumnSpacing="10" HorizontalAlignment="Stretch"
+              RowDefinitions="Auto * 0.15*" ColumnDefinitions="Auto Auto *">
+            <TextBlock Text="Results" Classes="H1" TextAlignment="Center" />
+
+            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Spacing="10">
+                <Panel>
+                    <ProgressBar Theme="{DynamicResource ProgressRing}" Width="100" Height="100" BorderThickness="13"
+                                 Value="80" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <TextBlock Classes="H2" Text="8/10" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Panel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Classes="H2" Text="Excellence" VerticalAlignment="Center" />
+                    <Button Theme="{StaticResource BorderlessButton}" Width="32" Margin="5 0 0 0" Padding="0"
+                            HorizontalAlignment="Center" Foreground="{DynamicResource SemiColorText0}"
+                            ClipToBounds="False">
+                        <LucideIcon Kind="Info" Size="20" />
+                        <Button.Flyout>
+                            <Flyout Placement="RightEdgeAlignedBottom">
+                                <UniformGrid Columns="2" ColumnSpacing="25" RowSpacing="15" Margin="5 5 10 5">
+                                    <TextBlock Text="Excellence:" />
+                                    <TextBlock Text="75% or higher" />
+                                    <TextBlock Text="Merit:" />
+                                    <TextBlock Text="50% - 74%" />
+                                    <TextBlock Text="Achieved:" />
+                                    <TextBlock Text="25% - 49%" />
+                                    <TextBlock Text="Not Achieved:" />
+                                    <TextBlock Text="24% or lower" />
+                                </UniformGrid>
+                            </Flyout>
+                        </Button.Flyout>
+
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Text="Well done, keep up the great work!" />
+            </StackPanel>
+
+            <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" />
+
+            <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Name="ResultsScrollViewer">
+                <views:QuestionAnswerResultsView ItemsSource="{StaticResource SampleQuestionResults}" />
+            </ScrollViewer>
+        </Grid>
+    </DockPanel>
+
+</UserControl>

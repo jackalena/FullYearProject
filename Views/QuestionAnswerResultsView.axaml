@@ -1,0 +1,132 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:questions="clr-namespace:FullYearProject.Models.Questions"
+             xmlns:views="clr-namespace:FullYearProject.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FullYearProject.Views.QuestionAnswerResultsView">
+
+    <UserControl.Styles>
+        <StyleInclude Source="Styles.axaml" />
+    </UserControl.Styles>
+
+    <Design.DesignStyle>
+        <Style Selector="views|QuestionAnswerResultsView">
+            <Setter Property="ItemsSource" Value="{StaticResource SampleQuestionResults}" />
+        </Style>
+    </Design.DesignStyle>
+
+    <ItemsControl ItemsSource="{Binding $parent[views:QuestionAnswerResultsView].ItemsSource}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="questions:QuestionResultTopic">
+                <StackPanel>
+                    <TextBlock Margin="20 0 0 0" Classes="H2" FontWeight="Normal">
+                        <Run Text="{Binding Topic}" FontWeight="SemiBold" />
+                        -
+                        <Run Text="{Binding CorrectCount}" />/<Run Text="{Binding Count}" />
+                    </TextBlock>
+                    <ItemsControl HorizontalAlignment="Stretch" ItemsSource="{Binding}" Margin="0 0 0 20">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="questions:QuestionResult">
+                                <Expander HorizontalAlignment="Stretch">
+                                    <Expander.Header>
+                                        <DockPanel Margin="3 1">
+                                            <DockPanel.Styles>
+                                                <Style Selector="LucideIcon">
+                                                    <Setter Property="Kind" Value="X" />
+                                                    <Setter Property="Foreground"
+                                                            Value="{DynamicResource SemiColorDanger}" />
+
+                                                    <Style Selector="^.Correct">
+                                                        <Setter Property="Kind" Value="Check" />
+                                                        <Setter Property="Foreground"
+                                                                Value="{DynamicResource SemiColorSuccess}" />
+                                                    </Style>
+                                                </Style>
+                                            </DockPanel.Styles>
+
+                                            <LucideIcon Classes.Correct="{Binding IsCorrect}"
+                                                        DockPanel.Dock="Left"
+                                                        Margin="5 0" Size="20" />
+                                            <TextBlock Text="{Binding Question}" />
+                                        </DockPanel>
+                                    </Expander.Header>
+
+                                    <Expander.Styles>
+                                        <Style
+                                            Selector="Expander /template/ ToggleButton#ExpanderHeader /template/ ContentPresenter">
+                                            <Setter Property="CornerRadius" Value="6" />
+                                        </Style>
+                                    </Expander.Styles>
+
+                                    <ItemsControl ItemsSource="{Binding Answers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Classes.Selected="{Binding IsSelected}"
+                                                        Margin="10 0 0 0"
+                                                        Classes.Correct="{Binding IsCorrect}"
+                                                        CornerRadius="6"
+                                                        Padding="10 0" x:Name="AnswerOptionBorder">
+
+                                                    <Border.Styles>
+                                                        <Style Selector="Border LucideIcon">
+                                                            <Setter Property="Kind" Value="X" />
+                                                            <Setter Property="Foreground"
+                                                                    Value="{DynamicResource SemiColorText2}" />
+                                                        </Style>
+                                                        <Style Selector="Border.Selected">
+                                                            <Setter Property="BorderThickness" Value="2" />
+                                                            <Setter Property="BorderBrush"
+                                                                    Value="{DynamicResource SemiColorDanger}" />
+                                                            <Setter Property="Background">
+                                                                <SolidColorBrush
+                                                                    Color="{Binding #AnswerOptionBorder.((SolidColorBrush)BorderBrush).Color, FallbackValue=Transparent}"
+                                                                    Opacity="0.25" />
+                                                            </Setter>
+
+                                                            <Style Selector="^ LucideIcon">
+                                                                <Setter Property="Foreground"
+                                                                        Value="{DynamicResource SemiColorDanger}" />
+                                                            </Style>
+                                                        </Style>
+                                                        <Style Selector="Border.Correct">
+                                                            <Setter Property="BorderThickness" Value="2" />
+                                                            <Setter Property="BorderBrush"
+                                                                    Value="{DynamicResource SemiColorSuccess}" />
+
+                                                            <Style Selector="^ LucideIcon">
+                                                                <Setter Property="Kind" Value="Check" />
+                                                                <Setter Property="Foreground"
+                                                                        Value="{DynamicResource SemiColorSuccess}" />
+                                                            </Style>
+                                                        </Style>
+                                                    </Border.Styles>
+
+                                                    <DockPanel>
+                                                        <LucideIcon DockPanel.Dock="Right" Size="18"
+                                                                    VerticalAlignment="Center" Margin="5 0 0 0" />
+                                                        <TextBlock Text="{Binding Answer}"
+                                                                   TextWrapping="Wrap"
+                                                                   Margin="0 5 5 5" />
+                                                    </DockPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Spacing="10" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+</UserControl>

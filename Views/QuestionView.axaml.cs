@@ -1,0 +1,68 @@
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
+
+namespace FullYearProject.Views;
+
+public partial class QuestionView : UserControl
+{
+    public static readonly StyledProperty<string> QuestionProperty =
+        AvaloniaProperty.Register<QuestionView, string>(nameof(Question));
+
+    public static readonly StyledProperty<IImage?> ImageProperty =
+        AvaloniaProperty.Register<QuestionView, IImage?>(nameof(Image));
+
+    public static readonly StyledProperty<object?> ChildProperty =
+        AvaloniaProperty.Register<QuestionView, object?>(
+            nameof(Child));
+
+    public static readonly StyledProperty<IEnumerable<string>> AnswerOptionsProperty =
+        AvaloniaProperty.Register<QuestionView, IEnumerable<string>>(nameof(AnswerOptions));
+
+    private static readonly string[] AnswerButtonClasses = ["Red", "Yellow", "Green", "Blue"];
+    private static readonly string[] AnswerButtonTrueFalseClasses = ["Red", "Green"];
+
+    public QuestionView()
+    {
+        InitializeComponent();
+    }
+
+    public object? Child
+    {
+        get => GetValue(ChildProperty);
+        set => SetValue(ChildProperty, value);
+    }
+
+    public IImage? Image
+    {
+        get => GetValue(ImageProperty);
+        set => SetValue(ImageProperty, value);
+    }
+
+    public string Question
+    {
+        get => GetValue(QuestionProperty);
+        set => SetValue(QuestionProperty, value);
+    }
+
+    public IEnumerable<string> AnswerOptions
+    {
+        get => GetValue(AnswerOptionsProperty);
+        set => SetValue(AnswerOptionsProperty, value);
+    }
+
+    private void AnswerOptionsItemsControl_OnPreparingContainer(object? sender, ContainerPreparedEventArgs e)
+    {
+        var isTrueFalse = (sender as ItemsControl)?.ItemCount == 2;
+
+        if (isTrueFalse)
+            e.Container.Classes.Add(AnswerButtonTrueFalseClasses[e.Index]);
+        else
+            e.Container.Classes.Add(AnswerButtonClasses[e.Index % AnswerButtonClasses.Length]);
+
+        Debug.WriteLine(string.Join(", ", e.Container.Classes.AsEnumerable()));
+    }
+}

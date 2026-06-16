@@ -1,0 +1,26 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FullYearProject.Views.HeaderView">
+
+    <UserControl.Styles>
+        <StyleInclude Source="Styles.axaml" />
+    </UserControl.Styles>
+
+    <UserControl.Resources>
+        <PathGeometry x:Key="QuestionMarkPath">M 95.557475 65.679712 C 92.048467 65.607248 88.784384 65.811652 86.011804 66.331352 C 68.205424 69.669024 55.322382 77.468127 47.279801 89.779016 C 42.073967 97.747656 40.216559 109.3656 43.427323 113.8747 C 43.711122 114.27326 43.943054 114.71088 43.943054 114.84725 C 43.943054 114.98362 44.687195 115.80734 45.5967 116.67815 C 51.249167 122.09015 61.697114 122.13033 66.968005 116.76031 C 68.763311 114.93124 69.839945 113.12467 73.113883 106.44777 C 77.892932 96.701331 82.128913 92.958061 89.848263 91.659521 C 105.75067 88.984431 116.96455 96.603058 117.06676 110.15193 C 117.13226 118.83528 113.61115 123.75879 99.373263 134.89254 C 89.689033 142.46543 85.813608 146.14702 82.663688 150.76547 C 74.731776 162.39533 77.487621 176.93113 88.154309 179.72443 C 91.918749 180.71023 97.058677 180.23649 100.09415 178.62372 C 102.97349 177.09391 105.06136 174.20857 106.75576 169.4186 C 107.14183 168.32719 108.10694 166.12454 108.90033 164.52381 C 111.05793 160.17069 113.18789 158.04742 121.0691 152.39483 C 127.81385 147.55735 130.91808 145.24228 132.97535 143.51527 C 145.23011 133.22774 150.5807 123.76331 151.01404 111.60714 C 151.62461 94.479286 143.23544 80.839612 127.12454 72.767135 C 118.81915 68.605668 106.0845 65.897104 95.557475 65.679712 z M 93.215499 195.27335 A 18.053553 18.053553 0 0 0 75.16182 213.32651 A 18.053553 18.053553 0 0 0 93.215499 231.38019 A 18.053553 18.053553 0 0 0 111.26866 213.32651 A 18.053553 18.053553 0 0 0 93.215499 195.27335 z </PathGeometry>
+    </UserControl.Resources>
+
+    <Border BoxShadow="0 -2 5 0 Black" MinHeight="75">
+        <Grid ColumnDefinitions="Auto Auto *" RowDefinitions="* Auto" ColumnSpacing="20">
+            <LucideIcon Kind="Lightbulb" Size="40" Margin="15 0 0 0" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Quiz" Classes="Title" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" />
+
+            <Rectangle Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Height="1" Fill="#4fff" />
+        </Grid>
+    </Border>
+
+</UserControl>

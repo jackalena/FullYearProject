@@ -1,0 +1,212 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel Spacing="20">
+            <StackPanel.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceInclude Source="/Assets/Resources.axaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackPanel.Resources>
+
+            <StackPanel.Styles>
+                <Style Selector="TextBlock Button">
+                    <Setter Property="FontFamily" Value="Nunito" />
+                </Style>
+            </StackPanel.Styles>
+
+            <ThemeVariantScope RequestedThemeVariant="Dark">
+                <Border Padding="20" Background="{DynamicResource WindowDefaultBackground}">
+                    <StackPanel Spacing="20">
+                        <Border Classes="CardFlat">
+                            <StackPanel>
+                                <TextBlock Classes="Title">Title</TextBlock>
+                                <TextBlock Classes="H1">Heading 1</TextBlock>
+                                <TextBlock Classes="H2">Heading 2</TextBlock>
+                                <TextBlock>Normal text</TextBlock>
+                            </StackPanel>
+                        </Border>
+
+                        <UniformGrid ColumnSpacing="10" RowSpacing="10" Columns="2">
+                            <Button Classes="Answer Red" Content="Option 1" />
+                            <Button Classes="Answer Yellow" Content="Option 2" />
+                            <Button Classes="Answer Green" Content="Option 3" />
+                            <Button Classes="Answer Blue" Content="Option 4" />
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+            </ThemeVariantScope>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Assets/Resources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="FlatCardBackground" Color="#1b000000" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="FlatCardBackground" Color="#1bffffff" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector=":is(UserControl)">
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="Background" Value="{DynamicResource WindowDefaultBackground}" />
+    </Style>
+
+    <Style Selector="Border.CardFlat">
+        <Setter Property="Background" Value="{DynamicResource FlatCardBackground}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#1dffffff" />
+    </Style>
+
+    <Style Selector="Border.Answer">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Button.Answer">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.05" />
+                    <EffectTransition Property="Effect" Duration="0:0:0.07" />
+                </Transitions>
+            </Setter>
+        </Style>
+    </Style>
+
+    <Style Selector="Border.LightShadow">
+        <Setter Property="BoxShadow" Value="1 2 7 0 #3000" />
+    </Style>
+
+    <Style Selector="Border.Light1Shadow">
+        <Setter Property="BoxShadow" Value="1 2 7 0 #2000" />
+    </Style>
+
+    <Style Selector="Border.Light2Shadow">
+        <Setter Property="BoxShadow" Value="1 2 7 0 #1000" />
+    </Style>
+
+    <Style Selector="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style Selector="TextBlock.Title">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector="TextBlock.H1">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="TextBlock.H2">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="Button.Red, :is(Control).Red Button">
+        <Setter Property="ClipToBounds" Value="False" />
+
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="#ee4a4a" />
+            <Setter Property="BorderBrush" Value="#ff6262" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="8" OffsetX="0" OffsetY="0" Color="#ff6262" />
+            </Setter>
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#DD4B4B" />
+            <Setter Property="BorderBrush" Value="#E76060" />
+        </Style>
+    </Style>
+
+    <Style Selector="Button.Yellow, :is(Control).Yellow Button">
+        <Setter Property="ClipToBounds" Value="False" />
+
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="#C69422" />
+            <Setter Property="BorderBrush" Value="#D2A022" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="8" OffsetX="0" OffsetY="0" Color="#D2A022" />
+            </Setter>
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#BD8A22" />
+            <Setter Property="BorderBrush" Value="#CB9823" />
+        </Style>
+    </Style>
+
+    <Style Selector="Button.Green, :is(Control).Green Button">
+        <Setter Property="ClipToBounds" Value="False" />
+
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="#4b4" />
+            <Setter Property="BorderBrush" Value="#56cc56" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="8" OffsetX="0" OffsetY="0" Color="#56cc56" />
+            </Setter>
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#46AF46" />
+            <Setter Property="BorderBrush" Value="#56BE56" />
+        </Style>
+    </Style>
+
+    <Style Selector="Button.Blue, :is(Control).Blue Button">
+        <Setter Property="ClipToBounds" Value="False" />
+
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="#37c" />
+            <Setter Property="BorderBrush" Value="#4b8bdb" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="8" OffsetX="0" OffsetY="0" Color="#4b8bdb" />
+            </Setter>
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#336CC1" />
+            <Setter Property="BorderBrush" Value="#4B7DCD" />
+        </Style>
+    </Style>
+
+    <Style Selector="FlyoutPresenter">
+        <Setter Property="Background" Value="{DynamicResource WindowDefaultBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+</Styles>

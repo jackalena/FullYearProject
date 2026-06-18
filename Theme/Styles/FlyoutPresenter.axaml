@@ -1,0 +1,49 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="50">
+            <Button Content="Open flyout">
+                <Button.Flyout>
+                    <Flyout>
+                        <TextBlock Text="Flyout text" />
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="FlyoutPresenter">
+        <Setter Property="Background" Value="{DynamicResource FlyoutBackground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Theme" Value="{StaticResource LightFlyout}" />
+
+        <Setter Property="Template">
+            <ControlTemplate TargetType="FlyoutPresenter">
+                <Border
+                    Name="LayoutRoot"
+                    Margin="4"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="#18ffffff"
+                    BorderThickness="1"
+                    BoxShadow="0.5 0.5 7 -2 Black"
+                    ClipToBounds="False"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    UseLayoutRounding="False">
+                    <ScrollViewer
+                        HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                        <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

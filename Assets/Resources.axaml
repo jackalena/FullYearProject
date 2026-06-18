@@ -2,8 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:questions="clr-namespace:FullYearProject.Models.Questions">
 
-    <SolidColorBrush x:Key="WindowDefaultBackground" Color="#126" />
-
     <questions:QuestionResultTopicCollection x:Key="SampleQuestionResults">
         <questions:QuestionResultTopic Topic="Topic 1">
             <questions:QuestionResult Question="Question 1">

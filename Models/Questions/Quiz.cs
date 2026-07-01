@@ -80,11 +80,11 @@ public class RangeQuizQuestionParameterConstraint : QuizQuestionParameterConstra
         Type = "Range";
     }
 
-    public List<int> Value { get; set; } = [0, 1];
+    public List<decimal> Value { get; set; } = [0, 1];
 
     public override decimal Apply(decimal value)
     {
-        if (Value.Count != 2) throw new InvalidOperationException("Value must be a list of two integers");
+        if (Value.Count != 2) throw new InvalidOperationException("Value must be a list of two numbers");
 
         return (decimal)Random.Shared.NextDouble() * (Value[1] - Value[0]) + Value[0];
     }

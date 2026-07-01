@@ -22,6 +22,9 @@
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
         <PackageReference Include="Lucide.Avalonia" Version="0.2.10"/>
+        <PackageReference Include="MathParser.org-mXparser" Version="6.1.1"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0-preview.5.26302.115"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="11.0.0-preview.5.26302.115"/>
         <PackageReference Include="Semi.Avalonia" Version="12.0.3"/>
     </ItemGroup>
 </Project>

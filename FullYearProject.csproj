@@ -12,16 +12,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="12.0.4"/>
-        <PackageReference Include="Avalonia.Desktop" Version="12.0.4"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4"/>
-        <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.2">
+        <PackageReference Include="Avalonia" Version="12.0.5"/>
+        <PackageReference Include="Avalonia.Desktop" Version="12.0.5"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.5"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.5"/>
+        <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
-        <PackageReference Include="Lucide.Avalonia" Version="0.2.10"/>
+        <PackageReference Include="Lucide.Avalonia" Version="0.2.11"/>
         <PackageReference Include="MathParser.org-mXparser" Version="6.1.1"/>
         <PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0-preview.5.26302.115"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="11.0.0-preview.5.26302.115"/>

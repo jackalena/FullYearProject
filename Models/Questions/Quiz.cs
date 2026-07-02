@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -40,6 +41,10 @@ public class QuizQuestion
 
 public class QuizQuestionCollection : List<QuizQuestion>
 {
+    public QuizQuestion GetCorrectQuestion()
+    {
+        return this.First(q => q.Options.Any(o => o.IsCorrect.EvaluateIsCorrect(null)));
+    }
 }
 
 public class QuizQuestionOption
@@ -84,7 +89,10 @@ public class RangeQuizQuestionParameterConstraint : QuizQuestionParameterConstra
 
     public override decimal Apply(decimal value)
     {
-        if (Value.Count != 2) throw new InvalidOperationException("Value must be a list of two numbers");
+        if (Value.Count != 2)
+        {
+            throw new InvalidOperationException("Value must be a list of two numbers");
+        }
 
         return (decimal)Random.Shared.NextDouble() * (Value[1] - Value[0]) + Value[0];
     }
@@ -120,7 +128,7 @@ public class EqualQuizQuestionParameterConstraint : QuizQuestionParameterConstra
 
 public abstract class OptionIsCorrectDefinition
 {
-    public abstract bool EvaluateIsCorrect(object? state);
+    public abstract bool EvaluateIsCorrect(Dictionary<string, decimal> variables);
 }
 
 public class IsCorrectDefinitionConverter : JsonConverter<OptionIsCorrectDefinition>
@@ -134,7 +142,7 @@ public class IsCorrectDefinitionConverter : JsonConverter<OptionIsCorrectDefinit
             {
                 Value = reader.GetBoolean()
             },
-            JsonTokenType.String => new ExpressionOptionIsCorrectDefiniton
+            JsonTokenType.String => new ExpressionOptionIsCorrectDefinition
             {
                 Expression = reader.GetString() ??
                              throw new JsonException("Cannot read expression string from JSON file")
@@ -155,17 +163,17 @@ public class BooleanOptionIsCorrectDefinition : OptionIsCorrectDefinition
 
     public bool Value { get; set; }
 
-    public override bool EvaluateIsCorrect(object? state)
+    public override bool EvaluateIsCorrect(Dictionary<string, decimal> variables)
     {
         return Value;
     }
 }
 
-public class ExpressionOptionIsCorrectDefiniton : OptionIsCorrectDefinition
+public class ExpressionOptionIsCorrectDefinition : OptionIsCorrectDefinition
 {
     public string Expression { get; set; } = string.Empty;
 
-    public override bool EvaluateIsCorrect(object? state)
+    public override bool EvaluateIsCorrect(Dictionary<string, decimal> variables)
     {
         return false;
     }

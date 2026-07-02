@@ -77,9 +77,13 @@ public class SmoothScrollContentPresenter : ScrollContentPresenter
             var delta = e.Delta;
 
             if (e.KeyModifiers == KeyModifiers.Shift && delta.X < 1f)
-                delta = new Vector(delta.Y, delta.X);
+            {
+                delta = new(delta.Y, delta.X);
+            }
             else
+            {
                 delta = AdjustDeltaForFlowDirection(delta, FlowDirection);
+            }
 
             if (Extent.Height > Viewport.Height)
             {

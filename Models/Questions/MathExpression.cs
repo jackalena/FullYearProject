@@ -8,7 +8,7 @@ public class MathExpression
 
     public MathExpression(string expression)
     {
-        Expression = new Expression(expression);
+        Expression = new(expression);
     }
 
     public string SourceExpression

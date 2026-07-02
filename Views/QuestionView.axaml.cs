@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -58,11 +56,10 @@ public partial class QuestionView : UserControl
     {
         var isTrueFalse = (sender as ItemsControl)?.ItemCount == 2;
 
-        if (isTrueFalse)
-            e.Container.Classes.Add(AnswerButtonTrueFalseClasses[e.Index]);
-        else
-            e.Container.Classes.Add(AnswerButtonClasses[e.Index % AnswerButtonClasses.Length]);
+        var newClass = isTrueFalse
+            ? AnswerButtonTrueFalseClasses[e.Index]
+            : AnswerButtonClasses[e.Index % AnswerButtonClasses.Length];
 
-        Debug.WriteLine(string.Join(", ", e.Container.Classes.AsEnumerable()));
+        e.Container.Classes.Add(newClass);
     }
 }

@@ -34,13 +34,13 @@
                         <Flyout Placement="RightEdgeAlignedBottom" ShowMode="TransientWithDismissOnPointerMoveAway">
                             <UniformGrid Columns="2" ColumnSpacing="25" RowSpacing="15" Margin="5 5 10 5">
                                 <TextBlock Text="Excellence:" />
-                                <TextBlock Text="75% or higher" />
+                                <TextBlock Text="88% to 100%" />
                                 <TextBlock Text="Merit:" />
-                                <TextBlock Text="50% - 74%" />
+                                <TextBlock Text="63% to 87%" />
                                 <TextBlock Text="Achieved:" />
-                                <TextBlock Text="25% - 49%" />
+                                <TextBlock Text="38% to 62%" />
                                 <TextBlock Text="Not Achieved:" />
-                                <TextBlock Text="24% or lower" />
+                                <TextBlock Text="0% to 37%" />
                             </UniformGrid>
                         </Flyout>
                     </Button.Flyout>

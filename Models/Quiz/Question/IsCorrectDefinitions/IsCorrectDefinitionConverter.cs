@@ -4,8 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
 
+/// <summary>
+///     JSON converter to convert between <see cref="OptionIsCorrectDefinition" /> instances and JSON.
+/// </summary>
 public class IsCorrectDefinitionConverter : JsonConverter<OptionIsCorrectDefinition>
 {
+    /// <summary>
+    ///     <inheritdoc />
+    ///     Returns a <see cref="OptionIsCorrectDefinition" /> instance depending on the definition type.
+    /// </summary>
+    /// <inheritdoc />
     public override OptionIsCorrectDefinition? Read(ref Utf8JsonReader reader, Type typeToConvert,
         JsonSerializerOptions options)
     {

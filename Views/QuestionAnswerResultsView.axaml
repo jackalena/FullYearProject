@@ -2,8 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:questions="clr-namespace:FullYearProject.Models.Questions"
              xmlns:views="clr-namespace:FullYearProject.Views"
+             xmlns:questions="clr-namespace:FullYearProject.Models.Responses"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FullYearProject.Views.QuestionAnswerResultsView">
 
@@ -19,7 +19,7 @@
 
     <ItemsControl ItemsSource="{Binding $parent[views:QuestionAnswerResultsView].ItemsSource}">
         <ItemsControl.ItemTemplate>
-            <DataTemplate x:DataType="questions:QuestionResultTopic">
+            <DataTemplate x:DataType="questions:QuestionResponseTopic">
                 <StackPanel>
                     <TextBlock Margin="20 0 0 0" Classes="H2" FontWeight="Normal">
                         <Run Text="{Binding Topic}" FontWeight="SemiBold" />
@@ -28,7 +28,7 @@
                     </TextBlock>
                     <ItemsControl HorizontalAlignment="Stretch" ItemsSource="{Binding}" Margin="0 0 0 20">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="questions:QuestionResult">
+                            <DataTemplate x:DataType="questions:QuestionResponse">
                                 <Expander HorizontalAlignment="Stretch">
                                     <Expander.Header>
                                         <DockPanel Margin="3 1">
@@ -46,7 +46,7 @@
                                                 </Style>
                                             </DockPanel.Styles>
 
-                                            <LucideIcon Classes.Correct="{Binding IsCorrect}"
+                                            <LucideIcon Classes.Correct="{Binding IsAnswerCorrect}"
                                                         DockPanel.Dock="Left"
                                                         Margin="5 0" Size="20" />
                                             <TextBlock Text="{Binding Question}" />
@@ -106,7 +106,7 @@
                                                     <DockPanel>
                                                         <LucideIcon DockPanel.Dock="Right" Size="18"
                                                                     VerticalAlignment="Center" Margin="5 0 0 0" />
-                                                        <TextBlock Text="{Binding Answer}"
+                                                        <TextBlock Text="{Binding Format}"
                                                                    TextWrapping="Wrap"
                                                                    Margin="0 5 5 5" />
                                                     </DockPanel>

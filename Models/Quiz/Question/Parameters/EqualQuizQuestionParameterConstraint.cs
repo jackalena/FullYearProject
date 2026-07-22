@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using FullYearProject.Models.Questions;
+﻿using FullYearProject.Models.Quiz.Expressions;
+using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.Models.Quiz.Question.Parameters;
 
@@ -16,14 +16,22 @@ public class EqualQuizQuestionParameterConstraint : QuizQuestionParameterConstra
     }
 
     /// <summary>
-    /// The expression to evaluate.
+    ///     The expression to evaluate.
     /// </summary>
-    public string? Value { get; set; }
+    public string Value { get; init; } = string.Empty;
 
-    public override double Apply(double value, Dictionary<string, double> variables)
+    /// <inheritdoc />
+    public override double Apply(double value)
     {
+        if (string.IsNullOrWhiteSpace(Value))
+        {
+            Logger.LogWarning("Tried to evaluate empty expression.");
+
+            return 0;
+        }
+
         _expressionEvaluator ??= new(Value);
-        _expressionEvaluator.Variables = variables;
+        _expressionEvaluator.Variables = Variables;
         return _expressionEvaluator.Evaluate();
     }
 }

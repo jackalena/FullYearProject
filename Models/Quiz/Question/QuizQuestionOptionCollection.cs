@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FullYearProject.Models.Quiz.Question;
 
@@ -14,6 +14,6 @@ public class QuizQuestionOptionCollection : List<QuizQuestionOption>
     /// <returns>The correct option.</returns>
     public QuizQuestionOption FindCorrectOption()
     {
-        throw new NotImplementedException();
+        return this.First(o => o.IsCorrect.EvaluateIsCorrect());
     }
 }

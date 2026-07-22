@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
-using FullYearProject.Models.Questions;
+using FullYearProject.Models.Responses;
 
 namespace FullYearProject.Views;
 
 public partial class QuestionAnswerResultsView : UserControl
 {
-    public static readonly StyledProperty<IEnumerable<QuestionResultTopic>> ItemsSourceProperty =
-        AvaloniaProperty.Register<QuestionAnswerResultsView, IEnumerable<QuestionResultTopic>>(
+    public static readonly StyledProperty<IEnumerable<QuestionResponseTopic>> ItemsSourceProperty =
+        AvaloniaProperty.Register<QuestionAnswerResultsView, IEnumerable<QuestionResponseTopic>>(
             nameof(ItemsSource));
 
     public QuestionAnswerResultsView()
@@ -16,7 +16,7 @@ public partial class QuestionAnswerResultsView : UserControl
         InitializeComponent();
     }
 
-    public IEnumerable<QuestionResultTopic> ItemsSource
+    public IEnumerable<QuestionResponseTopic> ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);

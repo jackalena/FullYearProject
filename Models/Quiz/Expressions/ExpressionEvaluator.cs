@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using org.mariuszgromada.math.mxparser;
 
-namespace FullYearProject.Models.Questions;
+namespace FullYearProject.Models.Quiz.Expressions;
 
 /// <summary>
 ///     Evaluates a mathematical expression using a set of variables and their values.

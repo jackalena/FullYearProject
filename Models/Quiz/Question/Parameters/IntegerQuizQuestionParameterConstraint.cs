@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace FullYearProject.Models.Quiz.Question.Parameters;
 
@@ -13,7 +12,8 @@ public class IntegerQuizQuestionParameterConstraint : QuizQuestionParameterConst
         Type = "Integer";
     }
 
-    public override double Apply(double value, Dictionary<string, double> variables)
+    /// <inheritdoc />
+    public override double Apply(double value)
     {
         return Math.Round(value);
     }

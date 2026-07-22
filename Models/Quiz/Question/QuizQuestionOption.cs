@@ -3,6 +3,9 @@ using FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
 
 namespace FullYearProject.Models.Quiz.Question;
 
+/// <summary>
+///     Represents an option for a quiz question.
+/// </summary>
 public class QuizQuestionOption
 {
     /// <summary>

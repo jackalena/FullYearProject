@@ -29,11 +29,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="SampleQuestions\set-1.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="SampleQuestions\set-2.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="SampleQuestions\set-1.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="SampleQuestions\set-2.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Models\Questions\MathExpression.cs"/>
+        <Compile Remove="Models\Questions\AnswerOptionCollection.cs"/>
     </ItemGroup>
 </Project>

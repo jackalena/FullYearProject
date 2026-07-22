@@ -5,15 +5,13 @@ using FullYearProject.Helpers;
 using FullYearProject.Logging;
 using Microsoft.Extensions.Logging;
 
-namespace FullYearProject.Models.Questions;
+namespace FullYearProject.Models.Quiz.Expressions;
 
 /// <summary>
 ///     Formats a string using a set of variables and their values.
 /// </summary>
-public class StringVariableFormatter
+public class StringVariableFormatter : Loggable
 {
-    private readonly ILogger _logger = Logger.Create<StringVariableFormatter>();
-
     // StringBuilder to use for string replacement
     private readonly StringBuilder _sb = new();
 
@@ -59,7 +57,7 @@ public class StringVariableFormatter
             var endIdx = _sb.IndexOf("}", startIdx);
             if (endIdx == -1)
             {
-                _logger.LogError("Unclosed variable brace");
+                Logger.LogError("Unclosed variable brace");
                 break;
             }
 
@@ -99,13 +97,16 @@ public class StringVariableFormatter
             // Replace the variable with its value or log an error if the variable doesn't exist
             if (newVal == null)
             {
-                _logger.LogError("Invalid variable name: {VariableName}", _sb.ToString(startIdx + 2, len - 3));
+                Logger.LogError("Invalid variable name: {VariableName}", _sb.ToString(startIdx + 2, len - 3));
             }
             else
             {
                 _sb.ReplaceRange(startIdx, len, newVal);
             }
         }
+
+        // Remove '\' from any escaped '@' characters
+        _sb.Replace("\\@", "@");
 
         return _sb.ToString();
     }

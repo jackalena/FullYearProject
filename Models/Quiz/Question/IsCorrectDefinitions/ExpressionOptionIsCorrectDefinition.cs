@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using FullYearProject.Models.Questions;
+﻿using FullYearProject.Models.Quiz.Expressions;
+using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
 
@@ -13,7 +13,7 @@ public class ExpressionOptionIsCorrectDefinition : OptionIsCorrectDefinition
     /// <summary>
     ///     The expression to use to evaluate whether the option is correct.
     /// </summary>
-    public string Expression { get; set; } = string.Empty;
+    public string Expression { get; init; } = string.Empty;
 
     /// <summary>
     ///     <inheritdoc />
@@ -21,10 +21,18 @@ public class ExpressionOptionIsCorrectDefinition : OptionIsCorrectDefinition
     ///     <see cref="ExpressionOptionIsCorrectDefinition" />.
     /// </summary>
     /// <inheritdoc />
-    public override bool EvaluateIsCorrect(Dictionary<string, double> variables)
+    public override bool EvaluateIsCorrect()
     {
+        if (string.IsNullOrWhiteSpace(Expression))
+        {
+            Logger.LogWarning("Tried to evaluate empty expression.");
+
+            return false;
+        }
+
         _expressionEvaluator ??= new(Expression);
-        _expressionEvaluator.Variables = variables;
+        _expressionEvaluator.Variables = Variables;
+
         return _expressionEvaluator.Evaluate();
     }
 }

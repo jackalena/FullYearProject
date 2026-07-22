@@ -22,7 +22,7 @@ public class BooleanOptionIsCorrectDefinition : OptionIsCorrectDefinition
     ///     Will always return <see cref="Value" /> for <see cref="BooleanOptionIsCorrectDefinition" />.
     /// </summary>
     /// <inheritdoc />
-    public override bool EvaluateIsCorrect(Dictionary<string, double> variables)
+    public override bool EvaluateIsCorrect()
     {
         return Value;
     }

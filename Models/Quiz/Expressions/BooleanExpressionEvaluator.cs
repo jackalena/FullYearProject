@@ -1,4 +1,4 @@
-﻿namespace FullYearProject.Models.Questions;
+﻿namespace FullYearProject.Models.Quiz.Expressions;
 
 /// <summary>
 ///     Evaluates an expression as a boolean value.

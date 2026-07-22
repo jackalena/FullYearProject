@@ -18,7 +18,8 @@ public class RangeQuizQuestionParameterConstraint : QuizQuestionParameterConstra
     /// </summary>
     public List<double> Value { get; set; } = [0, 1];
 
-    public override double Apply(double value, Dictionary<string, double> variables)
+    /// <inheritdoc />
+    public override double Apply(double value)
     {
         if (Value.Count != 2)
         {

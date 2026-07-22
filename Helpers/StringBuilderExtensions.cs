@@ -4,6 +4,9 @@ using System.Text;
 
 namespace FullYearProject.Helpers;
 
+/// <summary>
+///     Extension methods for <see cref="StringBuilder" />.
+/// </summary>
 public static class StringBuilderExtensions
 {
     /// <param name="sb">The <see cref="StringBuilder" /> instance to use.</param>

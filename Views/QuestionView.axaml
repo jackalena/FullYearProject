@@ -13,6 +13,7 @@
 
     <Design.DesignStyle>
         <Style Selector="views|QuestionView">
+            <Setter Property="TopicName" Value="Topic name" />
             <Setter Property="Question" Value="What is the answer to this question?" />
             <Setter Property="Image" Value="/Assets/placeholder.png" />
             <Setter Property="AnswerOptions">
@@ -34,6 +35,10 @@
                     <Image Source="{Binding $parent[views:QuestionView].Image}"
                            RenderOptions.BitmapInterpolationMode="MediumQuality" Stretch="Uniform" />
                 </Border>
+                <TextBlock DockPanel.Dock="Top" Classes="H0" Text="{Binding $parent[views:QuestionView].TopicName}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+
                 <TextBlock Classes="H1" Text="{Binding $parent[views:QuestionView].Question}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
@@ -95,7 +100,10 @@
                     </Style>
                 </LucideIcon.Styles>
             </LucideIcon>
-            <TextBlock Margin="5 0" Text="5:00 remaining" />
+            <TextBlock Margin="5 0">
+                <Run Text="{Binding $parent[views:QuestionView].TimeRemaining, StringFormat='m\\:ss'}" />
+                <Run Text="remaining" />
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

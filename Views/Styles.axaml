@@ -114,6 +114,11 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
+    <Style Selector="TextBlock.H0">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
     <Style Selector="TextBlock.H1">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="SemiBold" />

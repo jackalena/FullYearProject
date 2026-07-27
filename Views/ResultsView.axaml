@@ -3,16 +3,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:FullYearProject.Views"
+             xmlns:configuration="clr-namespace:FullYearProject.Configuration"
+             xmlns:vm="clr-namespace:FullYearProject.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:ResultsViewModel"
              x:Class="FullYearProject.Views.ResultsView">
+
+    <Design.DataContext>
+        <vm:ResultsViewModel />
+    </Design.DataContext>
 
     <UserControl.Styles>
         <StyleInclude Source="Styles.axaml" />
     </UserControl.Styles>
 
-
     <Grid Margin="20" RowSpacing="10" ColumnSpacing="10" HorizontalAlignment="Stretch"
-          RowDefinitions="Auto * 0.15*" ColumnDefinitions="Auto Auto *">
+          RowDefinitions="Auto * 0.15*" ColumnDefinitions="* Auto 2*">
         <TextBlock Text="Results" Classes="H1" TextAlignment="Center" />
 
         <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Spacing="10">
@@ -20,11 +26,13 @@
                 <ProgressBar Theme="{DynamicResource ProgressRing}" Width="100" Height="100" BorderThickness="13"
                              Value="80" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                <TextBlock Classes="H2" Text="8/10" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Classes="H2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Run Text="{Binding CorrectAnswered}" />/<Run Text="{Binding TotalAnswered}" />
+                </TextBlock>
             </Panel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Classes="H2" Text="Excellence" VerticalAlignment="Center" />
+                <TextBlock Classes="H2" Text="{Binding Grade.Name}" VerticalAlignment="Center" />
                 <Button Theme="{StaticResource BorderlessButton}" Width="32" Margin="5 0 0 0" Padding="0"
                         HorizontalAlignment="Center" Foreground="{DynamicResource SemiColorText0}"
                         ClipToBounds="False">
@@ -32,29 +40,36 @@
 
                     <Button.Flyout>
                         <Flyout Placement="RightEdgeAlignedBottom" ShowMode="TransientWithDismissOnPointerMoveAway">
-                            <UniformGrid Columns="2" ColumnSpacing="25" RowSpacing="15" Margin="5 5 10 5">
-                                <TextBlock Text="Excellence:" />
-                                <TextBlock Text="88% to 100%" />
-                                <TextBlock Text="Merit:" />
-                                <TextBlock Text="63% to 87%" />
-                                <TextBlock Text="Achieved:" />
-                                <TextBlock Text="38% to 62%" />
-                                <TextBlock Text="Not Achieved:" />
-                                <TextBlock Text="0% to 37%" />
-                            </UniformGrid>
+                            <ItemsControl ItemsSource="{x:Static configuration:GradeBoundaries.Boundaries}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="configuration:GradeBoundary">
+                                        <Grid ColumnDefinitions="Auto *">
+                                            <TextBlock Margin="5" FontWeight="SemiBold">
+                                                <Run Text="{Binding Name}" /><Run Text=": " />
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="1" Margin="5" HorizontalAlignment="Right">
+                                                <Run Text="{Binding Min}" />%
+                                                to
+                                                <Run Text="{Binding Max}" />%
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
                         </Flyout>
                     </Button.Flyout>
 
                 </Button>
             </StackPanel>
 
-            <TextBlock Text="Well done, keep up the great work!" />
+            <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" TextAlignment="Center" />
         </StackPanel>
 
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" />
 
         <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Name="ResultsScrollViewer">
-            <views:QuestionAnswerResultsView ItemsSource="{StaticResource SampleQuestionResults}" />
+            <views:QuestionAnswerResultsView ItemsSource="{Binding }" />
         </ScrollViewer>
     </Grid>
 

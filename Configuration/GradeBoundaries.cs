@@ -9,7 +9,7 @@ public static class GradeBoundaries
     public static GradeBoundary[] Boundaries { get; } =
     [
         new("Not Achieved", 0, 37, [
-            "This is just one step in learning, so take a breath and let's tackle it again together!",
+            "This is just one step in learning, so take a breath and let's tackle it again!",
             "Mistakes are just proof that you are trying, so keep your head up and keep going!",
             "It didn't go your way this time, but every setback is just setup for a comeback.",
             "Don't sweat it - use this as a guide for what to practice next, you've got this!",

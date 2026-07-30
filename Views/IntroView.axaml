@@ -2,8 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FullYearProject.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:IntroViewModel"
              x:Class="FullYearProject.Views.IntroView">
+
+    <Design.DataContext>
+        <vm:IntroViewModel />
+    </Design.DataContext>
 
     <UserControl.Styles>
         <StyleInclude Source="Styles.axaml" />
@@ -27,7 +33,7 @@
                 Press start to begin.
             </TextBlock>
         </StackPanel>
-        <Button Content="Start" HorizontalAlignment="Left" />
+        <Button Content="Start" HorizontalAlignment="Left" Command="{Binding StartCommand}" />
     </StackPanel>
 
 </UserControl>

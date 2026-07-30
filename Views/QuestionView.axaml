@@ -4,8 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:FullYearProject.Views"
              xmlns:models="clr-namespace:FullYearProject.Models"
+             xmlns:vm="clr-namespace:FullYearProject.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:QuestionViewModel"
              x:Class="FullYearProject.Views.QuestionView">
+
+    <Design.DataContext>
+        <vm:QuestionViewModel />
+    </Design.DataContext>
 
     <UserControl.Styles>
         <StyleInclude Source="Styles.axaml" />
@@ -13,8 +19,7 @@
 
     <Design.DesignStyle>
         <Style Selector="views|QuestionView">
-            <Setter Property="TopicName" Value="Topic name" />
-            <Setter Property="Question" Value="What is the answer to this question?" />
+            <Setter Property="Question" Value="{Binding QuestionText}" />
             <Setter Property="Image" Value="/Assets/placeholder.png" />
             <Setter Property="AnswerOptions">
                 <models:StringCollection>
@@ -32,26 +37,25 @@
             <DockPanel>
                 <Border CornerRadius="7" ClipToBounds="True" VerticalAlignment="Center" Margin="0" Padding="0"
                         Classes="CardFlat" DockPanel.Dock="Right">
-                    <Image Source="{Binding $parent[views:QuestionView].Image}"
+                    <Image Source="{Binding QuestionImage}"
                            RenderOptions.BitmapInterpolationMode="MediumQuality" Stretch="Uniform" />
                 </Border>
-                <TextBlock DockPanel.Dock="Top" Classes="H0" Text="{Binding $parent[views:QuestionView].TopicName}"
+                <TextBlock DockPanel.Dock="Top" Classes="H0" Text="{Binding QuestionTopic}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
 
-                <TextBlock Classes="H1" Text="{Binding $parent[views:QuestionView].Question}"
+                <TextBlock Classes="H1" Text="{Binding QuestionText}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
             </DockPanel>
         </Border>
 
-        <ContentPresenter Grid.Row="1" Content="{Binding $parent[views:QuestionView].Child}"
-                          Margin="10 10 10 0"
-                          IsVisible="{Binding $parent[views:QuestionView].Child, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        <!-- <ContentPresenter Grid.Row="1" Content="{Binding $parent[views:QuestionView].Child}" -->
+        <!--                   Margin="10 10 10 0" -->
+        <!--                   IsVisible="{Binding $parent[views:QuestionView].Child, Converter={x:Static ObjectConverters.IsNotNull}}" /> -->
 
         <ItemsControl
-            IsVisible="{Binding $parent[views:QuestionView].Child, Converter={x:Static ObjectConverters.IsNull}}"
-            ItemsSource="{Binding $parent[views:QuestionView].AnswerOptions}" Grid.Row="1"
+            ItemsSource="{Binding QuestionOptions}" Grid.Row="1"
             PreparingContainer="AnswerOptionsItemsControl_OnPreparingContainer">
 
             <ItemsControl.ItemsPanel>
@@ -101,7 +105,7 @@
                 </LucideIcon.Styles>
             </LucideIcon>
             <TextBlock Margin="5 0">
-                <Run Text="{Binding $parent[views:QuestionView].TimeRemaining, StringFormat='m\\:ss'}" />
+                <Run Text="{Binding TimeRemaining, StringFormat='m\\:ss'}" />
                 <Run Text="remaining" />
             </TextBlock>
         </StackPanel>

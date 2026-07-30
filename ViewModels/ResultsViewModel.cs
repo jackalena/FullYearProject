@@ -16,7 +16,7 @@ public partial class ResultsViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(Message))]
     [NotifyPropertyChangedFor(nameof(TotalAnswered))]
     [NotifyPropertyChangedFor(nameof(CorrectAnswered))]
-    public partial IEnumerable<QuestionResponseTopic> TopicResults { get; set; }
+    public partial IEnumerable<QuestionResponseTopic>? TopicResults { get; set; }
 
     public int? TotalAnswered => field ??= TopicResults?.Sum(topic => topic.Count);
     public int? CorrectAnswered => field ??= TopicResults?.Sum(topic => topic.Count(r => r.IsAnswerCorrect));
@@ -25,5 +25,5 @@ public partial class ResultsViewModel : ViewModelBase
 
     public GradeBoundary Grade => GradeBoundaries.GetGrade(CorrectPercentage);
 
-    public string? Message => field ??= Grade?.Messages.Apply(msgs => Random.Shared.GetItem(msgs));
+    public string? Message => field ??= Grade.Messages.Apply(msgs => Random.Shared.GetItem(msgs));
 }

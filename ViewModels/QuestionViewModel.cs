@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
+using FullYearProject.Models;
 using FullYearProject.Models.Quiz;
 using FullYearProject.Models.Quiz.Question;
 
@@ -26,7 +26,7 @@ public partial class QuestionViewModel : ViewModelBase
     public QuizQuestion Question { get; }
     public Quiz Quiz { get; }
 
-    [ObservableProperty] public partial Timer? Timer { get; set; }
+    [ObservableProperty] public partial TimeRemainingProvider? Timer { get; set; }
 
     public string QuestionText => Question.Text;
 
@@ -39,8 +39,11 @@ public partial class QuestionViewModel : ViewModelBase
 
     [ObservableProperty] public partial TimeSpan TimeRemaining { get; set; }
 
-    partial void OnTimerChanged(Timer? oldValue, Timer? newValue)
+    partial void OnTimerChanged(TimeRemainingProvider? value)
     {
-        oldValue?.
+        if (value != null)
+        {
+            value.TimeRemainingChanged += (_, e) => { TimeRemaining = e.TimeRemaining; };
+        }
     }
 }

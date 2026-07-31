@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:FullYearProject.Views"
              xmlns:models="clr-namespace:FullYearProject.Models"
              xmlns:vm="clr-namespace:FullYearProject.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -10,27 +9,16 @@
              x:Class="FullYearProject.Views.QuestionView">
 
     <Design.DataContext>
-        <vm:QuestionViewModel />
+        <vm:QuestionViewModel>
+            <vm:QuestionViewModel.Timer>
+                <models:TimeRemainingProvider StartTime="0:1:0" AutoStart="True" />
+            </vm:QuestionViewModel.Timer>
+        </vm:QuestionViewModel>
     </Design.DataContext>
 
     <UserControl.Styles>
         <StyleInclude Source="Styles.axaml" />
     </UserControl.Styles>
-
-    <Design.DesignStyle>
-        <Style Selector="views|QuestionView">
-            <Setter Property="Question" Value="{Binding QuestionText}" />
-            <Setter Property="Image" Value="/Assets/placeholder.png" />
-            <Setter Property="AnswerOptions">
-                <models:StringCollection>
-                    <x:String>Option 1</x:String>
-                    <x:String>Option 2</x:String>
-                    <x:String>Option 3</x:String>
-                    <x:String>Option 4</x:String>
-                </models:StringCollection>
-            </Setter>
-        </Style>
-    </Design.DesignStyle>
 
     <Grid RowDefinitions="2* 3* Auto">
         <Border Classes="Light2Shadow CardFlat" Padding="13" Margin="20 20 20 0">

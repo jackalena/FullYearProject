@@ -45,10 +45,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         var question = _quiz!.Questions[0];
 
-        CurrentViewModel = new QuestionViewModel(question, _quiz)
-        {
-            Timer = _timer
-        };
+        CurrentViewModel = new QuestionViewModel(question, _quiz, _timer);
     }
 
     private void OnTimerElapsed()

@@ -59,8 +59,8 @@ public class TimeRemainingProvider
 
         _stopwatch.Restart();
         _timerThreadRunning = true;
-        
-        _timerThread = new(TimerThreadTask);
+
+        _timerThread = new(TimerThreadTask) { IsBackground = true };
         _timerThread.Start();
     }
 
@@ -72,16 +72,19 @@ public class TimeRemainingProvider
 
     private void TimerThreadTask()
     {
-        var lastElapsed = TimeSpan.Zero;
+        var lastElapsed = -_interval;
 
         while (_timerThreadRunning)
         {
             var elapsed = _stopwatch.Elapsed;
-            var error = elapsed - lastElapsed - _interval;
 
             if (elapsed < StartTime)
             {
-                TimeRemainingChanged?.Invoke(this, new(StartTime - elapsed));
+                var roundedTime =
+                    new TimeSpan((long)Math.Round((double)(StartTime - elapsed).Ticks / TimeSpan.TicksPerSecond) *
+                                 TimeSpan.TicksPerSecond);
+
+                TimeRemainingChanged?.Invoke(this, new(roundedTime));
             }
             else
             {
@@ -89,10 +92,15 @@ public class TimeRemainingProvider
                 TimeRemainingElapsed?.Invoke();
             }
 
-            if (_interval > error)
+            var lastError = _interval - (_stopwatch.Elapsed - lastElapsed);
+            var nextDelay = _interval - lastError * 0.5;
+
+            if (nextDelay > TimeSpan.Zero)
             {
-                Thread.Sleep(_interval - error);
+                Thread.Sleep(nextDelay);
             }
+
+            lastElapsed = elapsed;
         }
     }
 }

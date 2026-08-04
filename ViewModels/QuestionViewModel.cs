@@ -31,8 +31,8 @@ public partial class QuestionViewModel : ViewModelBase
         TimeRemaining = Timer.TimeRemaining;
     }
 
-    public QuizQuestion Question { get; }
-    public Quiz Quiz { get; }
+    public QuizQuestion Question { get; init; }
+    public Quiz Quiz { get; init; }
 
     public TimeRemainingProvider? Timer { get; init; }
 
@@ -50,6 +50,9 @@ public partial class QuestionViewModel : ViewModelBase
     [ObservableProperty] public partial bool ShowCompleted { get; set; }
     [ObservableProperty] public partial bool IsCorrect { get; set; }
 
+    [ObservableProperty] public partial QuizQuestionOption? SelectedOption { get; set; }
+    public QuizQuestionOption CorrectOption => field ??= Question.Options.FindCorrectOption();
+
     [RelayCommand]
     private async Task AnswerButtonPressed(QuizQuestionOption option)
     {
@@ -64,8 +67,10 @@ public partial class QuestionViewModel : ViewModelBase
 
     private async Task ShowCompletedQuestion(QuizQuestionOption? option)
     {
+        SelectedOption = option;
+        IsCorrect = option == CorrectOption;
+
         ShowCompleted = true;
-        IsCorrect = option?.IsCorrect.EvaluateIsCorrect() ?? false;
 
         if (IsCorrect)
         {

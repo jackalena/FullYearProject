@@ -11,7 +11,8 @@
     </Application.DataTemplates>
 
     <Application.Styles>
-        <semi:SemiTheme Locale="en-NZ" />
+        <semi:SemiTheme />
+        <semi:SemiPopupAnimations />
     </Application.Styles>
 
     <Application.Resources>

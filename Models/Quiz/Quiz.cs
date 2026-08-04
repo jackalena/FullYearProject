@@ -31,4 +31,10 @@ public class Quiz
         return await JsonSerializer.DeserializeAsync<Quiz>(fileStream) ??
                throw new("Could not load quiz");
     }
+
+    public static Quiz LoadString(string str)
+    {
+        return JsonSerializer.Deserialize<Quiz>(str) ??
+               throw new("Could not load quiz");
+    }
 }

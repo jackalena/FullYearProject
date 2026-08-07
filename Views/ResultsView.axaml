@@ -64,6 +64,11 @@
             </StackPanel>
 
             <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" TextAlignment="Center" />
+
+            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Quit" />
+                <Button Content="Play again" Theme="{StaticResource SolidButton}" />
+            </StackPanel>
         </StackPanel>
 
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" />

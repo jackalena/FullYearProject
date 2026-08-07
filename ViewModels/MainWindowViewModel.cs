@@ -1,14 +1,22 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FullYearProject.Models;
 using FullYearProject.Models.Quiz;
+using FullYearProject.Models.Quiz.Question;
 
 namespace FullYearProject.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
     private readonly TimeRemainingProvider _timer = new();
+    private List<QuizQuestion> _correctQuestions = [];
+    private List<QuizQuestion> _incorrectQuestions = [];
+
     private Quiz? _quiz;
+    private List<QuizQuestion> _skippedQuestions = [];
+
+    private List<QuizQuestion> _unusedQuestions = [];
 
     public MainWindowViewModel()
     {

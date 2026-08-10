@@ -4,80 +4,197 @@ using System.Linq;
 
 namespace FullYearProject.Models.Responses;
 
-public class PrioritisedList<TPriority, TValue> where TPriority : struct
+public class PrioritisedList<TPriority, TValue> where TPriority : struct, IEquatable<TPriority>
 {
-    private readonly Dictionary<TPriority, List<TValue>> _lists = new();
+    private readonly List<TValue>[] _lists;
 
-    public PrioritisedList(IEnumerable<TPriority> alowedPriorities, TPriority? resetOnAllKey)
+    /// <summary>
+    ///     Creates a new PrioritisedList using the provided allowed priorities and reset priority.
+    /// </summary>
+    /// <param name="allowedPriorities">A list of priorities that can be assigned to items in the list.</param>
+    /// <param name="resetOnAllPriority">
+    ///     <inheritdoc cref="ResetOnAllPriority" path="/summary/node()" />
+    /// </param>
+    public PrioritisedList(IEnumerable<TPriority> allowedPriorities, TPriority? resetOnAllPriority)
     {
-        AlowedPriorities = alowedPriorities.ToArray();
-        AlowedPriorities.Sort();
+        AllowedPriorities = allowedPriorities.ToArray();
+        AllowedPriorities.Sort();
 
-        ResetOnAllKey = resetOnAllKey;
+        ResetOnAllPriority = resetOnAllPriority;
 
-        foreach (var priority in AlowedPriorities)
+        _lists = new List<TValue>[AllowedPriorities.Length];
+        for (var i = 0; i < _lists.Length; i++)
         {
-            _lists[priority] = [];
+            _lists[i] = [];
         }
     }
 
-    public TPriority[] AlowedPriorities { get; }
-    public TPriority? ResetOnAllKey { get; set; }
+    /// <summary>
+    ///     The possible priorities for items in the list.
+    /// </summary>
+    public TPriority[] AllowedPriorities { get; }
 
-    public void Add(TValue value, TPriority priority = default)
+    /// <summary>
+    ///     If not null, the list will reset if all items have a priority equal to this value.
+    /// </summary>
+    public TPriority? ResetOnAllPriority { get; set; }
+
+    /// <summary>
+    ///     Creates a new PrioritisedList using the values of an enum as the possible priorities.
+    /// </summary>
+    /// <param name="resetOnAllPriority">
+    ///     <inheritdoc cref="ResetOnAllPriority" path="/summary/node()" />
+    /// </param>
+    /// <typeparam name="TEnum">The type of the enum used for possible priorities.</typeparam>
+    /// <returns></returns>
+    public static PrioritisedList<TEnum, TValue> FromEnum<TEnum>(TEnum? resetOnAllPriority = null)
+        where TEnum : struct, Enum, IEquatable<TEnum>
     {
-        _lists[priority].Add(value);
+        return new(Enum.GetValues<TEnum>(), resetOnAllPriority);
     }
 
+    /// <summary>
+    ///     Adds an item to the list with the given priority.
+    /// </summary>
+    /// <param name="value">The item to add to the list.</param>
+    /// <param name="priority">The priority to give the added item.</param>
+    public void Add(TValue value, TPriority priority = default)
+    {
+        var idx = AllowedPriorities.IndexOf(priority);
+        _lists[idx].Add(value);
+    }
+
+    /// <summary>
+    ///     Adds the elements of a specified collection to the list with the given priority.
+    /// </summary>
+    /// <param name="values">The items to add to the list.</param>
+    /// <param name="priority">The priority to give the added items.</param>
+    public void AddRange(IEnumerable<TValue> values, TPriority priority = default)
+    {
+        var idx = AllowedPriorities.IndexOf(priority);
+        _lists[idx].AddRange(values);
+    }
+
+    /// <summary>
+    ///     Removes the first occurrence of a specific object from the list.
+    /// </summary>
+    /// <param name="value">The value to remove.</param>
+    /// <returns>True if the item was successfully removed; otherwise False.</returns>
+    public bool Remove(TValue value)
+    {
+        return _lists.Any(list => list.Remove(value));
+    }
+
+    /// <summary>
+    ///     Determines whether the list contains a specific value.
+    /// </summary>
+    /// <param name="value">The value to find in the list.</param>
+    /// <returns>True if the value was found in the list; otherwise false.</returns>
+    public bool Contains(TValue value)
+    {
+        return _lists.Any(list => list.Contains(value));
+    }
+
+    /// <summary>
+    ///     Gets the priority of an item in the list.
+    /// </summary>
+    /// <param name="value">The item to get the priority of.</param>
+    /// <returns>The priority of the item in <paramref name="value" />.</returns>
+    /// <exception cref="InvalidOperationException">
+    ///     Thrown if the item provided in <paramref name="value" /> does not exist in
+    ///     the list.
+    /// </exception>
+    public TPriority GetPriority(TValue value)
+    {
+        for (var i = 0; i < AllowedPriorities.Length; i++)
+        {
+            if (_lists[i].Contains(value))
+            {
+                return AllowedPriorities[i];
+            }
+        }
+
+        throw new InvalidOperationException("Value not found in list.");
+    }
+
+    /// <summary>
+    ///     Sets the priority of an item in the list.
+    /// </summary>
+    /// <param name="value">The item to set the priority of.</param>
+    /// <param name="priority">The priority to set the item to.</param>
+    /// <exception cref="InvalidOperationException">
+    ///     Thrown if the item provided in <paramref name="value" /> does not exist in
+    ///     the list.
+    /// </exception>
+    public void SetPriority(TValue value, TPriority priority)
+    {
+        for (var i = 0; i < AllowedPriorities.Length; i++)
+        {
+            if (_lists[i].Remove(value))
+            {
+                _lists[AllowedPriorities.IndexOf(priority)].Add(value);
+                return;
+            }
+        }
+
+        throw new InvalidOperationException("Value not found in list.");
+    }
+
+    /// <summary>
+    ///     Gets the next item in the list and moves it to the next priority level.
+    /// </summary>
+    /// <returns>The next item.</returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public TValue GetNext()
     {
-        var orderedKeys = _lists.Keys
-            .Order().Select(k => (TPriority?)k).ToArray();
-
-        // Find the key of the first list with items, starting with the lowest priority index
-        var key = orderedKeys.FirstOrDefault(k => _lists[k!.Value].Count > 0, null);
+        // Find the key of the first list with items
+        var priorityIdx = _lists.TakeWhile(l => l.Count == 0).Count();
 
         // There were no lists with any items; ie. the whole PrioritisedList is empty.
-        if (key == null)
+        if (priorityIdx == _lists.Length)
         {
             throw new InvalidOperationException("List is empty.");
         }
 
         // If the selected list is the one in ResetOnAllKey, reset the list and return the next item.
-        if (key.Value.Equals(ResetOnAllKey))
+        if (AllowedPriorities[priorityIdx].Equals(ResetOnAllPriority))
         {
             Reset();
             return GetNext();
         }
 
-        var list = _lists[key.Value];
-        var newListKey = orderedKeys.SkipWhile(k => !k.Equals(key.Value)).ElementAtOrDefault(1);
+        var list = _lists[priorityIdx];
+        var listIdx = Random.Shared.Next(list.Count);
+        var value = list[listIdx];
 
-        var idx = Random.Shared.Next(list.Count);
-        var value = list[idx];
+        var newPriorityIdx = Math.Min(priorityIdx + 1, _lists.Length - 1);
 
-        if (newListKey != null)
+        if (newPriorityIdx != priorityIdx)
         {
-            list.RemoveAt(idx);
-            _lists[newListKey.Value].Add();
+            list.RemoveAt(listIdx);
+            _lists[newPriorityIdx].Add(value);
         }
 
         return value;
     }
 
+    /// <summary>
+    ///     Resets the list by changing all items to the default priority.
+    /// </summary>
+    /// <param name="newPriority">The new priority to give all items</param>
     public void Reset(TPriority newPriority = default)
     {
-        _lists[newPriority] ??= [];
+        var newPriorityIdx = AllowedPriorities.IndexOf(newPriority);
 
-        foreach (var key in _lists.Keys)
+        for (var i = 0; i < AllowedPriorities.Length; i++)
         {
-            if (newPriority.Equals(key))
+            if (AllowedPriorities[i].Equals(newPriorityIdx))
             {
                 continue;
             }
 
-            var oldList = _lists[key];
-            _lists[newPriority].AddRange(oldList);
+            var oldList = _lists[i];
+            _lists[newPriorityIdx].AddRange(oldList);
             oldList.Clear();
         }
     }

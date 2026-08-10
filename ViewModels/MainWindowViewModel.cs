@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FullYearProject.Models;
 using FullYearProject.Models.Quiz;
 using FullYearProject.Models.Quiz.Question;
+using FullYearProject.Models.Responses;
 
 namespace FullYearProject.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
+    public enum QuestionPriority
+    {
+        Unanswered,
+        Skipped,
+        Incorrect,
+        Correct
+    }
+
     private readonly TimeRemainingProvider _timer = new();
-    private List<QuizQuestion> _correctQuestions = [];
-    private List<QuizQuestion> _incorrectQuestions = [];
-
     private Quiz? _quiz;
-    private List<QuizQuestion> _skippedQuestions = [];
-
-    private List<QuizQuestion> _unusedQuestions = [];
 
     public MainWindowViewModel()
     {
@@ -29,6 +31,8 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [ObservableProperty] public partial ViewModelBase CurrentViewModel { get; set; }
+
+    PrioritisedList<QuestionPriority, QuizQuestion> _questions = PrioritisedList<QuestionPriority, QuizQuestion>
 
     private async Task LoadGame()
     {

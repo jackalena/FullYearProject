@@ -17,7 +17,42 @@
     <DockPanel>
         <views:HeaderView DockPanel.Dock="Top" />
 
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="15" IsVisible="{Binding ShowTimer}">
+            <LucideIcon Kind="Hourglass" Size="20">
+                <LucideIcon.Styles>
+                    <Style Selector="LucideIcon">
+                        <Setter Property="RotateTransform.Angle" Value="0" />
+
+                        <Style Selector="^.ShakeEffect">
+                            <Style.Animations>
+                                <Animation Duration="0:0:0.5" IterationCount="INFINITE"
+                                           PlaybackDirection="Alternate"
+                                           Easing="SineEaseInOut">
+                                    <KeyFrame Cue="0%">
+                                        <Setter Property="RotateTransform.Angle" Value="15" />
+                                    </KeyFrame>
+                                    <KeyFrame Cue="100%">
+                                        <Setter Property="RotateTransform.Angle" Value="-15" />
+                                    </KeyFrame>
+                                </Animation>
+                            </Style.Animations>
+                        </Style>
+                    </Style>
+                </LucideIcon.Styles>
+            </LucideIcon>
+            <TextBlock Margin="5 0">
+                <Run Text="{Binding TimeRemaining, StringFormat='m\\:ss'}" />
+                <Run Text="remaining" />
+            </TextBlock>
+        </StackPanel>
+
+        <TransitioningContentControl Content="{Binding CurrentViewModel}">
+            <TransitioningContentControl.PageTransition>
+                <PageSlide Duration="0:0:0.5" SlideInEasing="CubicEaseInOut" SlideOutEasing="CubicEaseInOut" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
     </DockPanel>
 
 

@@ -52,7 +52,7 @@
   "Questions": [
     {
       "Topic": 0,
-      "Name": "True or false: The three macronutrients are carbohydrates, proteins, and lipids.",
+      "Text": "True or false: The three macronutrients are carbohydrates, proteins, and lipids.",
       "Options": [
         {
           "Type": "Text",
@@ -68,7 +68,7 @@
     },
     {
       "Topic": 0,
-      "Name": "True or false: Vitamins and minerals are classified as macronutrients because the body needs them in large amounts.",
+      "Text": "True or false: Vitamins and minerals are classified as macronutrients because the body needs them in large amounts.",
       "Options": [
         {
           "Type": "Text",
@@ -84,7 +84,7 @@
     },
     {
       "Topic": 0,
-      "Name": "Which macronutrient is the primary source of energy for the body?",
+      "Text": "Which macronutrient is the primary source of energy for the body?",
       "Options": [
         {
           "Type": "Text",
@@ -108,7 +108,7 @@
     },
     {
       "Topic": 0,
-      "Name": "True or false: Fibre is a macronutrient that the body can fully digest and absorb.",
+      "Text": "True or false: Fibre is a macronutrient that the body can fully digest and absorb.",
       "Options": [
         {
           "Type": "Text",
@@ -124,7 +124,7 @@
     },
     {
       "Topic": 1,
-      "Name": "True or false: Physical digestion uses enzymes to break food into smaller molecules.",
+      "Text": "True or false: Physical digestion uses enzymes to break food into smaller molecules.",
       "Options": [
         {
           "Type": "Text",
@@ -140,7 +140,7 @@
     },
     {
       "Topic": 1,
-      "Name": "Which enzyme is responsible for breaking down starch into glucose?",
+      "Text": "Which enzyme is responsible for breaking down starch into glucose?",
       "Options": [
         {
           "Type": "Text",
@@ -164,7 +164,7 @@
     },
     {
       "Topic": 1,
-      "Name": "True or false: Pepsin is the enzyme that breaks down lipids into glycerol and fatty acids.",
+      "Text": "True or false: Pepsin is the enzyme that breaks down lipids into glycerol and fatty acids.",
       "Options": [
         {
           "Type": "Text",
@@ -180,7 +180,7 @@
     },
     {
       "Topic": 1,
-      "Name": "Why is it important for complex molecules to be broken down into smaller molecules during digestion?",
+      "Text": "Why is it important for complex molecules to be broken down into smaller molecules during digestion?",
       "Options": [
         {
           "Type": "Text",
@@ -204,7 +204,7 @@
     },
     {
       "Topic": 1,
-      "Name": "True or false: Physical digestion increases the surface area of food, making it easier for enzymes to act on it.",
+      "Text": "True or false: Physical digestion increases the surface area of food, making it easier for enzymes to act on it.",
       "Options": [
         {
           "Type": "Text",
@@ -220,7 +220,7 @@
     },
     {
       "Topic": 2,
-      "Name": "True or false: Starch is a simple sugar.",
+      "Text": "True or false: Starch is a simple sugar.",
       "Options": [
         {
           "Type": "Text",
@@ -236,7 +236,7 @@
     },
     {
       "Topic": 2,
-      "Name": "What is the chemical name for table sugar?",
+      "Text": "What is the chemical name for table sugar?",
       "Options": [
         {
           "Type": "Text",
@@ -260,7 +260,7 @@
     },
     {
       "Topic": 2,
-      "Name": "True or false: Complex sugars are made up of long chains of simple sugars bonded together.",
+      "Text": "True or false: Complex sugars are made up of long chains of simple sugars bonded together.",
       "Options": [
         {
           "Type": "Text",
@@ -276,7 +276,7 @@
     },
     {
       "Topic": 2,
-      "Name": "Which of the following is an example of a simple sugar found in milk?",
+      "Text": "Which of the following is an example of a simple sugar found in milk?",
       "Options": [
         {
           "Type": "Text",
@@ -300,7 +300,7 @@
     },
     {
       "Topic": 2,
-      "Name": "True or false: Glucose is both a simple sugar and the building block of starch.",
+      "Text": "True or false: Glucose is both a simple sugar and the building block of starch.",
       "Options": [
         {
           "Type": "Text",
@@ -316,7 +316,7 @@
     },
     {
       "Topic": 3,
-      "Name": "What is the correct word equation for cellular respiration?",
+      "Text": "What is the correct word equation for cellular respiration?",
       "Options": [
         {
           "Type": "Text",
@@ -340,7 +340,7 @@
     },
     {
       "Topic": 3,
-      "Name": "True or false: Cellular respiration is the same process as breathing.",
+      "Text": "True or false: Cellular respiration is the same process as breathing.",
       "Options": [
         {
           "Type": "Text",
@@ -356,7 +356,7 @@
     },
     {
       "Topic": 3,
-      "Name": "True or false: Cellular respiration only happens in animal cells, not plant cells.",
+      "Text": "True or false: Cellular respiration only happens in animal cells, not plant cells.",
       "Options": [
         {
           "Type": "Text",
@@ -372,7 +372,7 @@
     },
     {
       "Topic": 3,
-      "Name": "Where does the glucose used in cellular respiration come from?",
+      "Text": "Where does the glucose used in cellular respiration come from?",
       "Options": [
         {
           "Type": "Text",
@@ -396,7 +396,7 @@
     },
     {
       "Topic": 3,
-      "Name": "True or false: Carbon dioxide is a waste product of cellular respiration that must be removed from the body because it becomes toxic when it builds up.",
+      "Text": "True or false: Carbon dioxide is a waste product of cellular respiration that must be removed from the body because it becomes toxic when it builds up.",
       "Options": [
         {
           "Type": "Text",
@@ -412,7 +412,7 @@
     },
     {
       "Topic": 4,
-      "Name": "True or false: Proteins are made up of long chains of amino acids.",
+      "Text": "True or false: Proteins are made up of long chains of amino acids.",
       "Options": [
         {
           "Type": "Text",
@@ -428,7 +428,7 @@
     },
     {
       "Topic": 4,
-      "Name": "Which enzyme digests proteins in the stomach?",
+      "Text": "Which enzyme digests proteins in the stomach?",
       "Options": [
         {
           "Type": "Text",
@@ -452,7 +452,7 @@
     },
     {
       "Topic": 4,
-      "Name": "True or false: When we eat protein, the amino acids are absorbed as complete proteins and used directly by cells.",
+      "Text": "True or false: When we eat protein, the amino acids are absorbed as complete proteins and used directly by cells.",
       "Options": [
         {
           "Type": "Text",
@@ -468,7 +468,7 @@
     },
     {
       "Topic": 4,
-      "Name": "How many naturally occurring amino acids are there?",
+      "Text": "How many naturally occurring amino acids are there?",
       "Options": [
         {
           "Type": "Text",
@@ -492,7 +492,7 @@
     },
     {
       "Topic": 4,
-      "Name": "True or false: Essential amino acids can be produced by the human body without needing to eat them.",
+      "Text": "True or false: Essential amino acids can be produced by the human body without needing to eat them.",
       "Options": [
         {
           "Type": "Text",
@@ -508,7 +508,7 @@
     },
     {
       "Topic": 4,
-      "Name": "Which of the following is NOT a role of proteins in the body?",
+      "Text": "Which of the following is NOT a role of proteins in the body?",
       "Options": [
         {
           "Type": "Text",
@@ -532,7 +532,7 @@
     },
     {
       "Topic": 4,
-      "Name": "True or false: Animal protein sources such as steak are generally more protein-dense per 100g than plant protein sources like chickpeas.",
+      "Text": "True or false: Animal protein sources such as steak are generally more protein-dense per 100g than plant protein sources like chickpeas.",
       "Options": [
         {
           "Type": "Text",
@@ -548,7 +548,7 @@
     },
     {
       "Topic": 4,
-      "Name": "A steak contains 25g of protein per 100g. Chickpeas contain 4.5g per 100g. Approximately how many grams of chickpeas would you need to eat to get the same protein as @{a}g of steak?",
+      "Text": "A steak contains 25g of protein per 100g. Chickpeas contain 4.5g per 100g. Approximately how many grams of chickpeas would you need to eat to get the same protein as @{a}g of steak?",
       "Parameters": [
         {
           "Name": "b",
@@ -611,7 +611,7 @@
     },
     {
       "Topic": 5,
-      "Name": "True or false: Oils are liquid at room temperature while fats are solid at room temperature.",
+      "Text": "True or false: Oils are liquid at room temperature while fats are solid at room temperature.",
       "Options": [
         {
           "Type": "Text",
@@ -627,7 +627,7 @@
     },
     {
       "Topic": 5,
-      "Name": "What are the two products formed when lipase breaks down a triglyceride?",
+      "Text": "What are the two products formed when lipase breaks down a triglyceride?",
       "Options": [
         {
           "Type": "Text",
@@ -651,7 +651,7 @@
     },
     {
       "Topic": 5,
-      "Name": "True or false: Unsaturated fats are considered 'heart-healthy' because they can lower bad cholesterol (LDL) levels.",
+      "Text": "True or false: Unsaturated fats are considered 'heart-healthy' because they can lower bad cholesterol (LDL) levels.",
       "Options": [
         {
           "Type": "Text",
@@ -667,7 +667,7 @@
     },
     {
       "Topic": 5,
-      "Name": "True or false: Saturated fats are considered beneficial for heart health because they raise HDL cholesterol.",
+      "Text": "True or false: Saturated fats are considered beneficial for heart health because they raise HDL cholesterol.",
       "Options": [
         {
           "Type": "Text",
@@ -683,7 +683,7 @@
     },
     {
       "Topic": 5,
-      "Name": "Which of the following is a function of lipids in the body?",
+      "Text": "Which of the following is a function of lipids in the body?",
       "Options": [
         {
           "Type": "Text",
@@ -707,7 +707,7 @@
     },
     {
       "Topic": 5,
-      "Name": "True or false: A triglyceride consists of three fatty acid chains bonded to one glycerol molecule.",
+      "Text": "True or false: A triglyceride consists of three fatty acid chains bonded to one glycerol molecule.",
       "Options": [
         {
           "Type": "Text",
@@ -723,7 +723,7 @@
     },
     {
       "Topic": 5,
-      "Name": "True or false: 'kJ' on a nutrition label stands for kilojoules, a unit of energy.",
+      "Text": "True or false: 'kJ' on a nutrition label stands for kilojoules, a unit of energy.",
       "Options": [
         {
           "Type": "Text",
@@ -739,7 +739,7 @@
     },
     {
       "Topic": 5,
-      "Name": "A yoghurt has @{s} servings per package and each serving is @{w}g. What is the total weight of the package?",
+      "Text": "A yoghurt has @{s} servings per package and each serving is @{w}g. What is the total weight of the package?",
       "Parameters": [
         {
           "Name": "s",
@@ -817,7 +817,7 @@
     },
     {
       "Topic": 5,
-      "Name": "A @{a}g Mars bar contains @{b}g of total fat per serving. A @{c}g avocado contains @{d}g of total fat. Which food has more total fat per 100g?",
+      "Text": "A @{a}g Mars bar contains @{b}g of total fat per serving. A @{c}g avocado contains @{d}g of total fat. Which food has more total fat per 100g?",
       "Parameters": [
         {
           "Name": "e",
@@ -941,7 +941,7 @@
     },
     {
       "Topic": 5,
-      "Name": "True or false: Ingredients on food labels are listed in order from the smallest to the largest amount present in the product.",
+      "Text": "True or false: Ingredients on food labels are listed in order from the smallest to the largest amount present in the product.",
       "Options": [
         {
           "Type": "Text",
@@ -957,7 +957,7 @@
     },
     {
       "Topic": 5,
-      "Name": "An Athletes Bar (50g serving) contains 20g of protein. A Mars Bar (50g serving) contains 5g of protein. How many Mars Bars would you need to eat to match the protein in one Athletes Bar?",
+      "Text": "An Athletes Bar (50g serving) contains 20g of protein. A Mars Bar (50g serving) contains 5g of protein. How many Mars Bars would you need to eat to match the protein in one Athletes Bar?",
       "Options": [
         {
           "Type": "Text",
@@ -981,7 +981,7 @@
     },
     {
       "Topic": 6,
-      "Name": "True or false: A scientific claim is the same as an opinion because both express what someone believes to be true.",
+      "Text": "True or false: A scientific claim is the same as an opinion because both express what someone believes to be true.",
       "Options": [
         {
           "Type": "Text",
@@ -997,7 +997,7 @@
     },
     {
       "Topic": 6,
-      "Name": "Which of the following is a scientific claim (not an opinion)?",
+      "Text": "Which of the following is a scientific claim (not an opinion)?",
       "Options": [
         {
           "Type": "Text",
@@ -1021,7 +1021,7 @@
     },
     {
       "Topic": 6,
-      "Name": "True or false: The claim \"Sugar is a poison and you must never eat a single carbohydrate again\" is a reliable scientific claim.",
+      "Text": "True or false: The claim \"Sugar is a poison and you must never eat a single carbohydrate again\" is a reliable scientific claim.",
       "Options": [
         {
           "Type": "Text",
@@ -1037,7 +1037,7 @@
     },
     {
       "Topic": 6,
-      "Name": "True or false: Oversimplification in dietary claims (e.g., 'all fat is bad') is a problem because it ignores the different types of fats and their different effects on health.",
+      "Text": "True or false: Oversimplification in dietary claims (e.g., 'all fat is bad') is a problem because it ignores the different types of fats and their different effects on health.",
       "Options": [
         {
           "Type": "Text",
@@ -1053,7 +1053,7 @@
     },
     {
       "Topic": 7,
-      "Name": "In the Rauru Whakarare framework, 'Mana' refers to which key question?",
+      "Text": "In the Rauru Whakarare framework, 'Mana' refers to which key question?",
       "Options": [
         {
           "Type": "Text",
@@ -1077,7 +1077,7 @@
     },
     {
       "Topic": 7,
-      "Name": "True or false: A crystal healer and yoga enthusiast is as credible a source of nutritional advice as a Registered Dietitian.",
+      "Text": "True or false: A crystal healer and yoga enthusiast is as credible a source of nutritional advice as a Registered Dietitian.",
       "Options": [
         {
           "Type": "Text",
@@ -1093,7 +1093,7 @@
     },
     {
       "Topic": 7,
-      "Name": "In the Rauru Whakarare framework, '**Māramatanga**' asks which key question?",
+      "Text": "In the Rauru Whakarare framework, '**Māramatanga**' asks which key question?",
       "Options": [
         {
           "Type": "Text",
@@ -1117,7 +1117,7 @@
     },
     {
       "Topic": 7,
-      "Name": "True or false: A website that links to peer-reviewed journals is generally more credible than one that only links to products for sale.",
+      "Text": "True or false: A website that links to peer-reviewed journals is generally more credible than one that only links to products for sale.",
       "Options": [
         {
           "Type": "Text",
@@ -1133,7 +1133,7 @@
     },
     {
       "Topic": 7,
-      "Name": "True or false: A health article published in 1950 is just as reliable as one published in 2025 because facts don't change.",
+      "Text": "True or false: A health article published in 1950 is just as reliable as one published in 2025 because facts don't change.",
       "Options": [
         {
           "Type": "Text",
@@ -1149,7 +1149,7 @@
     },
     {
       "Topic": 9,
-      "Name": "True or false: LDL is known as 'good cholesterol' because it helps remove excess cholesterol from the body.",
+      "Text": "True or false: LDL is known as 'good cholesterol' because it helps remove excess cholesterol from the body.",
       "Options": [
         {
           "Type": "Text",
@@ -1165,7 +1165,7 @@
     },
     {
       "Topic": 9,
-      "Name": "A chocolate bar has @{a}g of saturated fat per 100g. A vegetable has @{b}g of saturated fat per 100g. How many times more saturated fat does the chocolate bar contain per 100g than the vegetable?",
+      "Text": "A chocolate bar has @{a}g of saturated fat per 100g. A vegetable has @{b}g of saturated fat per 100g. How many times more saturated fat does the chocolate bar contain per 100g than the vegetable?",
       "Parameters": [
         {
           "Name": "a",
@@ -1234,7 +1234,7 @@
     },
     {
       "Topic": 9,
-      "Name": "True or false: A consistently high intake of LDL cholesterol from saturated fats can eventually cause a complete blockage of an artery.",
+      "Text": "True or false: A consistently high intake of LDL cholesterol from saturated fats can eventually cause a complete blockage of an artery.",
       "Options": [
         {
           "Type": "Text",
@@ -1250,7 +1250,7 @@
     },
     {
       "Topic": 10,
-      "Name": "True or false: Plant-based proteins are always 'incomplete' and cannot provide all essential amino acids, regardless of what is eaten.",
+      "Text": "True or false: Plant-based proteins are always 'incomplete' and cannot provide all essential amino acids, regardless of what is eaten.",
       "Options": [
         {
           "Type": "Text",
@@ -1266,7 +1266,7 @@
     },
     {
       "Topic": 10,
-      "Name": "Which of the following is a potential health concern of consuming very large amounts of animal protein sources?",
+      "Text": "Which of the following is a potential health concern of consuming very large amounts of animal protein sources?",
       "Options": [
         {
           "Type": "Text",

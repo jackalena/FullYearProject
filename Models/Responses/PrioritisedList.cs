@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FullYearProject.Models.Responses;
 
-public class PrioritisedList<TPriority, TValue> where TPriority : struct, IEquatable<TPriority>
+public class PrioritisedList<TPriority, TValue> where TPriority : struct
 {
     private readonly List<TValue>[] _lists;
 
@@ -48,7 +48,7 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct, IEquat
     /// <typeparam name="TEnum">The type of the enum used for possible priorities.</typeparam>
     /// <returns></returns>
     public static PrioritisedList<TEnum, TValue> FromEnum<TEnum>(TEnum? resetOnAllPriority = null)
-        where TEnum : struct, Enum, IEquatable<TEnum>
+        where TEnum : struct, Enum
     {
         return new(Enum.GetValues<TEnum>(), resetOnAllPriority);
     }
@@ -196,6 +196,17 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct, IEquat
             var oldList = _lists[i];
             _lists[newPriorityIdx].AddRange(oldList);
             oldList.Clear();
+        }
+    }
+
+    /// <summary>
+    ///     Removes all items from the list.
+    /// </summary>
+    public void Clear()
+    {
+        for (var i = 0; i < AllowedPriorities.Length; i++)
+        {
+            _lists[i].Clear();
         }
     }
 }

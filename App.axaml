@@ -13,11 +13,14 @@
     <Application.Styles>
         <semi:SemiTheme />
         <semi:SemiPopupAnimations />
+        <StyleInclude Source="avares://LiveMarkdown.Avalonia/Styles.axaml" />
     </Application.Styles>
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://LiveMarkdown.Avalonia/Defaults.axaml" />
+
                 <MergeResourceInclude Source="ResourceIndex.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

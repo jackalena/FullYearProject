@@ -5,6 +5,7 @@
              xmlns:models="clr-namespace:FullYearProject.Models"
              xmlns:vm="clr-namespace:FullYearProject.ViewModels"
              xmlns:views="clr-namespace:FullYearProject.Views"
+             xmlns:controls="clr-namespace:FullYearProject.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:QuestionViewModel"
              x:Class="FullYearProject.Views.QuestionView">
@@ -21,22 +22,16 @@
         <Grid RowDefinitions="2* 3* Auto" IsVisible="{Binding !ShowCompleted}">
             <Border Classes="Light2Shadow CardFlat" Padding="13" Margin="20 20 20 0">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top" Classes="H0" Text="{Binding QuestionTopic}"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
+                    <controls:MarkdownTextBlock DockPanel.Dock="Top" Classes="H0" Text="{Binding Question.Topic}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                    <TextBlock Classes="H1" Text="{Binding QuestionText}"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
+                    <controls:MarkdownTextBlock Classes="H1" Text="{Binding Question.Text}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </DockPanel>
             </Border>
 
-            <!-- <ContentPresenter Grid.Row="1" Content="{Binding $parent[views:QuestionView].Child}" -->
-            <!--                   Margin="10 10 10 0" -->
-            <!--                   IsVisible="{Binding $parent[views:QuestionView].Child, Converter={x:Static ObjectConverters.IsNotNull}}" /> -->
-
             <ItemsControl
-                ItemsSource="{Binding QuestionOptions}" Grid.Row="1"
+                ItemsSource="{Binding Question.Options}" Grid.Row="1"
                 PreparingContainer="AnswerOptionsItemsControl_OnPreparingContainer">
 
                 <ItemsControl.ItemsPanel>
@@ -123,22 +118,25 @@
                 <TextBlock DockPanel.Dock="Top" Classes="H0" Text="Correct!" IsVisible="{Binding IsCorrect}" />
                 <TextBlock DockPanel.Dock="Top" Classes="H0" Text="Incorrect" IsVisible="{Binding !IsCorrect}" />
 
-                <TextBlock DockPanel.Dock="Bottom" Text="Click to skip" FontStyle="Italic" Margin="10" />
+                <TextBlock DockPanel.Dock="Bottom" Text="Click to skip" FontStyle="Italic" HorizontalAlignment="Center"
+                           Margin="10" />
 
                 <StackPanel VerticalAlignment="Center" Spacing="10">
-                    <TextBlock Classes="H1" Text="{Binding QuestionText}" HorizontalAlignment="Center"
-                               TextAlignment="Center" Margin="0 0 0 10" />
+                    <controls:MarkdownTextBlock Classes="H1" Text="{Binding Question.Text}" HorizontalAlignment="Center"
+                               HorizontalContentAlignment="Center" Margin="0 0 0 10" />
 
                     <StackPanel Orientation="Horizontal" Spacing="10"
                                 IsVisible="{Binding SelectedOption, Converter={x:Static ObjectConverters.IsNotNull}}">
                         <LucideIcon Kind="X" />
-                        <TextBlock Text="{Binding SelectedOption.Value, FallbackValue=''}" />
+                        <controls:MarkdownTextBlock Text="{Binding SelectedOption.Value, FallbackValue=''}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <LucideIcon Kind="Check" />
-                        <TextBlock Text="{Binding CorrectOption.Value}" />
+                        <controls:MarkdownTextBlock Text="{Binding CorrectOption.Value}" />
                     </StackPanel>
+
+                    <controls:MarkdownTextBlock Text="{Binding Question.Explanation}" />
                 </StackPanel>
             </DockPanel>
         </Button>

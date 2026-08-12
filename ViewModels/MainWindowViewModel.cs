@@ -6,6 +6,8 @@ using FullYearProject.Models.Quiz;
 using FullYearProject.Models.Quiz.Question;
 using FullYearProject.Models.Responses;
 
+using Microsoft.Extensions.Logging;
+
 namespace FullYearProject.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
@@ -46,7 +48,16 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private async Task LoadGame()
     {
-        _quiz = await Quiz.LoadFile("SampleQuestions/set-1.json");
+        try
+        {
+            _quiz = await Quiz.LoadFile("SampleQuestions/set-1.json");
+        }
+        catch (Exception e)
+        {
+            Logger.LogError("Could not load game: {Exception}", e.Message);
+            return;
+        }
+
         (CurrentViewModel as IntroViewModel)?.Quiz = _quiz;
 
         _questions.Clear();

@@ -7,6 +7,8 @@ using Avalonia.Markup.Xaml;
 using FullYearProject.ViewModels;
 using FullYearProject.Views;
 
+using LiveMarkdown.Avalonia;
+
 namespace FullYearProject;
 
 public partial class App : Application
@@ -18,6 +20,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        InitialiseMarkdown();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
@@ -27,5 +31,15 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private static void InitialiseMarkdown()
+    {
+        MarkdownNode.Register<MathInlineNode>();
+        MarkdownNode.Register<MathBlockNode>();
+
+        MarkdownNode.Edit(builder => builder
+                                    .Register<MathInlineNode>()
+                                    .Register<MathBlockNode>());
     }
 }

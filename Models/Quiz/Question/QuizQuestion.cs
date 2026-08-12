@@ -1,4 +1,8 @@
-﻿namespace FullYearProject.Models.Quiz.Question;
+﻿using System.Collections.Generic;
+
+using FullYearProject.Models.Quiz.Question.Parameters;
+
+namespace FullYearProject.Models.Quiz.Question;
 
 /// <summary>
 ///     Represents a quiz question.
@@ -24,4 +28,9 @@ public class QuizQuestion
     ///     The explanation for the correct answer to the question.
     /// </summary>
     public string? Explanation { get; set; }
+
+    /// <summary>
+    /// The parameters/variables that will be used to calculate values used in the question.
+    /// </summary>
+    public List<QuizQuestionParameter>? Parameters { get; set; } = null;
 }

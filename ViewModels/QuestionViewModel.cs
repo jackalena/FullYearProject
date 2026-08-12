@@ -12,8 +12,9 @@ namespace FullYearProject.ViewModels;
 
 public partial class QuestionViewModel : ViewModelBase
 {
-    public Action<QuizQuestionOption?>? QuestionAnswered;
-    public Action? QuestionCompleted;
+    public event Action<QuizQuestionOption?>? QuestionAnswered;
+    public event Action? QuestionCompleted;
+
     private CancellationTokenSource? _completedDelayCts;
 
     public QuestionViewModel()
@@ -30,13 +31,6 @@ public partial class QuestionViewModel : ViewModelBase
 
     public QuizQuestion Question { get; init; }
     public Quiz Quiz { get; init; }
-
-    public string QuestionText => Question.Text;
-
-    public string QuestionTopic =>
-        Quiz.Topics.FirstOrDefault(t => t?.Id == Question.Topic, null)?.Name ?? "No Topic";
-
-    public List<QuizQuestionOption> QuestionOptions => Question.Options;
 
     [ObservableProperty] public partial bool ShowCompleted { get; set; }
     [ObservableProperty] public partial bool IsCorrect { get; set; }
@@ -60,6 +54,8 @@ public partial class QuestionViewModel : ViewModelBase
     {
         SelectedOption = option;
         IsCorrect = option == CorrectOption;
+
+        QuestionAnswered?.Invoke(option);
 
         ShowCompleted = true;
 

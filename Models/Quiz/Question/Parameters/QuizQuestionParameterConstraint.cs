@@ -16,6 +16,7 @@ public abstract class QuizQuestionParameterConstraint : Loggable
     /// <summary>
     ///     The type of the constraint.
     /// </summary>
+    [JsonIgnore]
     public string Type { get; set; } = "Unknown";
 
     /// <summary>

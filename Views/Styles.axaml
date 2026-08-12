@@ -129,6 +129,30 @@
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
+    <Style Selector=":is(TemplatedControl)">
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style Selector=":is(TemplatedControl).Title">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector=":is(TemplatedControl).H0">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector=":is(TemplatedControl).H1">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector=":is(TemplatedControl).H2">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
     <Style Selector="Button.Red, :is(Control).Red Button">
         <Setter Property="ClipToBounds" Value="False" />
 

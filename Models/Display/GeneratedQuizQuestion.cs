@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-
 using FullYearProject.Helpers;
 using FullYearProject.Models.Quiz.Expressions;
+using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
+using FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
 
 namespace FullYearProject.Models.Display;
 
 public class GeneratedQuizQuestion : QuizQuestion
 {
-    public QuizQuestion SourceQuestion { get; }
-
-    public GeneratedQuizQuestion(QuizQuestion sourceQuestion, QuizQuestionOptionCollection options, string text, string? explanation)
+    public GeneratedQuizQuestion(QuizQuestion sourceQuestion, QuizQuestionOptionCollection options, string text,
+        string? explanation)
     {
         SourceQuestion = sourceQuestion;
         Options = options;
@@ -21,7 +21,12 @@ public class GeneratedQuizQuestion : QuizQuestion
         Topic = SourceQuestion.Topic;
     }
 
-    public GeneratedQuizQuestion(QuizQuestion sourceQuestion) : this(sourceQuestion, sourceQuestion.Options, sourceQuestion.Text, sourceQuestion.Explanation) { }
+    public GeneratedQuizQuestion(QuizQuestion sourceQuestion) : this(sourceQuestion, sourceQuestion.Options,
+        sourceQuestion.Text, sourceQuestion.Explanation)
+    {
+    }
+
+    public QuizQuestion SourceQuestion { get; }
 
     public static GeneratedQuizQuestion GenerateQuestion(QuizQuestion sourceQuestion)
     {
@@ -48,6 +53,42 @@ public class GeneratedQuizQuestion : QuizQuestion
         var questionText = formatter.Format(sourceQuestion.Text);
         var questionExplanation = sourceQuestion.Explanation?.Apply(formatter.Format);
 
-        var questionOptions = new QuizQuestionOption[sourceQuestion.Options.Count];
+        var questionOptions = new QuizQuestionOptionCollection(sourceQuestion.Options.Count);
+
+        foreach (var option in sourceQuestion.Options)
+        {
+            string optionText;
+
+            switch (option)
+            {
+                case TextQuizQuestionOption textOption:
+                    optionText = formatter.Format(textOption.Value);
+                    break;
+                case ExpressionQuizQuestionOption expressionOption:
+                    NumericalExpressionEvaluator evaluator = new(expressionOption.Value)
+                    {
+                        Variables = parameters
+                    };
+
+                    var optionValue = evaluator.Evaluate();
+
+                    optionText = optionValue.ToString(expressionOption.Format);
+                    break;
+                default:
+                    optionText = option.Value;
+                    break;
+            }
+
+            var isCorrectDef = new BooleanOptionIsCorrectDefinition
+                { Value = option.IsCorrect.EvaluateIsCorrect(parameters) };
+
+            questionOptions.Add(new TextQuizQuestionOption
+            {
+                Value = optionText,
+                IsCorrect = isCorrectDef
+            });
+        }
+
+        return new(sourceQuestion, questionOptions, questionText, questionExplanation);
     }
 }

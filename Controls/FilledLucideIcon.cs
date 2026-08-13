@@ -5,21 +5,17 @@ using Avalonia;
 using Avalonia.Media;
 using Lucide.Avalonia;
 
-namespace FullYearProject.Controls.SmoothScrollViewer;
+namespace FullYearProject.Controls;
 
 public class FilledLucideIcon : LucideIcon
 {
-    public static readonly StyledProperty<IBrush?> FillProperty = AvaloniaProperty.Register<FilledLucideIcon, IBrush?>(nameof(Fill));
+    public static readonly StyledProperty<IBrush?> FillProperty =
+        AvaloniaProperty.Register<FilledLucideIcon, IBrush?>(nameof(Fill));
 
     private static readonly Func<LucideIcon, Geometry?> GetGeometryFunc;
     private static readonly Func<LucideIcon, Pen?> GetStrokeFunc;
 
     private static readonly Action<LucideIcon, DrawingContext>? PushScalingTransformFunc;
-
-    public IBrush? Fill {
-        get => GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
 
     static FilledLucideIcon()
     {
@@ -27,6 +23,12 @@ public class FilledLucideIcon : LucideIcon
         GetStrokeFunc = CreateFieldGetter<LucideIcon, Pen?>("_stroke");
 
         PushScalingTransformFunc = CreateCaller<LucideIcon, DrawingContext>("PushScalingTransform");
+    }
+
+    public IBrush? Fill
+    {
+        get => GetValue(FillProperty);
+        set => SetValue(FillProperty, value);
     }
 
     private static Func<TInstance, TField> CreateFieldGetter<TInstance, TField>(string fieldName)

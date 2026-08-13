@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question.Parameters;
 
 namespace FullYearProject.Models.Quiz.Question;
@@ -30,7 +30,7 @@ public class QuizQuestion
     public string? Explanation { get; set; }
 
     /// <summary>
-    /// The parameters/variables that will be used to calculate values used in the question.
+    ///     The parameters/variables that will be used to calculate values used in the question.
     /// </summary>
     public List<QuizQuestionParameter>? Parameters { get; set; } = null;
 }

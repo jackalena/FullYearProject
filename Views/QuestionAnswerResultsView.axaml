@@ -11,12 +11,6 @@
         <StyleInclude Source="Styles.axaml" />
     </UserControl.Styles>
 
-    <Design.DesignStyle>
-        <Style Selector="views|QuestionAnswerResultsView">
-            <Setter Property="ItemsSource" Value="{StaticResource SampleQuestionResults}" />
-        </Style>
-    </Design.DesignStyle>
-
     <ItemsControl ItemsSource="{Binding $parent[views:QuestionAnswerResultsView].ItemsSource}">
         <ItemsControl.ItemTemplate>
             <DataTemplate x:DataType="questions:QuestionResponseTopic">
@@ -106,7 +100,7 @@
                                                     <DockPanel>
                                                         <LucideIcon DockPanel.Dock="Right" Size="18"
                                                                     VerticalAlignment="Center" Margin="5 0 0 0" />
-                                                        <TextBlock Text="{Binding Format}"
+                                                        <TextBlock Text="{Binding Value}"
                                                                    TextWrapping="Wrap"
                                                                    Margin="0 5 5 5" />
                                                     </DockPanel>

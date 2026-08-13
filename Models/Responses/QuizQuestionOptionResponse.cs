@@ -1,4 +1,4 @@
-﻿using FullYearProject.Models.Quiz.Question;
+﻿using FullYearProject.Models.Quiz.Options;
 
 namespace FullYearProject.Models.Responses;
 

@@ -15,7 +15,7 @@ public class QuestionResponse
     /// <summary>
     ///     Whether the given answer is correct.
     /// </summary>
-    public bool IsAnswerCorrect => Answers?.Exists(a => a.IsSelected && a.IsCorrect.EvaluateIsCorrect()) == true;
+    public bool IsAnswerCorrect => Answers?.Exists(a => a.IsSelected && a.IsCorrect.EvaluateIsCorrect(null)) == true;
 
     /// <summary>
     ///     The possible answers to the question and their responses.

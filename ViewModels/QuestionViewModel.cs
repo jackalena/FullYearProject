@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FullYearProject.Models.Display;
 using FullYearProject.Models.Quiz;
+using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
+using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.ViewModels;
 
 public partial class QuestionViewModel : ViewModelBase
 {
-    public event Action<QuizQuestionOption?>? QuestionAnswered;
-    public event Action? QuestionCompleted;
-
     private CancellationTokenSource? _completedDelayCts;
 
     public QuestionViewModel()
@@ -23,7 +22,7 @@ public partial class QuestionViewModel : ViewModelBase
         Quiz = new();
     }
 
-    public QuestionViewModel(QuizQuestion question, Quiz quiz)
+    public QuestionViewModel(GeneratedQuizQuestion question, Quiz quiz)
     {
         Question = question;
         Quiz = quiz;
@@ -36,7 +35,12 @@ public partial class QuestionViewModel : ViewModelBase
     [ObservableProperty] public partial bool IsCorrect { get; set; }
 
     [ObservableProperty] public partial QuizQuestionOption? SelectedOption { get; set; }
-    public QuizQuestionOption CorrectOption => field ??= Question.Options.FindCorrectOption();
+
+    public QuizQuestionOption? CorrectOption =>
+        field ??= FindCorrectOption();
+
+    public event Action<QuizQuestionOption?>? QuestionAnswered;
+    public event Action? QuestionCompleted;
 
     [RelayCommand]
     private async Task AnswerButtonPressed(QuizQuestionOption option)
@@ -87,5 +91,17 @@ public partial class QuestionViewModel : ViewModelBase
     private void SkipCompleted()
     {
         _completedDelayCts?.Cancel();
+    }
+
+    private QuizQuestionOption? FindCorrectOption()
+    {
+        var option = Question.Options.FirstOrDefault(option => option.IsCorrect.EvaluateIsCorrect(null));
+
+        if (option == null)
+        {
+            Logger.LogWarning("Question has no correct option.");
+        }
+
+        return option;
     }
 }

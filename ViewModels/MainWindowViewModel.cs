@@ -2,10 +2,11 @@
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FullYearProject.Models;
+using FullYearProject.Models.Display;
 using FullYearProject.Models.Quiz;
+using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
 using FullYearProject.Models.Responses;
-
 using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.ViewModels;
@@ -83,7 +84,9 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         var question = _questions.GetNext();
 
-        var questionVm = new QuestionViewModel(question, _quiz!);
+        var generatedQuestion = GeneratedQuizQuestion.GenerateQuestion(question);
+
+        var questionVm = new QuestionViewModel(generatedQuestion, _quiz!);
         questionVm.QuestionAnswered += option => OnQuestionAnswered(question, option);
         questionVm.QuestionCompleted += ShowNextQuestion;
         CurrentViewModel = questionVm;

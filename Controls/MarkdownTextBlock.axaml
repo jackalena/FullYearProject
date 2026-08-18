@@ -3,9 +3,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:md="clr-namespace:LiveMarkdown.Avalonia;assembly=LiveMarkdown.Avalonia"
+             xmlns:controls="clr-namespace:FullYearProject.Controls"
+             xmlns:csmath="clr-namespace:CSharpMath.Avalonia;assembly=CSharpMath.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FullYearProject.Controls.MarkdownTextBlock">
 
-    <md:MarkdownRenderer x:Name="MarkdownRenderer"/>
+    <Design.DesignStyle>
+        <Style Selector="controls|MarkdownTextBlock">
+            <Setter Property="Text" Value="Test" />
+            <Setter Property="Margin" Value="20" />
+        </Style>
+    </Design.DesignStyle>
+
+    <md:MarkdownRenderer x:Name="MarkdownRenderer">
+        <md:MarkdownRenderer.Styles>
+            <Style Selector="md|MarkdownTextBlock">
+                <Setter Property="FontSize" Value="{Binding $parent[controls:MarkdownTextBlock].FontSize}" />
+                <Setter Property="FontWeight" Value="{Binding $parent[controls:MarkdownTextBlock].FontWeight}" />
+                <Setter Property="FontFamily" Value="{Binding $parent[controls:MarkdownTextBlock].FontFamily}" />
+                <Setter Property="FontFeatures" Value="{Binding $parent[controls:MarkdownTextBlock].FontFeatures}" />
+                <Setter Property="FontStretch" Value="{Binding $parent[controls:MarkdownTextBlock].FontStretch}" />
+                <Setter Property="FontStyle" Value="{Binding $parent[controls:MarkdownTextBlock].FontStyle}" />
+                <Setter Property="LetterSpacing" Value="{Binding $parent[controls:MarkdownTextBlock].LetterSpacing}" />
+                <Setter Property="FlowDirection" Value="{Binding $parent[controls:MarkdownTextBlock].FlowDirection}" />
+
+                <Setter Property="Foreground" Value="{Binding $parent[controls:MarkdownTextBlock].Foreground}" />
+                <Setter Property="Background" Value="{x:Null}" />
+
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+            <Style Selector="csmath|MathView">
+                <Setter Property="TextColor" Value="{Binding $parent[controls:MarkdownTextBlock].Foreground}" />
+            </Style>
+        </md:MarkdownRenderer.Styles>
+    </md:MarkdownRenderer>
 
 </UserControl>

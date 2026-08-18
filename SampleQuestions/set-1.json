@@ -793,7 +793,7 @@
     },
     {
       "Topic": 7,
-      "Text": "A sunflower was @{a} cm tall on Monday and @{b} cm tall on Friday. What is the percentage increase? Choose the correct calculation.",
+      "Text": "A sunflower was @{a} cm tall on Monday and @{b} cm tall on Friday. What is the percentage increase?.",
       "Parameters": [
         {
           "Name": "e",
@@ -857,26 +857,26 @@
         {
           "Type": "Expression",
           "Value": "d",
-          "Format": "{0:P2}",
+          "Format": "{0:P0}",
           "IsCorrect": true
         },
         {
           "Type": "Expression",
           "Value": "c / b",
-          "Format": "{0:P2}"
+          "Format": "{0:P0}"
         },
         {
           "Type": "Expression",
           "Value": "(a + b) / a",
-          "Format": "{0:P2}"
+          "Format": "{0:P0}"
         },
         {
           "Type": "Expression",
           "Value": "(a - c) / b",
-          "Format": "{0:P2}"
+          "Format": "{0:P0}"
         }
       ],
-      "Explanation": "(@{b} − @{a}) / @{a} × 100 = @{d:P2}."
+      "Explanation": "$(@{b}-@{a})\\div @{a}\\times 100=@{d:P2}$."
     },
     {
       "Topic": 7,
@@ -963,7 +963,7 @@
           "Format": "{0:P2}"
         }
       ],
-      "Explanation": "(@{b} − @{a}) / @{a} × 100 = @{d:P2}."
+      "Explanation": "$(@{b}−@{a})\\div @{a}\\times 100=@{d:P2}$."
     },
     {
       "Topic": 8,

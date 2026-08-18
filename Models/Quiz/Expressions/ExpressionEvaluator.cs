@@ -12,6 +12,11 @@ public abstract class ExpressionEvaluator
     private readonly string _expressionStr;
     private Expression? _expression;
 
+    static ExpressionEvaluator()
+    {
+        mXparser.setToOverrideBuiltinTokens();
+    }
+
     /// <summary>
     ///     Creates a new ExpressionEvaluator using the expression provided.
     /// </summary>
@@ -41,6 +46,8 @@ public abstract class ExpressionEvaluator
             _expression.defineConstant(variable.Key, variable.Value);
         }
 
-        return _expression.calculate();
+        var result = _expression.calculate();
+
+        return result;
     }
 }

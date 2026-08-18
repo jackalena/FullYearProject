@@ -1,17 +1,14 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
-using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
 using FullYearProject.ViewModels;
 using FullYearProject.Views;
-
 using LiveMarkdown.Avalonia;
+using org.mariuszgromada.math.mxparser;
 
 namespace FullYearProject;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -22,12 +19,11 @@ public partial class App : Application
     {
         InitialiseMarkdown();
 
+        License.iConfirmNonCommercialUse("Jack Ishmael");
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
+            desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel() };
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -37,9 +33,5 @@ public partial class App : Application
     {
         MarkdownNode.Register<MathInlineNode>();
         MarkdownNode.Register<MathBlockNode>();
-
-        MarkdownNode.Edit(builder => builder
-                                    .Register<MathInlineNode>()
-                                    .Register<MathBlockNode>());
     }
 }

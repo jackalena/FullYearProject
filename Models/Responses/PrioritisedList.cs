@@ -144,7 +144,7 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
     ///     Gets the next item in the list and moves it to the next priority level.
     /// </summary>
     /// <returns>The next item.</returns>
-    /// <exception cref="InvalidOperationException"></exception>
+    /// <exception cref="InvalidOperationException">Thrown if the list is empty.</exception>
     public TValue GetNext()
     {
         // Find the key of the first list with items

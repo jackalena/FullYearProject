@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FullYearProject.Models.Quiz.Question;
 
 namespace FullYearProject.Models.Responses;
 
@@ -7,18 +10,26 @@ namespace FullYearProject.Models.Responses;
 /// </summary>
 public class QuestionResponse
 {
+    public QuestionResponse(QuizQuestion question, IEnumerable<QuestionOptionResponse> answers)
+    {
+        Question = question;
+        Answers = answers.ToArray();
+
+        IsAnswerCorrect = Array.Exists(Answers, a => a.IsSelected && a.IsCorrect.EvaluateIsCorrect(null));
+    }
+
     /// <summary>
     ///     The question that was answered.
     /// </summary>
-    public string? Question { get; set; }
+    public QuizQuestion Question { get; }
 
     /// <summary>
     ///     Whether the given answer is correct.
     /// </summary>
-    public bool IsAnswerCorrect => Answers?.Exists(a => a.IsSelected && a.IsCorrect.EvaluateIsCorrect(null)) == true;
+    public bool IsAnswerCorrect { get; }
 
     /// <summary>
     ///     The possible answers to the question and their responses.
     /// </summary>
-    public List<QuizQuestionOptionResponse>? Answers { get; set; }
+    public QuestionOptionResponse[] Answers { get; }
 }

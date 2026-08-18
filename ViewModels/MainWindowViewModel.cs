@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FullYearProject.Models;
@@ -23,6 +25,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private readonly PrioritisedList<QuestionPriority, QuizQuestion> _questions =
         PrioritisedList<QuestionPriority, QuizQuestion>.FromEnum<QuestionPriority>();
+
+    private readonly QuestionResponseCollection _responses = [];
 
     private readonly TimeRemainingProvider _timer = new();
 
@@ -82,9 +86,25 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void ShowNextQuestion()
     {
-        var question = _questions.GetNext();
+        QuizQuestion question = null!;
+
+        for (var i = 0; i < 10; i++)
+        {
+            question = _questions.GetNext();
+
+            if (question.Parameters?.Count > 0)
+            {
+                break;
+            }
+        }
 
         var generatedQuestion = GeneratedQuizQuestion.GenerateQuestion(question);
+
+        Debug.WriteLine(generatedQuestion.Text);
+        foreach (var option in generatedQuestion.Options)
+        {
+            Debug.WriteLine(option.Value);
+        }
 
         var questionVm = new QuestionViewModel(generatedQuestion, _quiz!);
         questionVm.QuestionAnswered += option => OnQuestionAnswered(question, option);
@@ -99,5 +119,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void OnQuestionAnswered(QuizQuestion question, QuizQuestionOption? option)
     {
+        var optionResponses = question.Options.Select(o => new QuestionOptionResponse(o, o == option));
+        var response = new QuestionResponse(question, optionResponses);
+
+        _responses.Add(response);
     }
 }

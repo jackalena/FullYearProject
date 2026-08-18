@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using FullYearProject.Helpers;
 using FullYearProject.Models.Quiz.Expressions;
 using FullYearProject.Models.Quiz.Options;
@@ -39,12 +41,19 @@ public class GeneratedQuizQuestion : QuizQuestion
 
         foreach (var parameter in sourceQuestion.Parameters)
         {
+            Debug.WriteLine("Evaluating parameter " + parameter.Name + " with constraints:");
+
             parameters[parameter.Name] = 0;
 
             foreach (var constraint in parameter.Constraints)
             {
+                Debug.WriteLine($"\tEvaluating constraint: {constraint.Type}");
+
                 constraint.Variables = parameters;
-                constraint.Apply(parameters[parameter.Name]);
+                var oldVal = parameters[parameter.Name];
+                parameters[parameter.Name] = constraint.Apply(parameters[parameter.Name]);
+
+                Debug.WriteLine($"Changed parameter {parameter.Name} from {oldVal} to {parameters[parameter.Name]}");
             }
         }
 
@@ -57,36 +66,44 @@ public class GeneratedQuizQuestion : QuizQuestion
 
         foreach (var option in sourceQuestion.Options)
         {
-            string optionText;
+            string? optionText = null;
 
             switch (option)
             {
                 case TextQuizQuestionOption textOption:
                     optionText = formatter.Format(textOption.Value);
+
                     break;
                 case ExpressionQuizQuestionOption expressionOption:
-                    NumericalExpressionEvaluator evaluator = new(expressionOption.Value)
-                    {
-                        Variables = parameters
-                    };
+                    NumericalExpressionEvaluator evaluator = new(expressionOption.Value) { Variables = parameters };
 
                     var optionValue = evaluator.Evaluate();
 
-                    optionText = optionValue.ToString(expressionOption.Format);
+                    if (expressionOption.Format != null)
+                    {
+                        try
+                        {
+                            optionText = string.Format(expressionOption.Format, optionValue);
+                        }
+                        catch (FormatException)
+                        {
+                            optionText = null;
+                        }
+                    }
+
+                    optionText ??= optionValue.ToString();
+
                     break;
                 default:
                     optionText = option.Value;
+
                     break;
             }
 
             var isCorrectDef = new BooleanOptionIsCorrectDefinition
                 { Value = option.IsCorrect.EvaluateIsCorrect(parameters) };
 
-            questionOptions.Add(new TextQuizQuestionOption
-            {
-                Value = optionText,
-                IsCorrect = isCorrectDef
-            });
+            questionOptions.Add(new TextQuizQuestionOption { Value = optionText, IsCorrect = isCorrectDef });
         }
 
         return new(sourceQuestion, questionOptions, questionText, questionExplanation);

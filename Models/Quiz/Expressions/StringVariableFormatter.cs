@@ -90,7 +90,7 @@ public class StringVariableFormatter : Loggable
                 // the provided format string
                 if (Variables.TryGetValue(varName, out var num))
                 {
-                    newVal = num.ToString($"{{0:{format}}}", CultureInfo.CurrentCulture);
+                    newVal = num.ToString(format, CultureInfo.CurrentCulture);
                 }
             }
 

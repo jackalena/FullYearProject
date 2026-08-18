@@ -5,8 +5,16 @@ namespace FullYearProject.Models.Responses;
 /// <summary>
 ///     Represents a response to a single option for a quiz question.
 /// </summary>
-public class QuizQuestionOptionResponse : QuizQuestionOption
+public class QuestionOptionResponse : QuizQuestionOption
 {
+    public QuestionOptionResponse(QuizQuestionOption option, bool isSelected)
+    {
+        IsSelected = isSelected;
+        Type = option.Type;
+        Value = option.Value;
+        IsCorrect = option.IsCorrect;
+    }
+
     /// <summary>
     ///     Whether the user selected the option.
     /// </summary>

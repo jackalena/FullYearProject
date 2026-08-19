@@ -10,6 +10,8 @@ namespace FullYearProject;
 
 public class App : Application
 {
+    private static bool _hasInitialisedMarkdown;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -17,8 +19,6 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        InitialiseMarkdown();
-
         License.iConfirmNonCommercialUse("Jack Ishmael");
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -29,9 +29,16 @@ public class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private static void InitialiseMarkdown()
+    public static void EnsureMarkdownInitialised()
     {
+        if (_hasInitialisedMarkdown)
+        {
+            return;
+        }
+
         MarkdownNode.Register<MathInlineNode>();
         MarkdownNode.Register<MathBlockNode>();
+
+        _hasInitialisedMarkdown = true;
     }
 }

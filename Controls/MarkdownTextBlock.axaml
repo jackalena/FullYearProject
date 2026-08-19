@@ -5,12 +5,13 @@
              xmlns:md="clr-namespace:LiveMarkdown.Avalonia;assembly=LiveMarkdown.Avalonia"
              xmlns:controls="clr-namespace:FullYearProject.Controls"
              xmlns:csmath="clr-namespace:CSharpMath.Avalonia;assembly=CSharpMath.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
              x:Class="FullYearProject.Controls.MarkdownTextBlock">
 
     <Design.DesignStyle>
         <Style Selector="controls|MarkdownTextBlock">
-            <Setter Property="Text" Value="Test" />
+            <Setter Property="Text" Value="Normal&#10;**bold**&#10;*italic*&#10;Equation: $f(x)=x^2+4x-34$" />
             <Setter Property="Margin" Value="20" />
         </Style>
     </Design.DesignStyle>
@@ -34,6 +35,9 @@
             </Style>
             <Style Selector="csmath|MathView">
                 <Setter Property="TextColor" Value="{Binding $parent[controls:MarkdownTextBlock].Foreground}" />
+                <Setter Property="GlyphBoxColor">
+                    <system:Tuple x:TypeArguments="Color, Color" />
+                </Setter>
             </Style>
         </md:MarkdownRenderer.Styles>
     </md:MarkdownRenderer>

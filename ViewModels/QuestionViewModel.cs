@@ -31,6 +31,8 @@ public partial class QuestionViewModel : ViewModelBase
     public QuizQuestion Question { get; init; }
     public Quiz Quiz { get; init; }
 
+    public string TopicName => Quiz.Topics.FromId(Question.Topic).Name;
+
     [ObservableProperty] public partial bool ShowCompleted { get; set; }
     [ObservableProperty] public partial bool IsCorrect { get; set; }
 

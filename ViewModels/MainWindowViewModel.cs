@@ -60,6 +60,7 @@ public partial class MainWindowViewModel : ViewModelBase
         catch (Exception e)
         {
             Logger.LogError("Could not load game: {Exception}", e.Message);
+
             return;
         }
 
@@ -86,16 +87,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void ShowNextQuestion()
     {
-        QuizQuestion question = null!;
+        var question = _questions.GetNext();
 
-        for (var i = 0; i < 10; i++)
+        while (!(question.Parameters?.Count > 0))
         {
             question = _questions.GetNext();
-
-            if (question.Parameters?.Count > 0)
-            {
-                break;
-            }
         }
 
         var generatedQuestion = GeneratedQuizQuestion.GenerateQuestion(question);

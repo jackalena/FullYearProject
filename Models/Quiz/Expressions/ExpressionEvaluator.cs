@@ -14,6 +14,7 @@ public abstract class ExpressionEvaluator
 
     static ExpressionEvaluator()
     {
+        // Allows question variables names to override built-in constants like 'e'
         mXparser.setToOverrideBuiltinTokens();
     }
 
@@ -32,7 +33,7 @@ public abstract class ExpressionEvaluator
     public Dictionary<string, double> Variables { get; set; } = new();
 
     /// <summary>
-    ///     Evaluates the expression using the variables provided.
+    ///     Evaluates the expression using the variables provided.*
     ///     A boolean expression returns 0 or 1 for true and false.
     /// </summary>
     /// <returns>The value of the expression evaluated by mXparser</returns>

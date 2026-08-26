@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="App.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/MarkdownTextBlock.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/MarkdownTextBlock/MarkDownTextBlockStyles.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/MarkdownTextBlock/MarkdownTextBlock.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/MarkdownTextBox.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/StyleIndex.axaml" value="FullYearProject.csproj" />
+        <entry key="StyleIndex.axaml" value="FullYearProject.csproj" />
+        <entry key="Theme/StyleIndex.axaml" value="FullYearProject.csproj" />
+        <entry key="Theme/Styles/FlyoutPresenter.axaml" value="FullYearProject.csproj" />
+        <entry key="Views/MainWindow.axaml" value="FullYearProject.csproj" />
+        <entry key="Views/QuestionAnswerResultsView.axaml" value="FullYearProject.csproj" />
+        <entry key="Views/QuestionView.axaml" value="FullYearProject.csproj" />
+        <entry key="Views/ResultsView.axaml" value="FullYearProject.csproj" />
+        <entry key="Views/Styles.axaml" value="FullYearProject.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

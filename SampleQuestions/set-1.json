@@ -686,7 +686,7 @@
           "Format": "{0:P0}"
         }
       ],
-      "Explanation": "$(@{b} - @{a}) \\div @{a} \\times 100 = @{d:F2} \\times 100 = @{d:P2}$."
+      "Explanation": "Example calculation: $(@{b} - @{a}) \\div @{a} \\times 100 = @{d:F2} \\times 100 = @{d:P2}$"
     },
     {
       "Topic": 7,
@@ -773,7 +773,7 @@
           "Format": "{0:P0}"
         }
       ],
-      "Explanation": "$@{d} \\div @{c} \\times 100 = @{e:F2} \\times 100 = @{e:P2}$."
+      "Explanation": "Example calculation: $@{d} \\div @{c} \\times 100 = @{e:F2} \\times 100 = @{e:P2}$"
     },
     {
       "Topic": 7,
@@ -876,11 +876,11 @@
           "Format": "{0:P0}"
         }
       ],
-      "Explanation": "$(@{b}-@{a})\\div @{a}\\times 100=@{d:P2}$."
+      "Explanation": "Example calculation: $(@{b}-@{a})\\div @{a}\\times 100=@{d:P2}$"
     },
     {
       "Topic": 7,
-      "Text": "A grapevine was @{a} cm long. After pruning it was @{b} cm. What is the percentage change?",
+      "Text": "A grapevine was @{a} cm long. After a week, it was @{b} cm. What is the percentage change?",
       "Parameters": [
         {
           "Name": "e",
@@ -963,7 +963,7 @@
           "Format": "{0:P2}"
         }
       ],
-      "Explanation": "$(@{b}−@{a})\\div @{a}\\times 100=@{d:P2}$."
+      "Explanation": "Example calculation: $(@{b}−@{a})\\div @{a}\\times 100=@{d:P2}$"
     },
     {
       "Topic": 8,

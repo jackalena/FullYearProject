@@ -19,6 +19,11 @@ public partial class MarkdownTextBlock : UserControl
     /// </summary>
     public static readonly StyledProperty<string?> TextProperty = TextBox.TextProperty.AddOwner<MarkdownTextBlock>();
 
+    static MarkdownTextBlock()
+    {
+        App.EnsureMarkdownInitialised();
+    }
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="MarkdownTextBlock" /> class.
     /// </summary>
@@ -102,6 +107,8 @@ public partial class MarkdownTextBlock : UserControl
                     if (panelChild is MathView mathView)
                     {
                         mathView.TextColor = ((ISolidColorBrush?)Foreground)?.Color ?? Colors.Black;
+                        mathView.FontSize = (float)FontSize / 1.2f;
+                        mathView.DisplacementY = 2.8f;
                     }
                 }
             }

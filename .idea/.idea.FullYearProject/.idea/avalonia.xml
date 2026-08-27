@@ -12,6 +12,7 @@
         <entry key="StyleIndex.axaml" value="FullYearProject.csproj" />
         <entry key="Theme/StyleIndex.axaml" value="FullYearProject.csproj" />
         <entry key="Theme/Styles/FlyoutPresenter.axaml" value="FullYearProject.csproj" />
+        <entry key="Views/IntroView.axaml" value="FullYearProject.csproj" />
         <entry key="Views/MainWindow.axaml" value="FullYearProject.csproj" />
         <entry key="Views/QuestionAnswerResultsView.axaml" value="FullYearProject.csproj" />
         <entry key="Views/QuestionView.axaml" value="FullYearProject.csproj" />

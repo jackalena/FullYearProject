@@ -22,7 +22,6 @@
                 <LucideIcon.Styles>
                     <Style Selector="LucideIcon">
                         <Setter Property="RotateTransform.Angle" Value="0" />
-
                         <Style Selector="^.ShakeEffect">
                             <Style.Animations>
                                 <Animation Duration="0:0:0.5" IterationCount="INFINITE"
@@ -41,7 +40,7 @@
                 </LucideIcon.Styles>
             </LucideIcon>
             <TextBlock Margin="5 0">
-                <Run Text="{Binding TimeRemaining, StringFormat='m\\:ss'}" />
+                <Run Text="{Binding TimeRemaining, StringFormat='m\\:ss', Mode=OneWay}" />
                 <Run Text="remaining" />
             </TextBlock>
         </StackPanel>

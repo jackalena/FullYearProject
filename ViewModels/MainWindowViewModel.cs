@@ -120,4 +120,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _responses.Add(response);
     }
+
+    partial void OnTimeRemainingChanged(TimeSpan value)
+    {
+        Console.WriteLine(value);
+    }
 }

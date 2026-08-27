@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FullYearProject.Configuration;
 using FullYearProject.Helpers;
 using FullYearProject.Models.Responses;
@@ -26,4 +27,18 @@ public partial class ResultsViewModel : ViewModelBase
     public GradeBoundary Grade => GradeBoundaries.GetGrade(CorrectPercentage);
 
     public string? Message => field ??= Grade.Messages.Apply(msgs => Random.Shared.GetItem(msgs));
+    public event Action? QuitRequested;
+    public event Action? RestartRequested;
+
+    [RelayCommand]
+    private void Quit()
+    {
+        QuitRequested?.Invoke();
+    }
+
+    [RelayCommand]
+    private void Restart()
+    {
+        RestartRequested?.Invoke();
+    }
 }

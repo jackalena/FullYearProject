@@ -90,6 +90,8 @@ public class TimeRemainingProvider
             {
                 TimeRemainingChanged?.Invoke(this, new(TimeSpan.Zero));
                 TimeRemainingElapsed?.Invoke();
+
+                return;
             }
 
             var lastError = _interval - (_stopwatch.Elapsed - lastElapsed);

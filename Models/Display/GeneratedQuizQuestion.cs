@@ -11,7 +11,7 @@ namespace FullYearProject.Models.Display;
 
 public class GeneratedQuizQuestion : QuizQuestion
 {
-    public GeneratedQuizQuestion(QuizQuestion sourceQuestion, QuizQuestionOptionCollection options, string text,
+    private GeneratedQuizQuestion(QuizQuestion sourceQuestion, QuizQuestionOptionCollection options, string text,
         string? explanation)
     {
         SourceQuestion = sourceQuestion;
@@ -23,7 +23,7 @@ public class GeneratedQuizQuestion : QuizQuestion
         Topic = SourceQuestion.Topic;
     }
 
-    public GeneratedQuizQuestion(QuizQuestion sourceQuestion) : this(sourceQuestion, sourceQuestion.Options,
+    private GeneratedQuizQuestion(QuizQuestion sourceQuestion) : this(sourceQuestion, sourceQuestion.Options,
         sourceQuestion.Text, sourceQuestion.Explanation)
     {
     }
@@ -105,6 +105,8 @@ public class GeneratedQuizQuestion : QuizQuestion
 
             questionOptions.Add(new TextQuizQuestionOption { Value = optionText, IsCorrect = isCorrectDef });
         }
+
+        questionOptions.Shuffle();
 
         return new(sourceQuestion, questionOptions, questionText, questionExplanation);
     }

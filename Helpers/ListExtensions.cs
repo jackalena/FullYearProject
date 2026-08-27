@@ -5,10 +5,17 @@ namespace FullYearProject.Helpers;
 
 public static class ListExtensions
 {
-    public static T RandomElement<T>(this IList<T> list, Random? random = null)
+    public static void Shuffle<T>(this IList<T> list)
     {
-        random ??= Random.Shared;
+        var n = list.Count;
+        while (n > 1)
+        {
+            n--;
 
-        return list[random.Next(list.Count)];
+            var k = Random.Shared.Next(n + 1);
+
+            // Swap elements k and n.
+            (list[k], list[n]) = (list[n], list[k]);
+        }
     }
 }

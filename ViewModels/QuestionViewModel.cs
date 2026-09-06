@@ -34,12 +34,16 @@ public partial class QuestionViewModel : ViewModelBase
     public string TopicName => Quiz.Topics.FromId(Question.Topic).Name;
 
     [ObservableProperty] public partial bool ShowCompleted { get; set; }
+
     [ObservableProperty] public partial bool IsCorrect { get; set; }
+
+    [ObservableProperty] public partial bool IsIncorrect { get; set; }
+
+    [ObservableProperty] public partial bool IsSkipped { get; set; }
 
     [ObservableProperty] public partial QuizQuestionOption? SelectedOption { get; set; }
 
-    public QuizQuestionOption? CorrectOption =>
-        field ??= FindCorrectOption();
+    public QuizQuestionOption? CorrectOption => field ??= FindCorrectOption();
 
     public event Action<QuizQuestionOption?>? QuestionAnswered;
     public event Action? QuestionCompleted;
@@ -60,6 +64,8 @@ public partial class QuestionViewModel : ViewModelBase
     {
         SelectedOption = option;
         IsCorrect = option == CorrectOption;
+        IsSkipped = option == null;
+        IsIncorrect = !(IsCorrect || IsSkipped);
 
         QuestionAnswered?.Invoke(option);
 

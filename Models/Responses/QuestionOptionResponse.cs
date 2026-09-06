@@ -16,6 +16,11 @@ public class QuestionOptionResponse : QuizQuestionOption
     }
 
     /// <summary>
+    ///     Whether the option is correct or not.
+    /// </summary>
+    public bool IsCorrectBool => IsCorrect.EvaluateIsCorrect(null);
+
+    /// <summary>
     ///     Whether the user selected the option.
     /// </summary>
     public bool IsSelected { get; set; }

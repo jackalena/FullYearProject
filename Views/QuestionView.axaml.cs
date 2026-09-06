@@ -5,7 +5,7 @@ namespace FullYearProject.Views;
 public partial class QuestionView : UserControl
 {
     private static readonly string[] AnswerButtonClasses = ["Red", "Yellow", "Green", "Blue"];
-    private static readonly string[] AnswerButtonTrueFalseClasses = ["Red", "Green"];
+    private static readonly string[] AnswerButtonTrueFalseClasses = ["Green", "Red"];
 
     public QuestionView()
     {

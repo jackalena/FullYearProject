@@ -133,6 +133,7 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
             if (_lists[i].Remove(value))
             {
                 _lists[AllowedPriorities.IndexOf(priority)].Add(value);
+
                 return;
             }
         }
@@ -160,22 +161,46 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
         if (AllowedPriorities[priorityIdx].Equals(ResetOnAllPriority))
         {
             Reset();
+
             return GetNext();
         }
 
+        // Choose a random item from the list
         var list = _lists[priorityIdx];
         var listIdx = Random.Shared.Next(list.Count);
-        var value = list[listIdx];
+        var item = list[listIdx];
 
-        var newPriorityIdx = Math.Min(priorityIdx + 1, _lists.Length - 1);
-
-        if (newPriorityIdx != priorityIdx)
+        // If the item is reusable, increment its reuse counter or move it to the next list if it has been reused enough times.
+        if (item is IReusablePrioritisedListItem reusableItem)
         {
-            list.RemoveAt(listIdx);
-            _lists[newPriorityIdx].Add(value);
+            if (reusableItem.ReuseCount - reusableItem.CurrentReuseCount >= 0)
+            {
+                reusableItem.CurrentReuseCount++;
+            }
+            else
+            {
+                MoveItem();
+                reusableItem.CurrentReuseCount = 0;
+            }
+        }
+        else
+        {
+            MoveItem();
         }
 
-        return value;
+        return item;
+
+        // Moves the item to the next list
+        void MoveItem()
+        {
+            var newPriorityIdx = Math.Min(priorityIdx + 1, _lists.Length - 1);
+
+            if (newPriorityIdx != priorityIdx)
+            {
+                list.RemoveAt(listIdx);
+                _lists[newPriorityIdx].Add(item);
+            }
+        }
     }
 
     /// <summary>

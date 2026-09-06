@@ -549,6 +549,7 @@
     {
       "Topic": 4,
       "Text": "A steak contains 25g of protein per 100g. Chickpeas contain 4.5g per 100g. Approximately how many grams of chickpeas would you need to eat to get the same protein as @{a}g of steak?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "b",
@@ -740,6 +741,7 @@
     {
       "Topic": 5,
       "Text": "A yoghurt has @{s} servings per package and each serving is @{w}g. What is the total weight of the package?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "s",
@@ -818,6 +820,7 @@
     {
       "Topic": 5,
       "Text": "A @{a}g Mars bar contains @{b}g of total fat per serving. A @{c}g avocado contains @{d}g of total fat. Which food has more total fat per 100g?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "e",
@@ -1166,6 +1169,7 @@
     {
       "Topic": 9,
       "Text": "A chocolate bar has @{a}g of saturated fat per 100g. A vegetable has @{b}g of saturated fat per 100g. How many times more saturated fat does the chocolate bar contain per 100g than the vegetable?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "a",

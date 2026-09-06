@@ -7,4 +7,11 @@ namespace FullYearProject.Models.Responses;
 /// </summary>
 public class QuestionResponseTopicCollection : List<QuestionResponseTopic>
 {
+    public QuestionResponseTopicCollection()
+    {
+    }
+
+    public QuestionResponseTopicCollection(IEnumerable<QuestionResponseTopic> collection) : base(collection)
+    {
+    }
 }

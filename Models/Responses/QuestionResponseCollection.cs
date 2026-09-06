@@ -8,6 +8,14 @@ namespace FullYearProject.Models.Responses;
 /// </summary>
 public class QuestionResponseCollection : List<QuestionResponse>
 {
+    public QuestionResponseCollection()
+    {
+    }
+
+    public QuestionResponseCollection(IEnumerable<QuestionResponse> collection) : base(collection)
+    {
+    }
+
     /// <summary>
     ///     The number of correct responses.
     /// </summary>

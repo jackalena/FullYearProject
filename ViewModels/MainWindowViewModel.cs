@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -23,6 +22,10 @@ public partial class MainWindowViewModel : ViewModelBase
         Correct
     }
 
+    //TODO: Reusable questions not being reused
+    // tooltip colour
+    // answer result formatting
+
     private readonly PrioritisedList<QuestionPriority, QuizQuestion> _questions =
         PrioritisedList<QuestionPriority, QuizQuestion>.FromEnum<QuestionPriority>();
 
@@ -30,14 +33,14 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private readonly TimeRemainingProvider _timer = new();
 
+    private volatile bool _hasTimerElapsed;
+
     private Quiz? _quiz;
 
     public MainWindowViewModel()
     {
-        var introVm = new IntroViewModel();
-        introVm.StartQuiz += StartGame;
-
-        CurrentViewModel = introVm;
+        CurrentViewModel = null!;
+        ShowIntro();
 
         _timer.TimeRemainingChanged += (_, e) => TimeRemaining = e.TimeRemaining;
         _timer.TimeRemainingElapsed += OnTimerElapsed;
@@ -50,6 +53,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] public partial ViewModelBase CurrentViewModel { get; set; }
 
     [ObservableProperty] public partial bool ShowTimer { get; set; }
+
 
     private async Task LoadGame()
     {
@@ -70,6 +74,14 @@ public partial class MainWindowViewModel : ViewModelBase
         _questions.AddRange(_quiz.Questions);
     }
 
+    private void ShowIntro()
+    {
+        var introVm = new IntroViewModel();
+        introVm.StartQuiz += StartGame;
+
+        CurrentViewModel = introVm;
+    }
+
     private void StartGame()
     {
         if (_quiz == null)
@@ -79,6 +91,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
         ShowTimer = true;
 
+        _responses.Clear();
+        _hasTimerElapsed = false;
         _timer.StartTime = _quiz.Settings.TimeLimit;
         _timer.Start();
 
@@ -87,20 +101,15 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void ShowNextQuestion()
     {
-        var question = _questions.GetNext();
-
-        while (!(question.Parameters?.Count > 0))
+        if (_hasTimerElapsed)
         {
-            question = _questions.GetNext();
+            return;
         }
+
+        var question = _questions.GetNext();
 
         var generatedQuestion = GeneratedQuizQuestion.GenerateQuestion(question);
 
-        Debug.WriteLine(generatedQuestion.Text);
-        foreach (var option in generatedQuestion.Options)
-        {
-            Debug.WriteLine(option.Value);
-        }
 
         var questionVm = new QuestionViewModel(generatedQuestion, _quiz!);
         questionVm.QuestionAnswered += option => OnQuestionAnswered(question, option);
@@ -110,7 +119,19 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void OnTimerElapsed()
     {
-        CurrentViewModel = new ResultsViewModel();
+        _hasTimerElapsed = true;
+
+        var vm = new ResultsViewModel(_responses, _quiz!);
+
+        vm.QuitRequested += () => Environment.Exit(0);
+        vm.RestartRequested += RestartGame;
+
+        CurrentViewModel = vm;
+    }
+
+    private void RestartGame()
+    {
+        StartGame();
     }
 
     private void OnQuestionAnswered(QuizQuestion question, QuizQuestionOption? option)
@@ -119,10 +140,5 @@ public partial class MainWindowViewModel : ViewModelBase
         var response = new QuestionResponse(question, optionResponses);
 
         _responses.Add(response);
-    }
-
-    partial void OnTimeRemainingChanged(TimeSpan value)
-    {
-        Console.WriteLine(value);
     }
 }

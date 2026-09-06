@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:FullYearProject.Views"
              xmlns:questions="clr-namespace:FullYearProject.Models.Responses"
+             xmlns:markdownTextBlock="clr-namespace:FullYearProject.Controls.MarkdownTextBlock"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FullYearProject.Views.QuestionAnswerResultsView">
 
@@ -16,7 +17,11 @@
             <DataTemplate x:DataType="questions:QuestionResponseTopic">
                 <StackPanel>
                     <TextBlock Margin="20 0 0 0" Classes="H2" FontWeight="Normal">
-                        <Run Text="{Binding Topic}" FontWeight="SemiBold" />
+                        <ToolTip.Tip>
+                            <markdownTextBlock:MarkdownTextBlock Text="{Binding Topic.Description}" />
+                        </ToolTip.Tip>
+
+                        <Run Text="{Binding Topic.Name}" FontWeight="SemiBold" />
                         -
                         <Run Text="{Binding CorrectCount}" />/<Run Text="{Binding Count}" />
                     </TextBlock>
@@ -26,6 +31,11 @@
                                 <Expander HorizontalAlignment="Stretch">
                                     <Expander.Header>
                                         <DockPanel Margin="3 1">
+                                            <ToolTip.Tip>
+                                                <markdownTextBlock:MarkdownTextBlock
+                                                    Text="{Binding Question.Explanation}" />
+                                            </ToolTip.Tip>
+
                                             <DockPanel.Styles>
                                                 <Style Selector="LucideIcon">
                                                     <Setter Property="Kind" Value="X" />
@@ -43,7 +53,7 @@
                                             <LucideIcon Classes.Correct="{Binding IsAnswerCorrect}"
                                                         DockPanel.Dock="Left"
                                                         Margin="5 0" Size="20" />
-                                            <TextBlock Text="{Binding Question}" />
+                                            <markdownTextBlock:MarkdownTextBlock Text="{Binding Question.Text}" />
                                         </DockPanel>
                                     </Expander.Header>
 
@@ -59,7 +69,7 @@
                                             <DataTemplate DataType="questions:QuestionOptionResponse">
                                                 <Border Classes.Selected="{Binding IsSelected}"
                                                         Margin="10 0 0 0"
-                                                        Classes.Correct="{Binding IsCorrect}"
+                                                        Classes.Correct="{Binding IsCorrectBool}"
                                                         CornerRadius="6"
                                                         Padding="10 0" x:Name="AnswerOptionBorder">
 
@@ -100,9 +110,8 @@
                                                     <DockPanel>
                                                         <LucideIcon DockPanel.Dock="Right" Size="18"
                                                                     VerticalAlignment="Center" Margin="5 0 0 0" />
-                                                        <TextBlock Text="{Binding Value}"
-                                                                   TextWrapping="Wrap"
-                                                                   Margin="0 5 5 5" />
+                                                        <markdownTextBlock:MarkdownTextBlock Text="{Binding Value}"
+                                                                Margin="0 5 5 5" />
                                                     </DockPanel>
                                                 </Border>
                                             </DataTemplate>

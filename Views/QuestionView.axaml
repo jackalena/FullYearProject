@@ -62,9 +62,11 @@
             </Button>
         </Grid>
 
+        <!-- TODO: Fix incorrect option shown when answered correctly -->
         <Button Name="OverlayBorder" Classes.Hidden="{Binding !ShowCompleted}" Padding="20"
-                Classes.Incorrect="{Binding !IsCorrect}" HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" Margin="20" CornerRadius="10" Command="{Binding SkipCompletedCommand}">
+                Classes.Incorrect="{Binding IsIncorrect}" HorizontalAlignment="Stretch"
+                Classes.Skipped="{Binding IsSkipped}" VerticalAlignment="Stretch" Margin="20" CornerRadius="10"
+                Command="{Binding SkipCompletedCommand}">
 
             <Button.Styles>
                 <Style Selector="Button#OverlayBorder">
@@ -109,6 +111,20 @@
                         </Style>
                     </Style>
 
+                    <Style Selector="^.Skipped">
+                        <Setter Property="Background" Value="#B06320" />
+                        <Setter Property="BorderBrush" Value="#C4834C" />
+
+                        <Style Selector="^:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#B06320" />
+                            <Setter Property="BorderBrush" Value="#C4834C" />
+                        </Style>
+                        <Style Selector="^:pressed /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#B06320" />
+                            <Setter Property="BorderBrush" Value="#C4834C" />
+                        </Style>
+                    </Style>
+
                     <Style Selector="^.Hidden">
                         <Setter Property="IsVisible" Value="False" />
                         <Setter Property="RenderTransform" Value="scale(0.0)" />
@@ -121,7 +137,9 @@
                 <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Classes="H0" Text="Correct!"
                            IsVisible="{Binding IsCorrect}" />
                 <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Classes="H0" Text="Incorrect"
-                           IsVisible="{Binding !IsCorrect}" />
+                           IsVisible="{Binding IsIncorrect}" />
+                <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Classes="H0" Text="Question Skipped"
+                           IsVisible="{Binding IsSkipped}" />
 
                 <TextBlock DockPanel.Dock="Bottom" Text="Click to continue" FontStyle="Italic"
                            HorizontalAlignment="Center"

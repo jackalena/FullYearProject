@@ -1,7 +1,7 @@
 {
   "Settings": {
     "Title": "Living Labs",
-    "TimeLimit": "00:00:10"
+    "TimeLimit": "00:02:30"
   },
   "Topics": [
     {
@@ -613,6 +613,7 @@
     {
       "Topic": 7,
       "Text": "A seedling was @{a} cm tall. After two weeks it was @{b} cm tall. What is the percentage increase in height?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "a",
@@ -691,6 +692,7 @@
     {
       "Topic": 7,
       "Text": "A plant had @{c} leaves. After a dry spell, it lost @{d} leaves. What is the percentage decrease?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "a",
@@ -794,6 +796,7 @@
     {
       "Topic": 7,
       "Text": "A sunflower was @{a} cm tall on Monday and @{b} cm tall on Friday. What is the percentage increase?.",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "e",
@@ -881,6 +884,7 @@
     {
       "Topic": 7,
       "Text": "A grapevine was @{a} cm long. After a week, it was @{b} cm. What is the percentage change?",
+      "ReuseCount": 3,
       "Parameters": [
         {
           "Name": "e",

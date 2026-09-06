@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question.Parameters;
 
@@ -18,6 +19,12 @@ public class QuizQuestion
     ///     The text to show for the question.
     /// </summary>
     public string Text { get; set; } = "Question";
+
+    /// <summary>
+    ///     The number of times that this question can be re-asked in a game.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public int ReuseCount { get; set; } = 0;
 
     /// <summary>
     ///     The answer options for the question.

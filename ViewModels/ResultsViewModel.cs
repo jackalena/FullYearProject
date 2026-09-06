@@ -1,23 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FullYearProject.Configuration;
 using FullYearProject.Helpers;
+using FullYearProject.Models.Quiz;
 using FullYearProject.Models.Responses;
 
 namespace FullYearProject.ViewModels;
 
 public partial class ResultsViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CorrectPercentage))]
-    [NotifyPropertyChangedFor(nameof(Grade))]
-    [NotifyPropertyChangedFor(nameof(Message))]
-    [NotifyPropertyChangedFor(nameof(TotalAnswered))]
-    [NotifyPropertyChangedFor(nameof(CorrectAnswered))]
-    public partial IEnumerable<QuestionResponseTopic>? TopicResults { get; set; }
+    private readonly Quiz _quiz;
+
+    public ResultsViewModel(QuestionResponseTopicCollection topicResults, Quiz quiz)
+    {
+        _quiz = quiz;
+        TopicResults = topicResults;
+    }
+
+    public ResultsViewModel(QuestionResponseCollection responses, Quiz quiz)
+    {
+        _quiz = quiz;
+        TopicResults = new(responses.GroupBy(r => r.Question.Topic)
+            .Select(group => new QuestionResponseTopic(group) { Topic = quiz.Topics.FromId(group.Key) }));
+    }
+
+    public QuestionResponseTopicCollection TopicResults { get; }
 
     public int? TotalAnswered => field ??= TopicResults?.Sum(topic => topic.Count);
     public int? CorrectAnswered => field ??= TopicResults?.Sum(topic => topic.Count(r => r.IsAnswerCorrect));
@@ -26,7 +34,8 @@ public partial class ResultsViewModel : ViewModelBase
 
     public GradeBoundary Grade => GradeBoundaries.GetGrade(CorrectPercentage);
 
-    public string? Message => field ??= Grade.Messages.Apply(msgs => Random.Shared.GetItem(msgs));
+    public string? Message => field ??= Random.Shared.GetItem(Grade.Messages);
+
     public event Action? QuitRequested;
     public event Action? RestartRequested;
 

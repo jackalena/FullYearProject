@@ -10,6 +10,9 @@
         <entry key="Controls/MarkdownTextBox.axaml" value="FullYearProject.csproj" />
         <entry key="Controls/StyleIndex.axaml" value="FullYearProject.csproj" />
         <entry key="StyleIndex.axaml" value="FullYearProject.csproj" />
+        <entry key="Theme/Colours.axaml" value="FullYearProject.csproj" />
+        <entry key="Theme/ResourceIndex.axaml" value="FullYearProject.csproj" />
+        <entry key="Theme/Resources/TooltipResources.axaml" value="FullYearProject.csproj" />
         <entry key="Theme/StyleIndex.axaml" value="FullYearProject.csproj" />
         <entry key="Theme/Styles/FlyoutPresenter.axaml" value="FullYearProject.csproj" />
         <entry key="Views/IntroView.axaml" value="FullYearProject.csproj" />

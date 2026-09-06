@@ -5,13 +5,10 @@
              xmlns:views="clr-namespace:FullYearProject.Views"
              xmlns:config="clr-namespace:FullYearProject.Configuration"
              xmlns:vm="clr-namespace:FullYearProject.ViewModels"
+             xmlns:markdownTextBlock="clr-namespace:FullYearProject.Controls.MarkdownTextBlock"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:ResultsViewModel"
              x:Class="FullYearProject.Views.ResultsView">
-
-    <Design.DataContext>
-        <vm:ResultsViewModel />
-    </Design.DataContext>
 
     <UserControl.Styles>
         <StyleInclude Source="Styles.axaml" />
@@ -24,7 +21,8 @@
         <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Spacing="10">
             <Panel>
                 <ProgressBar Theme="{DynamicResource ProgressRing}" Width="100" Height="100" BorderThickness="13"
-                             Value="80" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                             Value="{Binding CorrectPercentage}" HorizontalAlignment="Center"
+                             VerticalAlignment="Center" />
 
                 <TextBlock Classes="H2" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Run Text="{Binding CorrectAnswered}" />/<Run Text="{Binding TotalAnswered}" />
@@ -63,7 +61,8 @@
                 </Button>
             </StackPanel>
 
-            <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" TextAlignment="Center" />
+            <markdownTextBlock:MarkdownTextBlock Text="{Binding Message}" HorizontalAlignment="Center"
+                                                 HorizontalContentAlignment="Center" />
 
             <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center" Margin="10">
                 <Button Content="Quit" Command="{Binding QuitCommand}" />
@@ -74,7 +73,7 @@
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" />
 
         <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Name="ResultsScrollViewer">
-            <views:QuestionAnswerResultsView ItemsSource="{Binding }" />
+            <views:QuestionAnswerResultsView ItemsSource="{Binding TopicResults}" />
         </ScrollViewer>
     </Grid>
 

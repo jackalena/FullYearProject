@@ -1,4 +1,5 @@
 ﻿using FullYearProject.Models.Quiz.Expressions;
+
 using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.Models.Quiz.Question.Parameters;
@@ -10,15 +11,18 @@ public class EqualQuizQuestionParameterConstraint : QuizQuestionParameterConstra
 {
     private NumericalExpressionEvaluator? _expressionEvaluator;
 
-    public EqualQuizQuestionParameterConstraint()
-    {
-        Type = "Equal";
-    }
-
     /// <summary>
     ///     The expression to evaluate.
     /// </summary>
     public string Value { get; init; } = string.Empty;
+
+    /// <summary>
+    ///     Initialises a new instance of the <see cref="EqualQuizQuestionParameterConstraint" /> class.
+    /// </summary>
+    public EqualQuizQuestionParameterConstraint()
+    {
+        Type = "Equal";
+    }
 
     /// <inheritdoc />
     public override double Apply(double value)
@@ -32,6 +36,7 @@ public class EqualQuizQuestionParameterConstraint : QuizQuestionParameterConstra
 
         _expressionEvaluator ??= new(Value);
         _expressionEvaluator.Variables = Variables;
+
         return _expressionEvaluator.Evaluate();
     }
 }

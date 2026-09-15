@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+
 using FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
 
 namespace FullYearProject.Models.Quiz.Options;
@@ -15,16 +16,16 @@ public abstract class QuizQuestionOption
     ///     The type of the option.
     /// </summary>
     [JsonIgnore]
-    public string Type { get; set; } = "Unknown";
+    public string Type { get; init; } = "Unknown";
 
     /// <summary>
     ///     The value of the option.
     /// </summary>
-    public string Value { get; set; } = "Option";
+    public string Value { get; init; } = "Option";
 
     /// <summary>
     ///     The definition of whether the option is correct.
     /// </summary>
     [JsonConverter(typeof(IsCorrectDefinitionConverter))]
-    public OptionIsCorrectDefinition IsCorrect { get; set; } = BooleanOptionIsCorrectDefinition.Default;
+    public OptionIsCorrectDefinition IsCorrect { get; init; } = BooleanOptionIsCorrectDefinition.Default;
 }

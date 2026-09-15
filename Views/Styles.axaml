@@ -3,14 +3,6 @@
         xmlns:markdownTextBlock="clr-namespace:FullYearProject.Controls.MarkdownTextBlock">
     <Design.PreviewWith>
         <StackPanel Spacing="20">
-            <StackPanel.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceInclude Source="/Assets/Resources.axaml" />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </StackPanel.Resources>
-
             <StackPanel.Styles>
                 <Style Selector="TextBlock Button">
                     <Setter Property="FontFamily" Value="Nunito" />
@@ -43,10 +35,6 @@
 
     <Styles.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/Assets/Resources.axaml" />
-            </ResourceDictionary.MergedDictionaries>
-
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="FlatCardBackground" Color="#1b000000" />

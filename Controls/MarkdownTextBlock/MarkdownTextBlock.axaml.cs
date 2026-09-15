@@ -4,7 +4,9 @@ using Avalonia.Controls.Documents;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.VisualTree;
+
 using CSharpMath.Avalonia;
+
 using LiveMarkdown.Avalonia;
 
 namespace FullYearProject.Controls.MarkdownTextBlock;
@@ -19,32 +21,28 @@ public partial class MarkdownTextBlock : UserControl
     /// </summary>
     public static readonly StyledProperty<string?> TextProperty = TextBox.TextProperty.AddOwner<MarkdownTextBlock>();
 
+    /// <summary>
+    ///     Gets or sets the Markdown text to show.
+    /// </summary>
+    public string? Text {
+        get => GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+
     static MarkdownTextBlock()
     {
         App.EnsureMarkdownInitialised();
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="MarkdownTextBlock" /> class.
+    ///     Initialises a new instance of the <see cref="MarkdownTextBlock" /> class.
     /// </summary>
     public MarkdownTextBlock()
     {
         InitializeComponent();
     }
 
-    /// <summary>
-    ///     Gets or sets the Markdown text to show.
-    /// </summary>
-    public string? Text
-    {
-        get => GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
-    }
-
-    /// <summary>
-    ///     Called when an Avalonia property changes value.
-    /// </summary>
-    /// <param name="e">An <see cref="AvaloniaPropertyChangedEventArgs" /> object describing the property change.</param>
+    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -106,8 +104,8 @@ public partial class MarkdownTextBlock : UserControl
                 {
                     if (panelChild is MathView mathView)
                     {
-                        mathView.TextColor = ((ISolidColorBrush?)Foreground)?.Color ?? Colors.Black;
-                        mathView.FontSize = (float)FontSize / 1.2f;
+                        mathView.TextColor = ((ISolidColorBrush?) Foreground)?.Color ?? Colors.Black;
+                        mathView.FontSize = (float) FontSize / 1.2f;
                         mathView.DisplacementY = 2.8f;
                     }
                 }

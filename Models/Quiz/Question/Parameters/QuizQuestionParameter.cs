@@ -10,7 +10,7 @@ public class QuizQuestionParameter
     /// <summary>
     ///     The name of the parameter.
     /// </summary>
-    public string Name { get; set; } = "Unknown";
+    public string Name { get; init; } = "Unknown";
 
     /// <summary>
     ///     The constraints that will be applied to the parameter when calculating a value for it.

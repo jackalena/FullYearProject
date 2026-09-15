@@ -15,16 +15,11 @@ public class IsCorrectDefinitionConverter : JsonConverter<OptionIsCorrectDefinit
     /// </summary>
     /// <inheritdoc />
     public override OptionIsCorrectDefinition? Read(ref Utf8JsonReader reader, Type typeToConvert,
-        JsonSerializerOptions options)
+                                                    JsonSerializerOptions options)
     {
-        return reader.TokenType switch
-        {
-            JsonTokenType.True or JsonTokenType.False => new BooleanOptionIsCorrectDefinition
-            {
-                Value = reader.GetBoolean()
-            },
-            JsonTokenType.String => new ExpressionOptionIsCorrectDefinition
-            {
+        return reader.TokenType switch {
+            JsonTokenType.True or JsonTokenType.False => new BooleanOptionIsCorrectDefinition { Value = reader.GetBoolean() },
+            JsonTokenType.String => new ExpressionOptionIsCorrectDefinition {
                 Expression = reader.GetString() ??
                              throw new JsonException("Cannot read expression string from JSON file")
             },
@@ -32,6 +27,7 @@ public class IsCorrectDefinitionConverter : JsonConverter<OptionIsCorrectDefinit
         };
     }
 
+    /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, OptionIsCorrectDefinition value, JsonSerializerOptions options)
     {
         throw new NotSupportedException();

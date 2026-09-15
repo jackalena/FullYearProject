@@ -32,14 +32,14 @@ public static class StringBuilderExtensions
                 return -1;
             }
 
-            // Find the index of the last character in the string to search from
+            // Find the index of the last character in the string to search from.
             var searchEnd = Math.Min(sb.Length, end) - str.Length;
             for (var i = start; i <= searchEnd; i++)
             {
-                // Check if the substring matches at the current index
+                // Check if the substring matches at the current index.
                 var noMatch = str.Where((t, j) => sb[i + j] != t).Any();
 
-                // If the substring matches, return the index
+                // If the substring matches, return the index.
                 if (!noMatch)
                 {
                     return i;

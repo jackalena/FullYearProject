@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:FullYearProject.ViewModels"
+             xmlns:autoSelectComboBox="clr-namespace:FullYearProject.Controls.AutoSelectComboBox"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:IntroViewModel"
              x:Class="FullYearProject.Views.IntroView">
@@ -30,9 +31,14 @@
                 You will need to answer 10 questions, and you will get a result at the end based on your answers.
                 You can skip a question if you are unsure of the answer.<LineBreak />
                 <LineBreak />
-                Press start to begin.
+                Choose a quiz and press start to begin:
             </TextBlock>
         </StackPanel>
+
+        <autoSelectComboBox:AutoSelectComboBox ItemsSource="{Binding Quizzes}"
+                                               SelectedItem="{Binding SelectedQuiz, Mode=TwoWay}"
+                                               DisplayMemberBinding="{Binding Title}" PlaceholderText="Select quiz..." />
+
         <Button Content="Start" HorizontalAlignment="Left" Command="{Binding StartCommand}" />
     </StackPanel>
 

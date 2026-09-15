@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+
 using FullYearProject.Logging;
 
 namespace FullYearProject.Models.Quiz.Question.Parameters;
@@ -17,11 +18,12 @@ public abstract class QuizQuestionParameterConstraint : Loggable
     ///     The type of the constraint.
     /// </summary>
     [JsonIgnore]
-    public string Type { get; set; } = "Unknown";
+    public string Type { get; init; } = "Unknown";
 
     /// <summary>
     ///     The variables that can be used in the constraint.
     /// </summary>
+    [JsonIgnore]
     public Dictionary<string, double> Variables { get; set; } = new();
 
     /// <summary>

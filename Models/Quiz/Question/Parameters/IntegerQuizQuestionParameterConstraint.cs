@@ -7,6 +7,9 @@ namespace FullYearProject.Models.Quiz.Question.Parameters;
 /// </summary>
 public class IntegerQuizQuestionParameterConstraint : QuizQuestionParameterConstraint
 {
+    /// <summary>
+    ///     Initialises a new instance of the <see cref="IntegerQuizQuestionParameterConstraint" /> class.
+    /// </summary>
     public IntegerQuizQuestionParameterConstraint()
     {
         Type = "Integer";

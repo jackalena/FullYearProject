@@ -7,11 +7,9 @@ namespace FullYearProject.Models.Responses;
 /// </summary>
 public class QuestionResponseTopicCollection : List<QuestionResponseTopic>
 {
-    public QuestionResponseTopicCollection()
-    {
-    }
+    /// <inheritdoc />
+    public QuestionResponseTopicCollection() { }
 
-    public QuestionResponseTopicCollection(IEnumerable<QuestionResponseTopic> collection) : base(collection)
-    {
-    }
+    /// <inheritdoc />
+    public QuestionResponseTopicCollection(IEnumerable<QuestionResponseTopic> collection) : base(collection) { }
 }

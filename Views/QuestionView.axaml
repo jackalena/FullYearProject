@@ -2,17 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:FullYearProject.Models"
              xmlns:vm="clr-namespace:FullYearProject.ViewModels"
              xmlns:views="clr-namespace:FullYearProject.Views"
              xmlns:markdownTextBlock="clr-namespace:FullYearProject.Controls.MarkdownTextBlock"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:QuestionViewModel"
              x:Class="FullYearProject.Views.QuestionView">
-
-    <Design.DataContext>
-        <vm:QuestionViewModel Quiz="{x:Static models:DesignQuiz.Quiz}" Question="{x:Static models:DesignQuiz.Question}" />
-    </Design.DataContext>
 
     <UserControl.Styles>
         <StyleInclude Source="Styles.axaml" />
@@ -62,7 +57,6 @@
             </Button>
         </Grid>
 
-        <!-- TODO: Fix incorrect option shown when answered correctly -->
         <Button Name="OverlayBorder" Classes.Hidden="{Binding !ShowCompleted}" Padding="20"
                 Classes.Incorrect="{Binding IsIncorrect}" HorizontalAlignment="Stretch"
                 Classes.Skipped="{Binding IsSkipped}" VerticalAlignment="Stretch" Margin="20" CornerRadius="10"
@@ -151,7 +145,7 @@
                                                          HorizontalContentAlignment="Center" Margin="0 0 0 20" />
 
                     <StackPanel Orientation="Horizontal" Spacing="10"
-                                IsVisible="{Binding SelectedOption, Converter={x:Static ObjectConverters.IsNotNull}}">
+                                IsVisible="{Binding IsIncorrect}">
                         <LucideIcon Kind="X" />
                         <markdownTextBlock:MarkdownTextBlock
                             Text="{Binding SelectedOption.Value, FallbackValue='', TargetNullValue=''}" />

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using FullYearProject.Models.Quiz;
 
 namespace FullYearProject.Models.Responses;
@@ -8,16 +9,14 @@ namespace FullYearProject.Models.Responses;
 /// </summary>
 public class QuestionResponseTopic : QuestionResponseCollection
 {
-    public QuestionResponseTopic()
-    {
-    }
-
-    public QuestionResponseTopic(IEnumerable<QuestionResponse> collection) : base(collection)
-    {
-    }
-
     /// <summary>
     ///     The topic of the responses.
     /// </summary>
     public QuizTopic? Topic { get; set; }
+
+    /// <inheritdoc />
+    public QuestionResponseTopic() { }
+
+    /// <inheritdoc />
+    public QuestionResponseTopic(IEnumerable<QuestionResponse> collection) : base(collection) { }
 }

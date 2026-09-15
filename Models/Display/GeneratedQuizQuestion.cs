@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+
 using FullYearProject.Helpers;
 using FullYearProject.Models.Quiz.Expressions;
 using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
 using FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
-using FullYearProject.Models.Responses;
 
 namespace FullYearProject.Models.Display;
 
@@ -17,6 +17,11 @@ namespace FullYearProject.Models.Display;
 public class GeneratedQuizQuestion : QuizQuestion
 {
     /// <summary>
+    ///     The original question this question has been generated from.
+    /// </summary>
+    public QuizQuestion SourceQuestion { get; }
+
+    /// <summary>
     ///     Creates a new instance of the GeneratedQuizQuestion class from question data.
     /// </summary>
     /// <param name="sourceQuestion">The question the generated question is based on.</param>
@@ -24,7 +29,7 @@ public class GeneratedQuizQuestion : QuizQuestion
     /// <param name="text">The question text to show.</param>
     /// <param name="explanation">The question explanation.</param>
     public GeneratedQuizQuestion(QuizQuestion sourceQuestion, QuizQuestionOptionCollection options, string text,
-        string? explanation)
+                                 string? explanation)
     {
         SourceQuestion = sourceQuestion;
         Options = options;
@@ -40,14 +45,7 @@ public class GeneratedQuizQuestion : QuizQuestion
     /// </summary>
     /// <param name="sourceQuestion">The question to use data from.</param>
     public GeneratedQuizQuestion(QuizQuestion sourceQuestion) : this(sourceQuestion, sourceQuestion.Options,
-        sourceQuestion.Text, sourceQuestion.Explanation)
-    {
-    }
-
-    /// <summary>
-    ///     The original question this question has been generated from.
-    /// </summary>
-    public QuizQuestion SourceQuestion { get; }
+                                                                     sourceQuestion.Text, sourceQuestion.Explanation) { }
 
     /// <summary>
     ///     Generates a quiz question from an existing question definition.
@@ -60,11 +58,6 @@ public class GeneratedQuizQuestion : QuizQuestion
         // the original question.
         if (sourceQuestion.Parameters == null)
         {
-            if (sourceQuestion.ReuseCount > 0)
-            {
-                return new ReusableGeneratedQuizQuestion(sourceQuestion);
-            }
-
             return new(sourceQuestion);
         }
 
@@ -87,7 +80,7 @@ public class GeneratedQuizQuestion : QuizQuestion
         var formatter = new StringVariableFormatter(parameters);
 
         var questionText = formatter.Format(sourceQuestion.Text);
-        var questionExplanation = sourceQuestion.Explanation?.Apply(formatter.Format);
+        var questionExplanation = sourceQuestion.Explanation == null ? null : formatter.Format(sourceQuestion.Explanation);
 
         var questionOptions = new QuizQuestionOptionCollection(sourceQuestion.Options.Count);
 
@@ -135,8 +128,7 @@ public class GeneratedQuizQuestion : QuizQuestion
             }
 
             // Evaluate whether the option is correct.
-            var isCorrectDef = new BooleanOptionIsCorrectDefinition
-                { Value = option.IsCorrect.EvaluateIsCorrect(parameters) };
+            var isCorrectDef = new BooleanOptionIsCorrectDefinition { Value = option.IsCorrect.EvaluateIsCorrect(parameters) };
 
             // Add the generated option to the list of the question's options.
             questionOptions.Add(new TextQuizQuestionOption { Value = optionText, IsCorrect = isCorrectDef });
@@ -145,32 +137,6 @@ public class GeneratedQuizQuestion : QuizQuestion
         // Randomise the order of the question's options.
         questionOptions.Shuffle();
 
-        if (sourceQuestion.ReuseCount > 0)
-        {
-            return new ReusableGeneratedQuizQuestion(sourceQuestion, questionOptions, questionText,
-                questionExplanation);
-        }
-
         return new(sourceQuestion, questionOptions, questionText, questionExplanation);
     }
-}
-
-/// <inheritdoc />
-/// Supports showing the question multiple times.
-public class ReusableGeneratedQuizQuestion : GeneratedQuizQuestion, IReusablePrioritisedListItem
-{
-    /// <inheritdoc />
-    public ReusableGeneratedQuizQuestion(QuizQuestion sourceQuestion, QuizQuestionOptionCollection options, string text,
-        string? explanation) :
-        base(sourceQuestion, options, text, explanation)
-    {
-    }
-
-    /// <inheritdoc />
-    public ReusableGeneratedQuizQuestion(QuizQuestion sourceQuestion) : base(sourceQuestion)
-    {
-    }
-
-    /// <inheritdoc />
-    public int CurrentReuseCount { get; set; }
 }

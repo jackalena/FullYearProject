@@ -8,15 +8,18 @@ namespace FullYearProject.Models.Quiz.Question.Parameters;
 /// </summary>
 public class RangeQuizQuestionParameterConstraint : QuizQuestionParameterConstraint
 {
-    public RangeQuizQuestionParameterConstraint()
-    {
-        Type = "Range";
-    }
-
     /// <summary>
     ///     The range of values to choose from. Must be a list of two numbers.
     /// </summary>
     public List<double> Value { get; set; } = [0, 1];
+
+    /// <summary>
+    ///     Initialises a new instance of the <see cref="RangeQuizQuestionParameterConstraint" /> class.
+    /// </summary>
+    public RangeQuizQuestionParameterConstraint()
+    {
+        Type = "Range";
+    }
 
     /// <inheritdoc />
     public override double Apply(double value)

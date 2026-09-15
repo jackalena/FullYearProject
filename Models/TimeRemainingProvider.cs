@@ -17,6 +17,32 @@ public class TimeRemainingProvider
     private volatile bool _timerThreadRunning;
 
     /// <summary>
+    ///     Whether the timer is currently running.
+    /// </summary>
+    public bool IsRunning => _timerThreadRunning;
+
+    /// <summary>
+    ///     The time at which the timer should start counting down.
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
+    public TimeSpan StartTime {
+        get;
+        set {
+            if (_timerThreadRunning)
+            {
+                throw new InvalidOperationException("Cannot change StartTime while the timer is running.");
+            }
+
+            field = value;
+        }
+    }
+
+    /// <summary>
+    ///     The time remaining until the timer reaches zero.
+    /// </summary>
+    public TimeSpan TimeRemaining { get; private set; }
+
+    /// <summary>
     ///     Creates a new instance of the <see cref="TimeRemainingProvider" /> class, using <see cref="TimeSpan.Zero" />
     ///     as the start time.
     /// </summary>
@@ -33,34 +59,6 @@ public class TimeRemainingProvider
     {
         StartTime = startTime;
     }
-
-    /// <summary>
-    ///     Whether the timer is currently running.
-    /// </summary>
-    public bool IsRunning => _timerThreadRunning;
-
-    /// <summary>
-    ///     The time at which the timer should start counting down.
-    /// </summary>
-    /// <exception cref="InvalidOperationException"></exception>
-    public TimeSpan StartTime
-    {
-        get;
-        set
-        {
-            if (_timerThreadRunning)
-            {
-                throw new InvalidOperationException("Cannot change StartTime while the timer is running.");
-            }
-
-            field = value;
-        }
-    }
-
-    /// <summary>
-    ///     The time remaining until the timer reaches zero.
-    /// </summary>
-    public TimeSpan TimeRemaining { get; private set; }
 
     /// <summary>
     ///     Event raised when the time remaining changes.
@@ -122,7 +120,7 @@ public class TimeRemainingProvider
                 // If the time remaining is less than the start time, round it down to the nearest second and invoke the
                 // TimeRemainingChanged event.
                 var roundedTime =
-                    new TimeSpan((long)Math.Round((double)(StartTime - elapsed).Ticks / TimeSpan.TicksPerSecond) *
+                    new TimeSpan((long) Math.Round((double) (StartTime - elapsed).Ticks / TimeSpan.TicksPerSecond) *
                                  TimeSpan.TicksPerSecond);
 
                 TimeRemainingChanged?.Invoke(this, new(roundedTime));
@@ -163,5 +161,8 @@ public delegate void TimeRemainingChangedEventHandler(object sender, TimeRemaini
 /// <param name="timeRemaining"></param>
 public class TimeRemainingChangedEventArgs(TimeSpan timeRemaining) : EventArgs
 {
+    /// <summary>
+    ///     The time remaining until the timer reaches zero.
+    /// </summary>
     public TimeSpan TimeRemaining { get; } = timeRemaining;
 }

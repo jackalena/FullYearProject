@@ -1,30 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using CommunityToolkit.Mvvm.ComponentModel;
+
 using FullYearProject.Models;
 using FullYearProject.Models.Display;
 using FullYearProject.Models.Quiz;
 using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
 using FullYearProject.Models.Responses;
+
 using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.ViewModels;
 
+/// <summary>
+///     The view model for the application's main window.
+/// </summary>
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public enum QuestionPriority
-    {
-        Unanswered,
-        Skipped,
-        Incorrect,
-        Correct
-    }
-
-    //TODO: Reusable questions not being reused
-    // tooltip colour
-    // answer result formatting
+    private const string QuizDirectory = "Questions";
 
     private readonly PrioritisedList<QuestionPriority, QuizQuestion> _questions =
         PrioritisedList<QuestionPriority, QuizQuestion>.FromEnum<QuestionPriority>();
@@ -37,6 +35,39 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private Quiz? _quiz;
 
+    /// <summary>
+    ///     The time remaining until the quiz ends.
+    /// </summary>
+    [ObservableProperty]
+    public partial TimeSpan TimeRemaining { get; set; }
+
+    /// <summary>
+    ///     The current view model to display.
+    /// </summary>
+    [ObservableProperty]
+    public partial ViewModelBase CurrentViewModel { get; set; }
+
+    /// <summary>
+    ///     Whether the timer should be shown.
+    /// </summary>
+    [ObservableProperty]
+    public partial bool ShowTimer { get; set; }
+
+    /// <summary>
+    ///     The title of the quiz.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(WindowTitle))]
+    public partial string QuizTitle { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     The title to show in the window.
+    /// </summary>
+    public string WindowTitle => $"Quiz - {QuizTitle}";
+
+    /// <summary>
+    ///     Creates a new instance of the <see cref="MainWindowViewModel" /> class.
+    /// </summary>
     public MainWindowViewModel()
     {
         CurrentViewModel = null!;
@@ -44,22 +75,36 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _timer.TimeRemainingChanged += (_, e) => TimeRemaining = e.TimeRemaining;
         _timer.TimeRemainingElapsed += OnTimerElapsed;
-
-        _ = LoadGame();
     }
 
-    [ObservableProperty] public partial TimeSpan TimeRemaining { get; set; }
+    // Loads the QuizSettings data from each quiz in the questions directory.
+    private async Task<QuizSettings[]> LoadQuizNames()
+    {
+        List<QuizSettings> settings = new();
 
-    [ObservableProperty] public partial ViewModelBase CurrentViewModel { get; set; }
+        // Loop through each json file in the questions directory and load the quiz settings.
+        foreach (var file in Directory.EnumerateFiles(QuizDirectory, "*.json"))
+        {
+            try
+            {
+                settings.Add(await Quiz.LoadSettingsAsync(file));
+            }
+            catch (Exception e)
+            {
+                Logger.LogError("Could not load quiz: {Exception}", e.Message);
+            }
+        }
 
-    [ObservableProperty] public partial bool ShowTimer { get; set; }
+        return settings.ToArray();
+    }
 
-
-    private async Task LoadGame()
+    // Loads the quiz data from a file.
+    private async Task LoadGame(string filename)
     {
         try
         {
-            _quiz = await Quiz.LoadFile("SampleQuestions/set-1.json");
+            _quiz = await Quiz.LoadFileAsync(filename);
+            QuizTitle = _quiz.Settings.Title;
         }
         catch (Exception e)
         {
@@ -68,37 +113,63 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        (CurrentViewModel as IntroViewModel)?.Quiz = _quiz;
-
         _questions.Clear();
         _questions.AddRange(_quiz.Questions);
     }
 
+    // Shows the intro screen / view model.
     private void ShowIntro()
     {
         var introVm = new IntroViewModel();
-        introVm.StartQuiz += StartGame;
+        introVm.StartQuiz += settings =>
+        {
+            if (settings.FileName != null)
+            {
+                InitQuiz(settings.FileName).ConfigureAwait(false);
+            }
+        };
 
         CurrentViewModel = introVm;
+
+        LoadQuizNames()
+           .ContinueWith(t => introVm.Quizzes = t.Result.ToList())
+           .ConfigureAwait(false);
     }
 
+    // Loads the quiz data from a file and starts the quiz.
+    private async Task InitQuiz(string filename)
+    {
+        await LoadGame(filename).ConfigureAwait(false);
+        StartGame();
+    }
+
+    // Starts the quiz.
     private void StartGame()
     {
         if (_quiz == null)
         {
+            Logger.LogError("Attempted to start game without a quiz.");
+
             return;
         }
 
         ShowTimer = true;
 
-        _responses.Clear();
+        // (Re)start the timer.
+        if (_timer.IsRunning)
+        {
+            _timer.Stop();
+        }
+
         _hasTimerElapsed = false;
         _timer.StartTime = _quiz.Settings.TimeLimit;
         _timer.Start();
 
+        _responses.Clear();
         ShowNextQuestion();
     }
 
+    // Generates and shows the next quiz question.
     private void ShowNextQuestion()
     {
         if (_hasTimerElapsed)
@@ -106,14 +177,13 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        var question = _questions.GetNext();
+        var question = GeneratedQuizQuestion.GenerateQuestion(_questions.GetNext());
 
-        var generatedQuestion = GeneratedQuizQuestion.GenerateQuestion(question);
-
-
-        var questionVm = new QuestionViewModel(generatedQuestion, _quiz!);
+        // Create a view model for the question.
+        var questionVm = new QuestionViewModel(question, _quiz!);
         questionVm.QuestionAnswered += option => OnQuestionAnswered(question, option);
         questionVm.QuestionCompleted += ShowNextQuestion;
+
         CurrentViewModel = questionVm;
     }
 
@@ -121,8 +191,10 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _hasTimerElapsed = true;
 
-        var vm = new ResultsViewModel(_responses, _quiz!);
+        ShowTimer = false;
 
+        // Show the results screen view model.
+        var vm = new ResultsViewModel(_responses, _quiz!);
         vm.QuitRequested += () => Environment.Exit(0);
         vm.RestartRequested += RestartGame;
 
@@ -131,11 +203,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void RestartGame()
     {
-        StartGame();
+        ShowIntro();
     }
 
-    private void OnQuestionAnswered(QuizQuestion question, QuizQuestionOption? option)
+    private void OnQuestionAnswered(GeneratedQuizQuestion question, QuizQuestionOption? option)
     {
+        // Create a QuestionResponse for the question and add it to the list of responses.
         var optionResponses = question.Options.Select(o => new QuestionOptionResponse(o, o == option));
         var response = new QuestionResponse(question, optionResponses);
 

@@ -8,15 +8,15 @@ public class QuizTopic
     /// <summary>
     ///     The id of the topic.
     /// </summary>
-    public int Id { get; set; } = -1;
+    public int Id { get; init; } = -1;
 
     /// <summary>
     ///     The name of the topic.
     /// </summary>
-    public string Name { get; set; } = "Topic";
+    public string Name { get; init; } = "Topic";
 
     /// <summary>
     ///     A description of the topic.
     /// </summary>
-    public string? Description { get; set; }
+    public string? Description { get; init; }
 }

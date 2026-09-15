@@ -15,7 +15,7 @@ public class BooleanOptionIsCorrectDefinition : OptionIsCorrectDefinition
     /// <summary>
     ///     Whether the option is correct or not.
     /// </summary>
-    public bool Value { get; set; }
+    public bool Value { get; init; }
 
     /// <summary>
     ///     <inheritdoc />

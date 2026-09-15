@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace FullYearProject.Models.Quiz;
 
@@ -15,10 +16,16 @@ public class QuizSettings
     /// <summary>
     ///     A description of the quiz.
     /// </summary>
-    public string? Description { get; set; }
+    public string? Description { get; init; }
 
     /// <summary>
     ///     The time limit for the quiz.
     /// </summary>
-    public TimeSpan TimeLimit { get; set; } = TimeSpan.FromMinutes(5);
+    public TimeSpan TimeLimit { get; init; } = TimeSpan.FromMinutes(5);
+
+    /// <summary>
+    ///     The path to the file containing the quiz data.
+    /// </summary>
+    [JsonIgnore]
+    public string? FileName { get; set; }
 }

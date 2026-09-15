@@ -17,25 +17,18 @@
             <DataTemplate x:DataType="questions:QuestionResponseTopic">
                 <StackPanel>
                     <TextBlock Margin="20 0 0 0" Classes="H2" FontWeight="Normal">
-                        <ToolTip.Tip>
-                            <markdownTextBlock:MarkdownTextBlock Text="{Binding Topic.Description}" />
-                        </ToolTip.Tip>
-
                         <Run Text="{Binding Topic.Name}" FontWeight="SemiBold" />
                         -
                         <Run Text="{Binding CorrectCount}" />/<Run Text="{Binding Count}" />
                     </TextBlock>
+                    <markdownTextBlock:MarkdownTextBlock Text="{Binding Topic.Description}"
+                                                         IsVisible="{Binding Topic.Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}, FallbackValue=False}" />
                     <ItemsControl HorizontalAlignment="Stretch" ItemsSource="{Binding}" Margin="0 0 0 20">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="questions:QuestionResponse">
                                 <Expander HorizontalAlignment="Stretch">
                                     <Expander.Header>
                                         <DockPanel Margin="3 1">
-                                            <ToolTip.Tip>
-                                                <markdownTextBlock:MarkdownTextBlock
-                                                    Text="{Binding Question.Explanation}" />
-                                            </ToolTip.Tip>
-
                                             <DockPanel.Styles>
                                                 <Style Selector="LucideIcon">
                                                     <Setter Property="Kind" Value="X" />
@@ -64,65 +57,70 @@
                                         </Style>
                                     </Expander.Styles>
 
-                                    <ItemsControl ItemsSource="{Binding Answers}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate DataType="questions:QuestionOptionResponse">
-                                                <Border Classes.Selected="{Binding IsSelected}"
-                                                        Margin="10 0 0 0"
-                                                        Classes.Correct="{Binding IsCorrectBool}"
-                                                        CornerRadius="6"
-                                                        Padding="10 0" x:Name="AnswerOptionBorder">
+                                    <StackPanel Margin="10 0 0 0">
+                                        <markdownTextBlock:MarkdownTextBlock Text="{Binding Question.Explanation}"
+                                                                             Margin="0 0 0 13" FontStyle="Italic"
+                                                                             IsVisible="{Binding Question.Explanation, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 
-                                                    <Border.Styles>
-                                                        <Style Selector="Border LucideIcon">
-                                                            <Setter Property="Kind" Value="X" />
-                                                            <Setter Property="Foreground"
-                                                                    Value="{DynamicResource SemiColorText2}" />
-                                                        </Style>
-                                                        <Style Selector="Border.Selected">
-                                                            <Setter Property="BorderThickness" Value="2" />
-                                                            <Setter Property="BorderBrush"
-                                                                    Value="{DynamicResource SemiColorDanger}" />
-                                                            <Setter Property="Background">
-                                                                <SolidColorBrush
-                                                                    Color="{Binding #AnswerOptionBorder.((SolidColorBrush)BorderBrush).Color, FallbackValue=Transparent}"
-                                                                    Opacity="0.25" />
-                                                            </Setter>
+                                        <ItemsControl ItemsSource="{Binding Answers}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate DataType="questions:QuestionOptionResponse">
+                                                    <Border Classes.Selected="{Binding IsSelected}"
+                                                            Classes.Correct="{Binding IsCorrectBool}"
+                                                            CornerRadius="6"
+                                                            Padding="10 0" x:Name="AnswerOptionBorder">
 
-                                                            <Style Selector="^ LucideIcon">
+                                                        <Border.Styles>
+                                                            <Style Selector="Border LucideIcon">
+                                                                <Setter Property="Kind" Value="X" />
                                                                 <Setter Property="Foreground"
+                                                                        Value="{DynamicResource SemiColorText2}" />
+                                                            </Style>
+                                                            <Style Selector="Border.Selected">
+                                                                <Setter Property="BorderThickness" Value="2" />
+                                                                <Setter Property="BorderBrush"
                                                                         Value="{DynamicResource SemiColorDanger}" />
-                                                            </Style>
-                                                        </Style>
-                                                        <Style Selector="Border.Correct">
-                                                            <Setter Property="BorderThickness" Value="2" />
-                                                            <Setter Property="BorderBrush"
-                                                                    Value="{DynamicResource SemiColorSuccess}" />
+                                                                <Setter Property="Background">
+                                                                    <SolidColorBrush
+                                                                        Color="{Binding #AnswerOptionBorder.((SolidColorBrush)BorderBrush).Color, FallbackValue=Transparent}"
+                                                                        Opacity="0.25" />
+                                                                </Setter>
 
-                                                            <Style Selector="^ LucideIcon">
-                                                                <Setter Property="Kind" Value="Check" />
-                                                                <Setter Property="Foreground"
+                                                                <Style Selector="^ LucideIcon">
+                                                                    <Setter Property="Foreground"
+                                                                            Value="{DynamicResource SemiColorDanger}" />
+                                                                </Style>
+                                                            </Style>
+                                                            <Style Selector="Border.Correct">
+                                                                <Setter Property="BorderThickness" Value="2" />
+                                                                <Setter Property="BorderBrush"
                                                                         Value="{DynamicResource SemiColorSuccess}" />
+
+                                                                <Style Selector="^ LucideIcon">
+                                                                    <Setter Property="Kind" Value="Check" />
+                                                                    <Setter Property="Foreground"
+                                                                            Value="{DynamicResource SemiColorSuccess}" />
+                                                                </Style>
                                                             </Style>
-                                                        </Style>
-                                                    </Border.Styles>
+                                                        </Border.Styles>
 
-                                                    <DockPanel>
-                                                        <LucideIcon DockPanel.Dock="Right" Size="18"
-                                                                    VerticalAlignment="Center" Margin="5 0 0 0" />
-                                                        <markdownTextBlock:MarkdownTextBlock Text="{Binding Value}"
-                                                                Margin="0 5 5 5" />
-                                                    </DockPanel>
-                                                </Border>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
+                                                        <DockPanel>
+                                                            <LucideIcon DockPanel.Dock="Right" Size="18"
+                                                                        VerticalAlignment="Center" Margin="5 0 0 0" />
+                                                            <markdownTextBlock:MarkdownTextBlock Text="{Binding Value}"
+                                                                    Margin="0 5 5 5" />
+                                                        </DockPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
 
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Spacing="10" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Spacing="10" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </StackPanel>
                                 </Expander>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

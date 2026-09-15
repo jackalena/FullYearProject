@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.Models.Quiz;
@@ -31,6 +32,11 @@ public class QuizTopicCollection : List<QuizTopic>
         return dict;
     }
 
+    /// <summary>
+    ///     Gets a topic by its ID.
+    /// </summary>
+    /// <param name="topicId">The ID of the topic.</param>
+    /// <returns>The QuizTopic object with the provided ID.</returns>
     public QuizTopic FromId(int topicId)
     {
         return TopicsById[topicId];

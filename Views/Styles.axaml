@@ -170,19 +170,19 @@
         <Setter Property="ClipToBounds" Value="False" />
 
         <Style Selector="^ /template/ ContentPresenter">
-            <Setter Property="Background" Value="#C69422" />
-            <Setter Property="BorderBrush" Value="#D2A022" />
+            <Setter Property="Background" Value="#BA8823" />
+            <Setter Property="BorderBrush" Value="#C79225" />
             <Setter Property="Foreground" Value="White" />
         </Style>
 
         <Style Selector="^:pointerover /template/ ContentPresenter">
             <Setter Property="Effect">
-                <DropShadowEffect BlurRadius="8" OffsetX="0" OffsetY="0" Color="#D2A022" />
+                <DropShadowEffect BlurRadius="8" OffsetX="0" OffsetY="0" Color="#C79225" />
             </Setter>
         </Style>
         <Style Selector="^:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="#BD8A22" />
-            <Setter Property="BorderBrush" Value="#CB9823" />
+            <Setter Property="Background" Value="#B37E23" />
+            <Setter Property="BorderBrush" Value="#BF8C23" />
         </Style>
     </Style>
 

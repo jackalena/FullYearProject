@@ -16,15 +16,15 @@
         <StyleInclude Source="Styles.axaml" />
     </UserControl.Styles>
 
-    <StackPanel Margin="20" Spacing="10">
+    <StackPanel Margin="20" Spacing="10" HorizontalAlignment="Center">
         <StackPanel.Styles>
             <Style Selector="TextBlock">
                 <Setter Property="TextWrapping" Value="Wrap" />
             </Style>
         </StackPanel.Styles>
 
-        <StackPanel HorizontalAlignment="Left" Spacing="10" MaxWidth="400">
-            <TextBlock Text="How to play" Classes="H1" HorizontalAlignment="Left" />
+        <StackPanel HorizontalAlignment="Center" Spacing="10" MaxWidth="450">
+            <TextBlock Text="How to play" Classes="H1" HorizontalAlignment="Center" />
             <TextBlock TextAlignment="Left" LineSpacing="3">
                 This is a quiz game where you answer questions and try to get the highest score possible.
                 <LineBreak />

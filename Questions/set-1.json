@@ -1,0 +1,1029 @@
+{
+  "Settings": {
+    "Title": "Living Labs",
+    "TimeLimit": "00:02:30"
+  },
+  "Topics": [
+    {
+      "Id": 0,
+      "Name": "MRS C GREN"
+    },
+    {
+      "Id": 1,
+      "Name": "Cellular Respiration"
+    },
+    {
+      "Id": 2,
+      "Name": "Cells"
+    },
+    {
+      "Id": 3,
+      "Name": "Photosynthesis"
+    },
+    {
+      "Id": 4,
+      "Name": "Transpiration"
+    },
+    {
+      "Id": 5,
+      "Name": "Reforestation"
+    },
+    {
+      "Id": 6,
+      "Name": "Plant Structures"
+    },
+    {
+      "Id": 7,
+      "Name": "Percentage Change"
+    },
+    {
+      "Id": 8,
+      "Name": "Elodea Experiment"
+    }
+  ],
+  "Questions": [
+    {
+      "Topic": 0,
+      "Text": "True or false: All living organisms carry out the eight life processes known as MRS C GREN.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "MRS C GREN stands for Movement, Respiration, Sensitivity, Cells, Growth, Reproduction, Excretion, Nutrition - every living organism does all eight."
+    },
+    {
+      "Topic": 0,
+      "Text": "True or false: Fire meets all eight criteria of MRS C GREN and should be classified as a living organism.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Fire only meets about 4 of the 8 criteria (movement, sensitivity, and some growth/reproduction). It has no cells, doesn't truly respire, excrete, or get nutrition."
+    },
+    {
+      "Topic": 0,
+      "Text": "Which letter in MRS C GREN stands for the removal of waste products made inside the body's cells?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "R - Respiration"
+        },
+        {
+          "Type": "Text",
+          "Value": "E - Excretion",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "N - Nutrition"
+        },
+        {
+          "Type": "Text",
+          "Value": "S - Sensitivity"
+        }
+      ],
+      "Explanation": "E stands for Excretion - the removal of metabolic waste products produced inside cells, such as exhaling CO₂ or sweating."
+    },
+    {
+      "Topic": 0,
+      "Text": "True or false: Plants **do not** carry out all eight MRS C GREN life processes because they cannot move.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Plants do carry out all eight processes. They exhibit localised movement (e.g., growing toward light) even though they don't move their whole body from place to place."
+    },
+    {
+      "Topic": 0,
+      "Text": "True or false: Water scores 2 out of 8 on the MRS C GREN criteria.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "Water can show movement and sensitivity but fails the other six criteria (no cells, no respiration, no growth, no reproduction, no excretion, no nutrition)."
+    },
+    {
+      "Topic": 1,
+      "Text": "True or false: Cellular respiration only happens when an organism is physically active.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Cellular respiration takes place constantly in every cell of every living organism. If a cell stops respiring it will eventually die."
+    },
+    {
+      "Topic": 1,
+      "Text": "What is the correct word equation for cellular respiration?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "$\\text{Glucose} + \\text{oxygen} \\rightarrow \\text{carbon dioxide} + \\text{water} + \\text{energy}$",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "$\\text{Carbon dioxide} + \\text{water} \\rightarrow \\text{glucose} + \\text{oxygen}$"
+        },
+        {
+          "Type": "Text",
+          "Value": "$\\text{Glucose} + \\text{carbon dioxide} \\rightarrow \\text{oxygen} + \\text{water} + \\text{energy}$"
+        },
+        {
+          "Type": "Text",
+          "Value": "$\\text{Oxygen} + \\text{water} \\rightarrow \\text{glucose} + \\text{carbon dioxide}$"
+        }
+      ],
+      "Explanation": "$\\text{Glucose} + \\text{oxygen} \\rightarrow \\text{carbon dioxide} + \\text{water} + \\text{energy}$. This is the opposite of photosynthesis."
+    },
+    {
+      "Topic": 1,
+      "Text": "True or false: Bacteria carry out cellular respiration only in their mitochondria.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Bacteria don't have mitochondria. Their cellular respiration takes place only in the cytoplasm."
+    },
+    {
+      "Topic": 1,
+      "Text": "True or false: Photosynthesis (not cellular respiration) provides energy for life processes in plants.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Photosynthesis creates glucose, but it is cellular respiration that breaks down that glucose to provide energy for life processes."
+    },
+    {
+      "Topic": 1,
+      "Text": "In which part of an animal cell does cellular respiration mainly take place?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Nucleus"
+        },
+        {
+          "Type": "Text",
+          "Value": "Cell membrane"
+        },
+        {
+          "Type": "Text",
+          "Value": "Mitochondria and cytoplasm",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Chloroplast"
+        }
+      ],
+      "Explanation": "Cellular respiration in animal cells mainly takes place inside the mitochondria and in the cytoplasm."
+    },
+    {
+      "Topic": 2,
+      "Text": "True or false: Plant cells and animal cells both contain a nucleus, cell membrane, cytoplasm, and mitochondria.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "These four structures are found in both plant and animal cells. Plant cells additionally have a cell wall, large vacuole, and chloroplasts."
+    },
+    {
+      "Topic": 2,
+      "Text": "True or false: Chloroplasts are found in both plant cells and animal cells.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Chloroplasts are only found in plant cells (and some other photosynthetic organisms). Animal cells do not photosynthesise and therefore do not have chloroplasts."
+    },
+    {
+      "Topic": 2,
+      "Text": "What is the function of the cell membrane?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "To carry out photosynthesis"
+        },
+        {
+          "Type": "Text",
+          "Value": "To control what goes in and out of the cell",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "To store water and nutrients"
+        },
+        {
+          "Type": "Text",
+          "Value": "To provide structure and protection"
+        }
+      ],
+      "Explanation": "The cell membrane controls what enters and leaves the cell - acting as a selective barrier."
+    },
+    {
+      "Topic": 2,
+      "Text": "True or false: Animal cells have a large permanent vacuole for storing water and nutrients.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Only plant cells have a large permanent vacuole. Animal cells may have small, temporary vacuoles."
+    },
+    {
+      "Topic": 2,
+      "Text": "Why do plant cells have chloroplasts but animal cells do not?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Animals make their own food using mitochondria"
+        },
+        {
+          "Type": "Text",
+          "Value": "Plants need chloroplasts to carry out photosynthesis to make their own food",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Animal cells are too small to fit chloroplasts"
+        },
+        {
+          "Type": "Text",
+          "Value": "Chloroplasts help animals breathe"
+        }
+      ],
+      "Explanation": "Plants are producers - they make their own food via photosynthesis, which takes place in the chloroplasts. Animals consume food rather than making it."
+    },
+    {
+      "Topic": 3,
+      "Text": "True or false: Photosynthesis is the reverse reaction of cellular respiration.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "In photosynthesis, CO₂ + water → glucose + oxygen (using light). In respiration, glucose + oxygen → CO₂ + water + energy. They are essentially opposite reactions."
+    },
+    {
+      "Topic": 3,
+      "Text": "Which green pigment in plant cells absorbs sunlight for photosynthesis?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Cytoplasm"
+        },
+        {
+          "Type": "Text",
+          "Value": "Chlorophyll",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Haemoglobin"
+        },
+        {
+          "Type": "Text",
+          "Value": "Stomata"
+        }
+      ],
+      "Explanation": "Chlorophyll is the green pigment found in chloroplasts that captures light energy to power photosynthesis."
+    },
+    {
+      "Topic": 3,
+      "Text": "True or false: Photosynthesis can occur in darkness if the plant has enough carbon dioxide and water.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Photosynthesis requires light energy (photo = light). Without light, the reaction cannot take place."
+    },
+    {
+      "Topic": 3,
+      "Text": "What are the two products of photosynthesis?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Carbon dioxide and water"
+        },
+        {
+          "Type": "Text",
+          "Value": "Glucose and oxygen",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Glucose and carbon dioxide"
+        },
+        {
+          "Type": "Text",
+          "Value": "Oxygen and water"
+        }
+      ],
+      "Explanation": "Photosynthesis produces glucose (food for the plant) and oxygen (released as a by-product through the stomata)."
+    },
+    {
+      "Topic": 3,
+      "Text": "True or false: In the Elodea experiment, the bubbles produced by the plant represent oxygen gas being released during photosynthesis.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "When Elodea photosynthesises, it releases oxygen as a by-product. This oxygen forms the bubbles we can observe and count."
+    },
+    {
+      "Topic": 4,
+      "Text": "True or false: Transpiration is the process by which plants gain water through their leaves.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Transpiration is the loss of water from leaves through the stomata via evaporation. Plants absorb water through their roots, not their leaves."
+    },
+    {
+      "Topic": 4,
+      "Text": "Which environmental condition would **increase** the rate of transpiration?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "High humidity"
+        },
+        {
+          "Type": "Text",
+          "Value": "Low temperature"
+        },
+        {
+          "Type": "Text",
+          "Value": "Strong wind",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Still air"
+        }
+      ],
+      "Explanation": "Strong wind speeds up evaporation from the leaf surface, increasing the rate of transpiration. High humidity, low temperature, and still air all slow transpiration."
+    },
+    {
+      "Topic": 4,
+      "Text": "True or false: If a plant loses too much water through transpiration, its rate of photosynthesis will slow down.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "Water is a reactant in photosynthesis. If too much water is lost through transpiration and cannot be replaced, less water is available for photosynthesis, slowing growth."
+    },
+    {
+      "Topic": 4,
+      "Text": "True or false: Larger leaves lose water more quickly than smaller leaves because they have more stomata.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "Larger leaves have more stomata, providing more openings through which water can evaporate into the air."
+    },
+    {
+      "Topic": 4,
+      "Text": "What is the name of the tiny pores in leaves through which water evaporates during transpiration?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Chloroplasts"
+        },
+        {
+          "Type": "Text",
+          "Value": "Vacuoles"
+        },
+        {
+          "Type": "Text",
+          "Value": "Stomata",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Xylem"
+        }
+      ],
+      "Explanation": "Stomata are small openings (pores) found mainly on the underside of leaves. Water diffuses out through them during transpiration."
+    },
+    {
+      "Topic": 5,
+      "Text": "True or false: Reforestation helps reduce the amount of CO₂ in the atmosphere by planting trees that absorb it.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "Trees absorb carbon dioxide from the air during photosynthesis, acting as carbon sinks and reducing greenhouse gas levels."
+    },
+    {
+      "Topic": 5,
+      "Text": "True or false: Planting non-native trees is always better for New Zealand's ecosystem because they grow faster.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "While non-native trees grow faster, they often don't support New Zealand's native wildlife. Native trees have co-evolved with local birds and insects that depend on them for food."
+    },
+    {
+      "Topic": 5,
+      "Text": "Which of the following is **not** a benefit of reforestation?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Reducing soil erosion"
+        },
+        {
+          "Type": "Text",
+          "Value": "Filtering water in rivers"
+        },
+        {
+          "Type": "Text",
+          "Value": "Increasing greenhouse gases",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "Providing wildlife habitats"
+        }
+      ],
+      "Explanation": "Reforestation reduces greenhouse gases (trees absorb CO₂). It does not increase them. The other options are all genuine benefits of reforestation."
+    },
+    {
+      "Topic": 5,
+      "Text": "True or false: Tree roots help prevent soil erosion by holding soil in place.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "Tree roots bind the soil together, preventing it from being washed away by rain - keeping the land healthy for both plants and animals."
+    },
+    {
+      "Topic": 6,
+      "Text": "Which plant structure is responsible for absorbing water and nutrients from the soil?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "Stem"
+        },
+        {
+          "Type": "Text",
+          "Value": "Leaf"
+        },
+        {
+          "Type": "Text",
+          "Value": "Flower"
+        },
+        {
+          "Type": "Text",
+          "Value": "Roots",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Roots absorb water and dissolved nutrients from the soil and also anchor the plant in place."
+    },
+    {
+      "Topic": 7,
+      "Text": "A seedling was @{a} cm tall. After two weeks it was @{b} cm tall. What is the percentage increase in height?",
+      "ReuseCount": 3,
+      "Parameters": [
+        {
+          "Name": "a",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                5,
+                20
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "c",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                5,
+                15
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "b",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "a + c"
+            }
+          ]
+        },
+        {
+          "Name": "d",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "c / a"
+            }
+          ]
+        }
+      ],
+      "Options": [
+        {
+          "Type": "Expression",
+          "Value": "c / b",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "(a + b) / a",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "d",
+          "Format": "{0:P1}",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Expression",
+          "Value": "(a - c) / a",
+          "Format": "{0:P1}"
+        }
+      ],
+      "Explanation": "Example calculation: $(@{b} - @{a}) \\div @{a} \\times 100 = @{d:F2} \\times 100 = @{d:P1}$"
+    },
+    {
+      "Topic": 7,
+      "Text": "A plant had @{c} leaves. After a dry spell, it lost @{d} leaves. What is the percentage decrease?",
+      "ReuseCount": 3,
+      "Parameters": [
+        {
+          "Name": "a",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                6,
+                15
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "b",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                4,
+                12
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "c",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "a * 10"
+            }
+          ]
+        },
+        {
+          "Name": "d",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "b * 5"
+            }
+          ]
+        },
+        {
+          "Name": "e",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "c / d"
+            }
+          ]
+        }
+      ],
+      "Options": [
+        {
+          "Type": "Expression",
+          "Value": "(c - d) / c",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "c / (c + d)",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "d / c",
+          "Format": "{0:P1}",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Expression",
+          "Value": "d / (c - d)",
+          "Format": "{0:P1}"
+        }
+      ],
+      "Explanation": "Example calculation: $@{d} \\div @{c} \\times 100 = @{e:F2} \\times 100 = @{e:P1}$"
+    },
+    {
+      "Topic": 7,
+      "Text": "True or false: Increasing by 10% then decreasing by 10% results in the original value.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "Increasing by 10% means multiplying by 1.10, then decreasing by 10% means multiplying by 0.90. Overall, the value is multiplied by $1.10 \\times 0.90 = 0.99$, which is less than the original value."
+    },
+    {
+      "Topic": 7,
+      "Text": "A sunflower was @{a} cm tall on Monday and @{b} cm tall on Friday. What is the percentage increase?.",
+      "ReuseCount": 3,
+      "Parameters": [
+        {
+          "Name": "e",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                6,
+                20
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "c",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                3,
+                12
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "a",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "5e"
+            }
+          ]
+        },
+        {
+          "Name": "b",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "a + c"
+            }
+          ]
+        },
+        {
+          "Name": "d",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "c / a"
+            }
+          ]
+        }
+      ],
+      "Options": [
+        {
+          "Type": "Expression",
+          "Value": "d",
+          "Format": "{0:P1}",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Expression",
+          "Value": "c / b",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "(a + b) / a",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "(a - c) / b",
+          "Format": "{0:P1}"
+        }
+      ],
+      "Explanation": "Example calculation: $(@{b}-@{a})\\div @{a}\\times 100=@{d:P1}$"
+    },
+    {
+      "Topic": 7,
+      "Text": "A grapevine was @{a} cm long. After a week, it was @{b} cm. What is the percentage change?",
+      "ReuseCount": 3,
+      "Parameters": [
+        {
+          "Name": "e",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                15,
+                30
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "c",
+          "Constraints": [
+            {
+              "Type": "Range",
+              "Value": [
+                6,
+                16
+              ]
+            },
+            {
+              "Type": "Integer"
+            }
+          ]
+        },
+        {
+          "Name": "a",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "5e"
+            }
+          ]
+        },
+        {
+          "Name": "b",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "a + c"
+            }
+          ]
+        },
+        {
+          "Name": "d",
+          "Constraints": [
+            {
+              "Type": "Equal",
+              "Value": "c / a"
+            }
+          ]
+        }
+      ],
+      "Options": [
+        {
+          "Type": "Expression",
+          "Value": "d",
+          "Format": "{0:P1}",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Expression",
+          "Value": "c / b",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "(a + b) / a",
+          "Format": "{0:P1}"
+        },
+        {
+          "Type": "Expression",
+          "Value": "(a - c) / b",
+          "Format": "{0:P1}"
+        }
+      ],
+      "Explanation": "Example calculation: $(@{b}−@{a})\\div @{a}\\times 100=@{d:P1}$"
+    },
+    {
+      "Topic": 8,
+      "Text": "In the Elodea experiment, what is the independent variable?",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "The number of bubbles per minute"
+        },
+        {
+          "Type": "Text",
+          "Value": "The distance of the lamp from the plant",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "The temperature of the water"
+        },
+        {
+          "Type": "Text",
+          "Value": "The size of the beaker"
+        }
+      ],
+      "Explanation": "The independent variable is what you deliberately change. In this experiment, the lamp distance is changed to see how it affects the rate of photosynthesis."
+    },
+    {
+      "Topic": 8,
+      "Text": "True or false: In the Elodea experiment, as the lamp moves further away, the number of bubbles per minute should increase.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True"
+        },
+        {
+          "Type": "Text",
+          "Value": "False",
+          "IsCorrect": true
+        }
+      ],
+      "Explanation": "As the lamp moves further away, light intensity decreases, so photosynthesis slows and fewer bubbles are produced per minute."
+    },
+    {
+      "Topic": 8,
+      "Text": "True or false: Using the same size piece of Elodea in every trial is an example of a controlled variable.",
+      "Options": [
+        {
+          "Type": "Text",
+          "Value": "True",
+          "IsCorrect": true
+        },
+        {
+          "Type": "Text",
+          "Value": "False"
+        }
+      ],
+      "Explanation": "Controlled variables are kept the same so they don't affect the results. Using the same size Elodea ensures differences in bubble count are due to light distance only."
+    }
+  ]
+}

@@ -145,13 +145,13 @@
                                                          HorizontalContentAlignment="Center" Margin="0 0 0 20" />
 
                     <StackPanel Orientation="Horizontal" Spacing="10"
-                                IsVisible="{Binding IsIncorrect}">
+                                IsVisible="{Binding IsIncorrect}" HorizontalAlignment="Center">
                         <LucideIcon Kind="X" />
                         <markdownTextBlock:MarkdownTextBlock
                             Text="{Binding SelectedOption.Value, FallbackValue='', TargetNullValue=''}" />
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
                         <LucideIcon Kind="Check" />
                         <markdownTextBlock:MarkdownTextBlock
                             Text="{Binding CorrectOption.Value, FallbackValue='No correct option'}" />

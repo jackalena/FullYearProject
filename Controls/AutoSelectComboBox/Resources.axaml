@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:autoSelectComboBox="clr-namespace:FullYearProject.Controls.AutoSelectComboBox">
+
+    <!-- Required to apply the default ComboBox theme to the AutoSelectCombobox -->
+    <StaticResource x:Key="{x:Type autoSelectComboBox:AutoSelectComboBox}" ResourceKey="{x:Type ComboBox}" />
+
+</ResourceDictionary>

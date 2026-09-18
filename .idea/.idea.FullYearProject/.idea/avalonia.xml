@@ -8,6 +8,8 @@
         <entry key="Controls/MarkdownTextBlock/MarkDownTextBlockStyles.axaml" value="FullYearProject.csproj" />
         <entry key="Controls/MarkdownTextBlock/MarkdownTextBlock.axaml" value="FullYearProject.csproj" />
         <entry key="Controls/MarkdownTextBox.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/ResourceIndex.axaml" value="FullYearProject.csproj" />
+        <entry key="Controls/SmoothScrollViewer/SmoothScrollViewControlTheme.axaml" value="FullYearProject.csproj" />
         <entry key="Controls/StyleIndex.axaml" value="FullYearProject.csproj" />
         <entry key="StyleIndex.axaml" value="FullYearProject.csproj" />
         <entry key="Theme/Colours.axaml" value="FullYearProject.csproj" />

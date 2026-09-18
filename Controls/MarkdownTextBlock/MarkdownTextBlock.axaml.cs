@@ -4,9 +4,7 @@ using Avalonia.Controls.Documents;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.VisualTree;
-
 using CSharpMath.Avalonia;
-
 using LiveMarkdown.Avalonia;
 
 namespace FullYearProject.Controls.MarkdownTextBlock;
@@ -21,14 +19,6 @@ public partial class MarkdownTextBlock : UserControl
     /// </summary>
     public static readonly StyledProperty<string?> TextProperty = TextBox.TextProperty.AddOwner<MarkdownTextBlock>();
 
-    /// <summary>
-    ///     Gets or sets the Markdown text to show.
-    /// </summary>
-    public string? Text {
-        get => GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
-    }
-
     static MarkdownTextBlock()
     {
         App.EnsureMarkdownInitialised();
@@ -40,6 +30,15 @@ public partial class MarkdownTextBlock : UserControl
     public MarkdownTextBlock()
     {
         InitializeComponent();
+    }
+
+    /// <summary>
+    ///     Gets or sets the Markdown text to show.
+    /// </summary>
+    public string? Text
+    {
+        get => GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
     }
 
     /// <inheritdoc />
@@ -100,12 +99,13 @@ public partial class MarkdownTextBlock : UserControl
         {
             if (child is InlineUIContainer { Child: Panel panel })
             {
+                // Loop through each part of the Markdown text and check if it's a MathView.
                 foreach (var panelChild in panel.Children)
                 {
                     if (panelChild is MathView mathView)
                     {
-                        mathView.TextColor = ((ISolidColorBrush?) Foreground)?.Color ?? Colors.Black;
-                        mathView.FontSize = (float) FontSize / 1.2f;
+                        mathView.TextColor = ((ISolidColorBrush?)Foreground)?.Color ?? Colors.Black;
+                        mathView.FontSize = (float)FontSize / 1.2f;
                         mathView.DisplacementY = 2.8f;
                     }
                 }

@@ -37,7 +37,8 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
         AllowedPriorities.Sort();
 
         ResetOnAllPriority = resetOnAllPriority;
-
+        
+        // Create a list for each priority to store items of that priority
         _lists = new List<TValue>[AllowedPriorities.Length];
         for (var i = 0; i < _lists.Length; i++)
         {

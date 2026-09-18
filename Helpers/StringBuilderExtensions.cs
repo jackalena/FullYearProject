@@ -56,9 +56,9 @@ public static class StringBuilderExtensions
         /// <param name="length">The number of characters to remove.</param>
         /// <param name="value">The new string to replace with.</param>
         /// <returns>The string with the range of characters replaced.</returns>
-        public StringBuilder ReplaceRange(int startIndex, int length, string value)
+        public void ReplaceRange(int startIndex, int length, string value)
         {
-            return sb.Remove(startIndex, length).Insert(startIndex, value);
+            sb.Remove(startIndex, length).Insert(startIndex, value);
         }
 
         /// <summary>

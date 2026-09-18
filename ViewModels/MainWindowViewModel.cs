@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
 using CommunityToolkit.Mvvm.ComponentModel;
-
 using FullYearProject.Models;
 using FullYearProject.Models.Display;
 using FullYearProject.Models.Quiz;
@@ -14,7 +12,6 @@ using FullYearProject.Models.Quiz.Merging;
 using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
 using FullYearProject.Models.Responses;
-
 using Microsoft.Extensions.Logging;
 
 namespace FullYearProject.ViewModels;
@@ -36,6 +33,18 @@ public partial class MainWindowViewModel : ViewModelBase
     private volatile bool _hasTimerElapsed;
 
     private Quiz? _quiz;
+
+    /// <summary>
+    ///     Creates a new instance of the <see cref="MainWindowViewModel" /> class.
+    /// </summary>
+    public MainWindowViewModel()
+    {
+        CurrentViewModel = null!;
+        ShowIntro();
+
+        _timer.TimeRemainingChanged += (_, e) => TimeRemaining = e.TimeRemaining;
+        _timer.TimeRemainingElapsed += OnTimerElapsed;
+    }
 
     /// <summary>
     ///     The time remaining until the quiz ends.
@@ -67,18 +76,6 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     public string WindowTitle => $"Quiz - {QuizTitle}";
 
-    /// <summary>
-    ///     Creates a new instance of the <see cref="MainWindowViewModel" /> class.
-    /// </summary>
-    public MainWindowViewModel()
-    {
-        CurrentViewModel = null!;
-        ShowIntro();
-
-        _timer.TimeRemainingChanged += (_, e) => TimeRemaining = e.TimeRemaining;
-        _timer.TimeRemainingElapsed += OnTimerElapsed;
-    }
-
     // Loads the QuizSettings data from each quiz in the questions directory.
     private async Task<QuizSettings[]> LoadQuizNames()
     {
@@ -89,6 +86,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             try
             {
+                // Load the quiz settings and add it to the list of quizzes.
+                // Only the settings are needed to show the name in the list of available quizzes.
                 settings.Add(await Quiz.LoadSettingsAsync(file));
             }
             catch (Exception e)
@@ -105,16 +104,26 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         try
         {
+            // If there are multiple quizzes selected, merge them into a single quiz.
             if (filenames.Length > 1)
             {
                 ConcurrentBag<Quiz> quizzes = new();
 
-                await Parallel.ForEachAsync(filenames, async (filename, _) => { quizzes.Add(await Quiz.LoadFileAsync(filename)); });
+                // Load each quiz in parallel and add them to the list of quizzes.
+                await Parallel.ForEachAsync(filenames,
+                    async (filename, _) => { quizzes.Add(await Quiz.LoadFileAsync(filename)); });
 
-                _quiz = QuizMerger.Merge(null, quizzes.ToArray());
+                // Use the average time limit for the merged quiz.
+                var mergeOptions = new QuizMergeOptions
+                {
+                    TimeLimitOption = QuizMergeOptions.MergeTimeLimitOption.Average
+                };
+
+                _quiz = QuizMerger.Merge(mergeOptions, quizzes.ToArray());
             }
             else
             {
+                // If there is only one quiz selected, load it from the first file.
                 _quiz = await Quiz.LoadFileAsync(filenames[0]);
             }
 
@@ -141,7 +150,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             try
             {
-                InitQuiz(settings.Select(s => s.FileName ?? throw new NullReferenceException()).ToArray()).ConfigureAwait(false);
+                InitQuiz(settings.Select(s => s.FileName ?? throw new NullReferenceException()).ToArray())
+                    .ConfigureAwait(false);
             }
             catch (NullReferenceException)
             {
@@ -153,8 +163,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
         // Get the information of quizzes in the quiz directory and add them to the view model.
         LoadQuizNames()
-           .ContinueWith(t => introVm.Quizzes = t.Result)
-           .ConfigureAwait(false);
+            .ContinueWith(t => introVm.Quizzes = t.Result)
+            .ConfigureAwait(false);
     }
 
     // Loads the quiz data from a file and starts the quiz.

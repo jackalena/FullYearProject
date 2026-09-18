@@ -6,7 +6,6 @@
         </Border>
     </Design.PreviewWith>
 
-    <StyleInclude Source="Controls/StyleIndex.axaml" />
     <StyleInclude Source="Theme/StyleIndex.axaml" />
 
 </Styles>

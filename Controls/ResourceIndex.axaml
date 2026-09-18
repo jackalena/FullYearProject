@@ -4,7 +4,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceInclude
             Source="avares://FullYearProject/Controls/SmoothScrollViewer/SmoothScrollViewControlTheme.axaml" />
-        <ResourceInclude Source="avares://FullYearProject/Controls/AutoSelectComboBox/Resources.axaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

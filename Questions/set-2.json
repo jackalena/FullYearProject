@@ -928,7 +928,7 @@
         {
           "Type": "Text",
           "Value": "Avocado",
-          "IsCorrect": "~isEqualOrAlmost(g, h) && g > h"
+          "IsCorrect": "~isEqualOrAlmost(g, h) && g < h"
         },
         {
           "Type": "Text",
@@ -940,7 +940,7 @@
           "Value": "Can't be determined"
         }
       ],
-      "Explanation": "Mars bar: $@{b} \\div @{a} \\times 100 = @{g}\\,\\text{g}$ per 100g. Avocado: $@{d} \\div @{c} \\times 100 = @{h}\\,\\text{g}$ per 100g."
+      "Explanation": "Mars bar: $@{b} \\div @{a} \\times 100 = @{g:F2}\\,\\text{g:F2}$ per 100g. Avocado: $@{d} \\div @{c} \\times 100 = @{h:F2}\\,\\text{g:F2}$ per 100g."
     },
     {
       "Topic": 5,

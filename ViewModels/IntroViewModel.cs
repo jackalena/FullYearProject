@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,19 +18,39 @@ public partial class IntroViewModel : ViewModelBase
     ///     The quizzes to choose from.
     /// </summary>
     [ObservableProperty]
-    public partial List<QuizSettings> Quizzes { get; set; } = [];
+    public partial QuizSettings[] Quizzes { get; set; } = [];
 
-    /// <summary>
-    ///     The currently selected quiz.
-    /// </summary>
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(StartCommand))]
-    public partial QuizSettings? SelectedQuiz { get; set; }
+    public partial string HeaderString { get; set; } = "Select quizzes...";
+
+    /// <summary>
+    ///     The currently selected quizzes.
+    /// </summary>
+    public ObservableCollection<QuizSettings> SelectedQuizzes { get; } = [];
+
+    /// <summary>
+    ///     Initialises a new instance of the <see cref="IntroViewModel" /> class.
+    /// </summary>
+    public IntroViewModel()
+    {
+        SelectedQuizzes.CollectionChanged += (_, _) =>
+        {
+            if (SelectedQuizzes.Count == 0)
+            {
+                HeaderString = "Select quizzes...";
+
+                return;
+            }
+
+            HeaderString = string.Join(", ", SelectedQuizzes.Select(q => q.Title));
+        };
+    }
 
     /// <summary>
     ///     Event raised when the user presses the button to start the quiz.
     /// </summary>
-    public event Action<QuizSettings>? StartQuiz;
+    public event Action<QuizSettings[]>? StartQuiz;
 
     /// <summary>
     ///     Starts the quiz.
@@ -37,14 +58,14 @@ public partial class IntroViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanStart))]
     private void Start()
     {
-        if (SelectedQuiz != null)
+        if (SelectedQuizzes.Any())
         {
-            StartQuiz?.Invoke(SelectedQuiz);
+            StartQuiz?.Invoke(Quizzes);
         }
     }
 
     private bool CanStart()
     {
-        return SelectedQuiz != null;
+        return SelectedQuizzes.Any();
     }
 }

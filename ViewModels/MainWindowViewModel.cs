@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using FullYearProject.Models;
 using FullYearProject.Models.Display;
 using FullYearProject.Models.Quiz;
+using FullYearProject.Models.Quiz.Merging;
 using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
 using FullYearProject.Models.Responses;
@@ -99,16 +101,28 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     // Loads the quiz data from a file.
-    private async Task LoadGame(string filename)
+    private async Task LoadGame(string[] filenames)
     {
         try
         {
-            _quiz = await Quiz.LoadFileAsync(filename);
+            if (filenames.Length > 1)
+            {
+                ConcurrentBag<Quiz> quizzes = new();
+
+                await Parallel.ForEachAsync(filenames, async (filename, _) => { quizzes.Add(await Quiz.LoadFileAsync(filename)); });
+
+                _quiz = QuizMerger.Merge(null, quizzes.ToArray());
+            }
+            else
+            {
+                _quiz = await Quiz.LoadFileAsync(filenames[0]);
+            }
+
             QuizTitle = _quiz.Settings.Title;
         }
         catch (Exception e)
         {
-            Logger.LogError("Could not load game: {Exception}", e.Message);
+            Logger.LogError("Could not load game: {Exception}", e);
 
             return;
         }
@@ -121,25 +135,32 @@ public partial class MainWindowViewModel : ViewModelBase
     private void ShowIntro()
     {
         var introVm = new IntroViewModel();
+
+        // When start quiz is pressed, load the quiz data and start the quiz.
         introVm.StartQuiz += settings =>
         {
-            if (settings.FileName != null)
+            try
             {
-                InitQuiz(settings.FileName).ConfigureAwait(false);
+                InitQuiz(settings.Select(s => s.FileName ?? throw new NullReferenceException()).ToArray()).ConfigureAwait(false);
+            }
+            catch (NullReferenceException)
+            {
+                Logger.LogError("Could not start quiz: One or more quizzes do not contain a filename.");
             }
         };
 
         CurrentViewModel = introVm;
 
+        // Get the information of quizzes in the quiz directory and add them to the view model.
         LoadQuizNames()
-           .ContinueWith(t => introVm.Quizzes = t.Result.ToList())
+           .ContinueWith(t => introVm.Quizzes = t.Result)
            .ConfigureAwait(false);
     }
 
     // Loads the quiz data from a file and starts the quiz.
-    private async Task InitQuiz(string filename)
+    private async Task InitQuiz(string[] filenames)
     {
-        await LoadGame(filename).ConfigureAwait(false);
+        await LoadGame(filenames).ConfigureAwait(false);
         StartGame();
     }
 

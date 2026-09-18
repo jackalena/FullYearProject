@@ -17,6 +17,15 @@ public class QuizTopicCollection : List<QuizTopic>
 
     private Dictionary<int, QuizTopic> TopicsById => field ??= CreateDict();
 
+    /// <inheritdoc />
+    public QuizTopicCollection() { }
+
+    /// <inheritdoc />
+    public QuizTopicCollection(IEnumerable<QuizTopic> collection) : base(collection) { }
+
+    /// <inheritdoc />
+    public QuizTopicCollection(int capacity) : base(capacity) { }
+
     private Dictionary<int, QuizTopic> CreateDict()
     {
         var dict = new Dictionary<int, QuizTopic>(Count);

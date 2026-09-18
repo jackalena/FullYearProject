@@ -7,5 +7,6 @@
     </Design.PreviewWith>
 
     <StyleInclude Source="/Theme/Styles/FlyoutPresenter.axaml" />
+    <StyleInclude Source="/Theme/Styles/ListBox.axaml" />
 
 </Styles>

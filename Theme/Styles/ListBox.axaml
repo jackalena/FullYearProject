@@ -1,0 +1,82 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Width="250">
+            <ListBox SelectionMode="Multiple, Toggle" Classes="Checked">
+                <ListBoxItem>Item 1</ListBoxItem>
+                <ListBoxItem>Item 2</ListBoxItem>
+                <ListBoxItem>Item 3</ListBoxItem>
+                <ListBoxItem IsEnabled="False" IsSelected="True">Item 3</ListBoxItem>
+                <ListBoxItem>Item 4</ListBoxItem>
+            </ListBox>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="ListBox.Checked">
+
+        <Style Selector="^ ListBoxItem">
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+
+            <Setter Property="Template">
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <DockPanel>
+                            <LucideIcon Kind="Check" Foreground="{DynamicResource SemiColorPrimary}" Size="22"
+                                        Margin="0 -5 5 -5"
+                                        DockPanel.Dock="Left" Opacity="0">
+                                <LucideIcon.Styles>
+                                    <Style Selector="ListBoxItem:selected LucideIcon">
+                                        <Setter Property="Opacity" Value="1" />
+                                    </Style>
+                                </LucideIcon.Styles>
+                            </LucideIcon>
+
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Foreground="{TemplateBinding Foreground}" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+
+            <Style Selector="^:pointerover">
+                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemPointeroverForeground}" />
+                <Setter Property="Background" Value="{DynamicResource ListBoxItemPointeroverBackground}" />
+            </Style>
+
+            <Style Selector="^:pressed">
+                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemPressedForeground}" />
+                <Setter Property="Background" Value="{DynamicResource ListBoxItemPressedBackground}" />
+            </Style>
+
+            <Style Selector="^:selected">
+                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemSelectedForeground}" />
+                <Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SemiColorPrimary}" />
+                <Style Selector="^:pointerover">
+                    <Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedPointeroverBackground}" />
+                </Style>
+            </Style>
+
+            <Style Selector="^:disabled">
+                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemDisabledForeground}" />
+                <Setter Property="Background" Value="{DynamicResource ListBoxItemDisabledBackground}" />
+                <Style Selector="^:selected">
+                    <Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedDisabledBackground}" />
+                </Style>
+            </Style>
+        </Style>
+    </Style>
+
+</Styles>

@@ -15,7 +15,7 @@ public class QuizQuestion : IReusablePrioritisedListItem
     /// <summary>
     ///     The id of the question topic.
     /// </summary>
-    public int Topic { get; init; } = -1;
+    public int Topic { get; set; } = -1;
 
     /// <summary>
     ///     The text to show for the question.
@@ -36,6 +36,15 @@ public class QuizQuestion : IReusablePrioritisedListItem
     ///     The parameters/variables that will be used to calculate values used in the question.
     /// </summary>
     public List<QuizQuestionParameter>? Parameters { get; init; } = null;
+
+    /// <summary>
+    ///     Creates a shallow clone of the question.
+    /// </summary>
+    /// <returns>The cloned question.</returns>
+    public QuizQuestion ShallowClone()
+    {
+        return (QuizQuestion) MemberwiseClone();
+    }
 
     /// <inheritdoc />
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

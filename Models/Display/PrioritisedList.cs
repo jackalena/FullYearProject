@@ -15,16 +15,6 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
     private readonly List<TValue>[] _lists;
 
     /// <summary>
-    ///     The possible priorities for items in the list.
-    /// </summary>
-    public TPriority[] AllowedPriorities { get; }
-
-    /// <summary>
-    ///     If not null, the list will reset if all items have a priority equal to this value.
-    /// </summary>
-    public TPriority? ResetOnAllPriority { get; set; }
-
-    /// <summary>
     ///     Creates a new PrioritisedList using the provided allowed priorities and reset priority.
     /// </summary>
     /// <param name="allowedPriorities">A list of priorities that can be assigned to items in the list.</param>
@@ -37,7 +27,7 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
         AllowedPriorities.Sort();
 
         ResetOnAllPriority = resetOnAllPriority;
-        
+
         // Create a list for each priority to store items of that priority
         _lists = new List<TValue>[AllowedPriorities.Length];
         for (var i = 0; i < _lists.Length; i++)
@@ -45,6 +35,16 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
             _lists[i] = [];
         }
     }
+
+    /// <summary>
+    ///     The possible priorities for items in the list.
+    /// </summary>
+    public TPriority[] AllowedPriorities { get; }
+
+    /// <summary>
+    ///     If not null, the list will reset if all items have a priority equal to this value.
+    /// </summary>
+    public TPriority? ResetOnAllPriority { get; set; }
 
     /// <summary>
     ///     Creates a new PrioritisedList using the values of an enum as the possible priorities.
@@ -153,7 +153,7 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
     /// </summary>
     /// <returns>The next item.</returns>
     /// <exception cref="InvalidOperationException">Thrown if the list is empty.</exception>
-    public TValue GetNext()
+    public PrioritisedListItem<TPriority, TValue> GetNext()
     {
         // Find the key of the first list with items
         var priorityIdx = _lists.TakeWhile(l => l.Count == 0).Count();
@@ -177,30 +177,36 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
         var listIdx = Random.Shared.Next(list.Count);
         var item = list[listIdx];
 
-        // If the item is reusable, increment its reuse counter or move it to the next list if it has been reused enough times.
-        if (item is IReusablePrioritisedListItem { ReuseCount: > 0 } reusableItem)
+        var listItem = new PrioritisedListItem<TPriority, TValue>(this, item);
+
+        // Once the item is used, move it to the next list.
+        listItem.OnCompleted += requestedPriority =>
         {
-            if (reusableItem.ReuseCount - reusableItem.CurrentReuseCount >= 0)
+            // If the item is reusable, increment its reuse counter or move it to the next list if it has been reused enough times.
+            if (item is IReusablePrioritisedListItem { ReuseCount: > 0 } reusableItem)
             {
-                reusableItem.CurrentReuseCount++;
+                if (reusableItem.ReuseCount - reusableItem.CurrentReuseCount >= 0)
+                {
+                    reusableItem.CurrentReuseCount++;
+                }
+                else
+                {
+                    MoveItem(requestedPriority);
+                    reusableItem.CurrentReuseCount = 0;
+                }
             }
             else
             {
-                MoveItem();
-                reusableItem.CurrentReuseCount = 0;
+                MoveItem(requestedPriority);
             }
-        }
-        else
-        {
-            MoveItem();
-        }
+        };
 
-        return item;
+        return listItem;
 
         // Moves the item to the next list
-        void MoveItem()
+        void MoveItem(TPriority newPriority)
         {
-            var newPriorityIdx = Math.Min(priorityIdx + 1, _lists.Length - 1);
+            var newPriorityIdx = AllowedPriorities.IndexOf(newPriority);
 
             if (newPriorityIdx != priorityIdx)
             {
@@ -241,4 +247,39 @@ public class PrioritisedList<TPriority, TValue> where TPriority : struct
             _lists[i].Clear();
         }
     }
+}
+
+/// <summary>
+///     Represents an item in a <see cref="PrioritisedList{TPriority,TValue}" />.
+/// </summary>
+/// <typeparam name="TPriority">The type of the possible priority values.</typeparam>
+/// <typeparam name="TValue">The type of the list's items.</typeparam>
+public class PrioritisedListItem<TPriority, TValue> where TPriority : struct
+{
+    internal PrioritisedListItem(PrioritisedList<TPriority, TValue> ownerList, TValue value)
+    {
+        OwnerList = ownerList;
+        Value = value;
+    }
+
+    /// <summary>
+    ///     The value stored in the item.
+    /// </summary>
+    public TValue Value { get; }
+
+    /// <summary>
+    ///     The list that this item belongs to.
+    /// </summary>
+    public PrioritisedList<TPriority, TValue> OwnerList { get; }
+
+    /// <summary>
+    ///     Moves the item to the specified priority.
+    /// </summary>
+    /// <param name="priority">The priority to move the item to.</param>
+    public void MoveToPriority(TPriority priority)
+    {
+        OnCompleted?.Invoke(priority);
+    }
+
+    internal event Action<TPriority>? OnCompleted;
 }

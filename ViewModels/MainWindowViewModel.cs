@@ -11,6 +11,7 @@ using FullYearProject.Models.Quiz;
 using FullYearProject.Models.Quiz.Merging;
 using FullYearProject.Models.Quiz.Options;
 using FullYearProject.Models.Quiz.Question;
+using FullYearProject.Models.Quiz.Question.IsCorrectDefinitions;
 using FullYearProject.Models.Responses;
 using Microsoft.Extensions.Logging;
 
@@ -208,11 +209,30 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        var question = GeneratedQuizQuestion.GenerateQuestion(_questions.GetNext());
+        var questionListItem = _questions.GetNext();
+        var question = GeneratedQuizQuestion.GenerateQuestion(questionListItem.Value);
 
         // Create a view model for the question.
         var questionVm = new QuestionViewModel(question, _quiz!);
-        questionVm.QuestionAnswered += option => OnQuestionAnswered(question, option);
+
+        // When a question is answered, move it to the appropriate priority to be shown again and show the next question.
+        questionVm.QuestionAnswered += option =>
+        {
+            QuestionPriority priority;
+
+            if (option == null)
+            {
+                priority = QuestionPriority.Skipped;
+            }
+            else
+            {
+                var isCorrect = (option.IsCorrect as BooleanOptionIsCorrectDefinition)?.EvaluateIsCorrect(null) == true;
+                priority = isCorrect ? QuestionPriority.Correct : QuestionPriority.Incorrect;
+            }
+
+            questionListItem.MoveToPriority(priority);
+            OnQuestionAnswered(question, option);
+        };
         questionVm.QuestionCompleted += ShowNextQuestion;
 
         CurrentViewModel = questionVm;
